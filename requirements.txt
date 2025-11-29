@@ -1,0 +1,65 @@
+# Core dependencies for SC Gen 6 - Litigation Support RAG
+
+# Configuration & Validation
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+pyyaml>=6.0.1
+
+# Document Parsing
+PyMuPDF>=1.23.0  # PDF parsing
+python-docx>=1.1.0  # DOCX parsing
+openpyxl>=3.1.2  # Excel parsing
+pandas>=2.1.0  # Data handling
+Pillow>=10.1.0  # Image processing
+pytesseract>=0.3.10  # OCR (requires Tesseract binary)
+
+# Embeddings & Models
+sentence-transformers>=2.3.0  # BGE embeddings (CPU fallback)
+transformers>=4.36.0  # HuggingFace models
+torch>=2.1.0  # PyTorch (CPU/GPU)
+torch-directml  # DirectML support for AMD GPUs on Windows
+accelerate>=0.25.0  # Model acceleration
+hf_xet>=1.2.0  # Fast HuggingFace downloads with Xet Storage
+
+# ONNX Runtime (GPU acceleration for embeddings)
+onnxruntime-directml>=1.18.0  # DirectML for AMD/Intel/NVIDIA GPUs on Windows
+onnx>=1.15.0  # ONNX model format
+optimum>=2.0.0  # HuggingFace ONNX optimization
+
+# Vector Database
+chromadb>=0.4.22  # Vector store (v1.0+ API)
+
+# Keyword Search
+rank-bm25>=0.2.2  # BM25 implementation
+
+# Reranking
+# mixedbread-ai models loaded via transformers/sentence-transformers
+
+# LLM Interface
+ollama>=0.1.7  # Ollama client
+openai>=1.0.0  # OpenAI client (for LM Studio compatibility)
+
+# UI
+PySide6>=6.6.0,<6.10.0  # Desktop GUI (supports Python 3.8-3.13)
+markdown>=3.5.0  # Markdown rendering for specs panel
+
+# Logging
+loguru>=0.7.2  # Structured logging
+
+# Utilities
+tqdm>=4.66.0  # Progress bars
+python-dotenv>=1.0.0  # Environment variables
+
+# Testing (dev)
+pytest>=8.0.0
+pytest-cov>=4.1.0
+pytest-asyncio>=0.23.0
+pytest-json-report>=1.5.0
+
+# Code Quality (dev)
+black>=24.0.0
+ruff>=0.1.0
+mypy>=1.8.0
+
+# Packaging (dev)
+pyinstaller>=6.0.0  # For building desktop executable

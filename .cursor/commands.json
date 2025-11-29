@@ -1,0 +1,174 @@
+{
+  "commands": [
+    {
+      "name": "run-app",
+      "description": "Launch the SC Gen 6 application",
+      "command": "cmd /c run.bat"
+    },
+    {
+      "name": "test",
+      "description": "Run all pytest tests",
+      "command": "pytest tests/ -v"
+    },
+    {
+      "name": "test-fast",
+      "description": "Run tests, stop on first failure",
+      "command": "pytest tests/ -x -v"
+    },
+    {
+      "name": "test-cov",
+      "description": "Run tests with coverage report",
+      "command": "pytest tests/ --cov=src --cov-report=term-missing"
+    },
+    {
+      "name": "verify-config",
+      "description": "Verify configuration is valid",
+      "command": "python -m src.utils.first_run"
+    },
+    {
+      "name": "check-llm",
+      "description": "Check LLM configuration status",
+      "command": "python -c \"from src.config.llm_config import load_llm_config; c=load_llm_config(); print(f'Provider: {c.provider}\\nModel: {c.model_name}\\nURL: {c.base_url}')\""
+    },
+    {
+      "name": "check-backend",
+      "description": "Check configured backend from YAML",
+      "command": "python -c \"from src.config_loader import get_settings; s=get_settings(); print(f'Backend: {s.models.llm.backend}\\nDefault: {s.models.llm.default}')\""
+    },
+    {
+      "name": "start-llama",
+      "description": "Start llama.cpp server",
+      "command": "cmd /c scripts\\start_llama_server.bat"
+    },
+    {
+      "name": "rebuild-bm25",
+      "description": "Rebuild BM25 keyword index",
+      "command": "python rebuild_bm25.py"
+    },
+    {
+      "name": "lint",
+      "description": "Run linting checks",
+      "command": "python -m ruff check src/ tests/"
+    },
+    {
+      "name": "format",
+      "description": "Format code with black",
+      "command": "python -m black src/ tests/"
+    },
+    {
+      "name": "typecheck",
+      "description": "Run mypy type checking",
+      "command": "python -m mypy src/ --ignore-missing-imports"
+    },
+    {
+      "name": "gpu-info",
+      "description": "Show Vulkan GPU information",
+      "command": "vulkaninfo --summary 2>nul || echo Vulkan not available"
+    },
+    {
+      "name": "check-imports",
+      "description": "Verify all imports work",
+      "command": "python test_imports.py"
+    },
+    {
+      "name": "db-stats",
+      "description": "Show Chroma database statistics",
+      "command": "python -c \"import chromadb; c=chromadb.PersistentClient('data/chroma_db'); col=c.get_or_create_collection('litigation_docs'); print(f'Documents: {col.count()}')\""
+    },
+    {
+      "name": "clear-logs",
+      "description": "Clear log files",
+      "command": "del /q logs\\*.log 2>nul & echo Logs cleared"
+    },
+    {
+      "name": "tail-log",
+      "description": "Show last 50 lines of main log",
+      "command": "powershell -c \"if (Test-Path logs\\sc-gen-6.log) { Get-Content logs\\sc-gen-6.log -Tail 50 } else { echo 'No log file yet' }\""
+    },
+    {
+      "name": "ping-llm",
+      "description": "Test LLM server connectivity",
+      "command": "python tools/test_llm_connection.py"
+    },
+    {
+      "name": "install-deps",
+      "description": "Install/update dependencies",
+      "command": "pip install -r requirements.txt"
+    },
+    {
+      "name": "diagnostics",
+      "description": "Run full system diagnostics",
+      "command": "python -c \"from src.system.diagnostics import run_diagnostics, format_diagnostics; print(format_diagnostics(run_diagnostics()))\""
+    },
+    {
+      "name": "watch-logs",
+      "description": "Watch all logs in real-time",
+      "command": "powershell -c \"Get-ChildItem logs\\*.log -ErrorAction SilentlyContinue | ForEach-Object { Write-Host ('=== ' + $_.Name + ' ===') -ForegroundColor Cyan; Get-Content $_ -Tail 20 }\""
+    },
+    {
+      "name": "tail-ingestion",
+      "description": "Show last 30 lines of ingestion log",
+      "command": "powershell -c \"if (Test-Path logs\\ingestion.log) { Get-Content logs\\ingestion.log -Tail 30 } else { echo 'No ingestion log yet' }\""
+    },
+    {
+      "name": "ollama-status",
+      "description": "Check Ollama status and models",
+      "command": "ollama list 2>nul || echo Ollama not running - start with: ollama serve"
+    },
+    {
+      "name": "ollama-start",
+      "description": "Start Ollama server",
+      "command": "start /b ollama serve"
+    },
+    {
+      "name": "llama-health",
+      "description": "Check llama.cpp server health",
+      "command": "curl -s http://127.0.0.1:8000/health 2>nul || echo llama.cpp server not running"
+    },
+    {
+      "name": "llama-models",
+      "description": "List models on llama.cpp server",
+      "command": "curl -s http://127.0.0.1:8000/v1/models 2>nul || echo llama.cpp server not running"
+    },
+    {
+      "name": "check-errors",
+      "description": "Search logs for ERROR entries",
+      "command": "powershell -c \"Get-ChildItem logs\\*.log -ErrorAction SilentlyContinue | ForEach-Object { $errors = Select-String -Path $_ -Pattern 'ERROR|Exception|Traceback' -Context 0,3; if ($errors) { Write-Host ('=== ' + $_.Name + ' ===') -ForegroundColor Red; $errors } }\""
+    },
+    {
+      "name": "memory-usage",
+      "description": "Show Python process memory usage",
+      "command": "powershell -c \"Get-Process python* -ErrorAction SilentlyContinue | Select-Object Name, Id, @{N='Memory(MB)';E={[math]::Round($_.WorkingSet64/1MB,2)}} | Format-Table\""
+    },
+    {
+      "name": "gpu-memory",
+      "description": "Show GPU memory (AMD/NVIDIA)",
+      "command": "powershell -c \"$nvidia = nvidia-smi --query-gpu=memory.used,memory.total --format=csv,noheader 2>$null; if ($nvidia) { echo 'NVIDIA:'; echo $nvidia } else { echo 'No NVIDIA GPU or nvidia-smi not available' }\""
+    },
+    {
+      "name": "reset-db",
+      "description": "Reset vector database (CAUTION: deletes all indexed data)",
+      "command": "python -c \"from src.retrieval.vector_store import VectorStore; vs=VectorStore(); vs.reset(); print('Vector store reset successfully')\""
+    },
+    {
+      "name": "index-status",
+      "description": "Show indexing status (Chroma + BM25)",
+      "command": "python -c \"from src.retrieval.vector_store import VectorStore; from src.retrieval.bm25_index import BM25Index; vs=VectorStore(); bm25=BM25Index(); print(f'Chroma: {vs.stats()}'); print(f'BM25: {bm25.stats() if hasattr(bm25, \\\"stats\\\") else \\\"loaded\\\"}');\""
+    },
+    {
+      "name": "doc-types",
+      "description": "List all supported document types",
+      "command": "python -c \"from src.schema import DocumentType; import typing; types = typing.get_args(DocumentType); print('Supported Document Types:'); [print(f'  - {t}') for t in types]\""
+    },
+    {
+      "name": "test-classify",
+      "description": "Test document classification (run with file path)",
+      "command": "python -c \"import sys; from pathlib import Path; from src.ingestion.ingestion_pipeline import IngestionPipeline; p=IngestionPipeline(); doc=p.parse_document(Path(sys.argv[1]) if len(sys.argv)>1 else Path('.')); print(f'Type: {doc.document_type}' if doc else 'Parse failed')\""
+    },
+    {
+      "name": "test-chunker",
+      "description": "Test document chunking (provide file path as arg)",
+      "command": "python -m src.ingestion.chunkers.adaptive_chunker"
+    }
+  ]
+}

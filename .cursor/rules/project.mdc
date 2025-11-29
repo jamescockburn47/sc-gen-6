@@ -1,0 +1,68 @@
+---
+description: Core project rules for SC Gen 6 Litigation RAG
+globs: ["**/*.py", "**/*.yaml", "**/*.json"]
+alwaysApply: true
+---
+
+# SC Gen 6 Project Rules
+
+## Project Overview
+This is a **litigation support RAG system** for UK civil fraud & competition law. All outputs must be doctrinally exact with zero hallucinations and full citations.
+
+## Critical Constraints
+
+### Platform
+- **Windows 10/11 ONLY** - No Linux/WSL code
+- **Vulkan GPU** via llama.cpp - Primary backend
+- **128GB RAM** with 96GB VRAM allocation
+
+### Privacy
+- **NO network calls** in the RAG pipeline
+- All case materials stay local
+- APIs only for non-RAG features
+
+## Code Style
+
+```python
+# Python 3.11+ features required
+# Type hints (PEP 484) mandatory
+# Google-style docstrings
+# Black formatting
+# Import order: stdlib → third-party → local
+```
+
+## Configuration System (CRITICAL)
+
+**Three files must stay in sync:**
+1. `config/config.yaml` - App defaults
+2. `config/llm_runtime.json` - Runtime LLM state
+3. `src/config_loader.py` - Code defaults
+
+**When modifying config, ALWAYS:**
+- Check both YAML and JSON files
+- Update `src/config_loader.py` defaults if needed
+- Run verification: `python -m src.utils.first_run`
+
+## Launcher Policy
+
+**ONE launcher: `run.bat`**
+
+NEVER create:
+- ❌ New .bat/.sh launcher scripts
+- ❌ Platform-specific launchers
+- ❌ Alternative entry points
+
+INSTEAD:
+- ✅ Add flags to `run.bat`
+- ✅ Add logic to `launch.py`
+
+## File Organization
+
+```
+src/           → Application code
+config/        → Configuration files
+data/          → Documents, indexes, databases
+tests/         → Test files
+logs/          → Log files
+llama-cpp/     → llama.cpp binaries
+```

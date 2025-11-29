@@ -1,0 +1,40 @@
+[
+  {
+    "label": "GPT-OSS-20B (MXFP4)",
+    "model_name": "gpt-oss-20b",
+    "path": "C:/Users/James/.lmstudio/models/lmstudio-community/gpt-oss-20b-GGUF/gpt-oss-20b-MXFP4.gguf",
+    "vram_gb": 11.3,
+    "description": "Fast 20B model for general use"
+  },
+  {
+    "label": "GPT-OSS-120B (MXFP4) - Fast",
+    "model_name": "gpt-oss-120b-mxfp4",
+    "path": "C:/Users/James/.lmstudio/models/lmstudio-community/gpt-oss-120b-GGUF/gpt-oss-120b-MXFP4-00001-of-00002.gguf",
+    "vram_gb": 59.0,
+    "description": "Largest model - fastest inference, recommended for overnight tasks"
+  },
+  {
+    "label": "DeepSeek R1 14B (Reasoning)",
+    "model_name": "deepseek-r1:14b",
+    "path": "",
+    "provider": "ollama",
+    "vram_gb": 8.0,
+    "description": "Efficient reasoning model, good balance of speed and intelligence"
+  },
+  {
+    "label": "DeepSeek R1 32B (Reasoning)",
+    "model_name": "deepseek-r1:32b",
+    "path": "",
+    "provider": "ollama",
+    "vram_gb": 19.0,
+    "description": "Powerful reasoning model for complex cases"
+  },
+  {
+    "label": "Qwen 2.5 32B (Instruct)",
+    "model_name": "qwen2.5:32b",
+    "path": "",
+    "provider": "ollama",
+    "vram_gb": 19.0,
+    "description": "Strong general purpose model"
+  }
+]

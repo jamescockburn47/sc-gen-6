@@ -1,0 +1,12 @@
+{
+  "provider": "ollama",
+  "base_url": "http://localhost:11434",
+  "api_key": "",
+  "model_name": "qwen2.5:32b",
+  "_comments": {
+    "provider": "Using Ollama - native API with 16K context forced in code",
+    "base_url": "Standard Ollama endpoint (code handles /api/chat vs /v1)",
+    "model_name": "Standard qwen2.5:32b-instruct",
+    "context_fix": "Managed via src/llm/client.py native implementation"
+  }
+}

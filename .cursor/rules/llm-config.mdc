@@ -1,0 +1,76 @@
+---
+description: LLM and model configuration rules
+globs: ["config/*.yaml", "config/*.json", "src/config/**/*.py"]
+alwaysApply: false
+---
+
+# LLM Configuration Rules
+
+## Provider Priority
+
+1. **llama.cpp** (PRIMARY) - Vulkan GPU, best AMD performance
+2. **Ollama** (FALLBACK) - Simpler but slower
+3. ~~LM Studio~~ - REMOVED (API limitations)
+
+## Configuration Files
+
+### `config/config.yaml` - Application Defaults
+```yaml
+models:
+  llm:
+    backend: llama_cpp  # or "ollama"
+    default: model-name
+```
+
+### `config/llm_runtime.json` - Runtime State
+```json
+{
+  "provider": "llama_cpp",
+  "base_url": "http://127.0.0.1:8000/v1",
+  "model_name": "your-model"
+}
+```
+
+## Changing LLM Provider
+
+### To llama.cpp:
+1. Update `config/llm_runtime.json`:
+   - `provider: "llama_cpp"`
+   - `model_name`: your GGUF model name
+   - `llama_server.model_path`: full path to GGUF
+
+2. Update `config/config.yaml`:
+   - `models.llm.backend: llama_cpp`
+
+### To Ollama:
+1. Ensure Ollama is running: `ollama serve`
+2. Update `config/config.yaml`:
+   - `models.llm.backend: ollama`
+   - `models.llm.default`: Ollama model name (e.g., `qwen2.5:32b`)
+
+## Verification Commands
+
+```bash
+# Check YAML config
+python -c "from src.config_loader import get_settings; s=get_settings(); print(f'Backend: {s.models.llm.backend}')"
+
+# Check runtime config
+python -c "from src.config.llm_config import load_llm_config; c=load_llm_config(); print(f'Provider: {c.provider}')"
+
+# Full verification
+python -m src.utils.first_run
+```
+
+## llama.cpp Server Settings
+
+Optimized for AMD Radeon 8060S (RDNA 3.5):
+
+```json
+{
+  "gpu_layers": 999,
+  "context": 32768,
+  "batch": 4096,
+  "flash_attn": true,
+  "extra_args": "--ubatch-size 512 --threads 12 -cb -no-mmap"
+}
+```

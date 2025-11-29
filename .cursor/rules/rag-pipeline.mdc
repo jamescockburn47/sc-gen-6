@@ -1,0 +1,72 @@
+---
+description: RAG pipeline rules and patterns
+globs: ["src/rag/**/*.py", "src/retrieval/**/*.py", "src/ingestion/**/*.py"]
+alwaysApply: false
+---
+
+# RAG Pipeline Rules
+
+## Pipeline Architecture
+
+```
+Ingestion → Parsing/OCR → Adaptive Chunking → Embedding → Chroma DB
+                                                              ↓
+Query → BM25 + Dense → RRF Fusion → Cross-Encoder Rerank → LLM → Citation Verify
+```
+
+## Retrieval Parameters
+
+| Parameter | Default | Range | Purpose |
+|-----------|---------|-------|---------|
+| N (semantic_top_n) | 50 | 10-200 | Initial retrieval per method |
+| K (rerank_top_k) | 20 | 5-120 | Candidates for reranking |
+| M (context_to_llm) | 5 | 1-150 | Chunks sent to LLM |
+| confidence_threshold | 0.70 | 0.0-1.0 | Minimum rerank score |
+| rrf_k | 60 | - | RRF fusion constant |
+
+## Citation Requirements (CRITICAL)
+
+**Every factual claim MUST be cited:**
+```
+[Source: filename | Page X, Para Y | "Section Title"]
+```
+
+**If information not in sources:**
+```
+"Not found in provided documents."
+```
+
+## Chunking by Document Type
+
+| Type | Size | Overlap | Strategy |
+|------|------|---------|----------|
+| Witness statement | 1024 | 500 | Paragraph boundaries |
+| Court filing | 512 | 200 | Numbered paragraphs |
+| Statute | 512 | 200 | Section boundaries |
+| Contract | 768 | 300 | Clause/heading aware |
+| Email | 512 | 150 | Header-aware |
+
+## Code Patterns
+
+### Adding New Document Type
+```python
+# 1. Add to config/config.yaml chunking.sizes
+# 2. Add chunking strategy in src/ingestion/chunker.py
+# 3. Add document type detection in src/ingestion/classifier.py
+# 4. Update tests
+```
+
+### Modifying Retrieval
+```python
+# Always preserve hybrid retrieval:
+# - BM25 for keyword matching
+# - Dense vectors for semantic
+# - RRF for fusion
+# - Cross-encoder for final ranking
+```
+
+## Performance Targets
+
+- Retrieval: <500ms
+- Full query with generation: <10s
+- Document ingestion: ~1s per page

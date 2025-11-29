@@ -1,0 +1,17 @@
+# Minimal ignore - Full access for testing
+# Only ignore truly binary/useless files
+
+# Compiled binaries only
+*.dll
+*.exe
+*.pyd
+
+# Binary data files
+*.bin
+*.gguf
+*.safetensors
+
+# Python bytecode
+*.pyc
+*.pyo
+__pycache__/

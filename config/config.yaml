@@ -1,0 +1,156 @@
+python:
+  version: '3.11'
+models:
+  embedding:
+    default: BAAI/bge-large-en-v1.5
+    use_onnx_gpu: true  # Use ONNX Runtime + DirectML for GPU acceleration
+    alternatives:
+    - BAAI/bge-m3
+    - Qwen/Qwen3-Embedding-8B
+  reranker:
+    # base-v2 is 3x faster than large-v2 on CPU (~20s vs ~150s for 20 chunks)
+    # Quality difference is marginal for most use cases
+    default: mixedbread-ai/mxbai-rerank-base-v2
+    use_onnx_gpu: true  # Use ONNX Runtime + DirectML for GPU acceleration
+    alternatives:
+    - mixedbread-ai/mxbai-rerank-large-v2
+  llm:
+    backend: ollama
+    default: mistral-nemo:12b-instruct-2407-q8_0
+    available:
+    - mistral-nemo:12b-instruct-2407-q8_0
+    - deepseek-r1:14b
+    - gemma2:27b
+    - qwen2.5:32b-instruct
+    - qwen2.5:72b-instruct
+    # Thinking mode configuration
+    enable_thinking: true    # Enable extended reasoning for compatible models
+    thinking_budget: 8192    # Max tokens for thinking phase
+    thinking_models:         # Models that support thinking/reasoning mode
+    - qwen3
+    - deepseek-r1
+    - o1
+    - claude-3.5
+    - gemini-2.0
+  ollama:
+    host: http://localhost:11434
+    keep_alive_ms: -1
+retrieval:
+  semantic_top_n: 50  # Increased for better recall
+  keyword_top_n: 50   # Increased for better recall
+  skip_reranking: false
+  rerank_top_k: 25    # Reduced from 50 for speed (20-25 is usually sufficient)
+  rerank_max_chars: 512  # Truncate chunks for reranking (cross-encoder optimization)
+  context_to_llm: 15  # Increased default context
+  confidence_threshold: 0.15  # Lowered threshold to prevent aggressive filtering
+  rrf_k: 60
+  # Keyword search uses SQLite FTS5 (auto-syncing, ACID-compliant)
+  # Graph-enhanced search (user-optional)
+  use_query_expansion: false   # OFF by default - expands query with entity aliases
+  use_graph_context: false     # OFF by default - adds entity context to LLM
+  date_filter_mode: document   # "document" | "mentioned" | "both"
+  
+  # Summary-enhanced search
+  use_summaries: true          # Include doc summaries in LLM context (recommended!)
+  search_summaries: false      # Also search summary text (experimental)
+
+# Case graph settings
+graph:
+  enabled: true                 # Master toggle - allows extraction
+  auto_extract: true            # Extract entities during document ingestion
+  extraction_confidence: 0.7    # Min confidence for auto-added entities
+  max_context_entities: 10      # Max entities in graph context for LLM
+  max_context_events: 5         # Max timeline events in graph context
+
+# Document summary settings (Hyperlink-inspired)
+summary:
+  enabled: true                 # Enable summary generation
+  auto_generate: false          # Auto-generate during ingestion (slow, uses LLM)
+  summary_types:                # Types of summaries to generate
+  - overview                    # Document overview
+  max_summary_length: 300       # Target summary length in words
+  include_in_search: true       # Include summaries in search results
+  # Dedicated summarization model (smaller/faster than main LLM)
+  summarization_model: qwen2.5:7b  # Fast and accurate for summarization
+  summarization_model_alternatives:
+  - qwen2.5:7b                  # Best balance of speed/quality (~40 tok/s)
+  - qwen2.5:3b                  # Fastest (~80 tok/s), good for simple docs
+  - llama3.2:3b                 # Very fast (~70 tok/s)
+  - mistral:7b                  # Good quality (~35 tok/s)
+  - phi3:mini                   # Microsoft's efficient model (~60 tok/s)
+  parallel_summaries: 8         # Docs to summarize in parallel (was 2, your 96GB VRAM supports 8)
+  batch_size: 16                # Docs per batch for progress updates
+generation:
+  enable_batching: true
+  min_chunks_for_batching: 6    # Restore: Batch if >6 chunks
+  chunk_batch_size: 5           # Restore: Smaller batches for better attention
+  max_batches: 4                # Limit to 4 batches (20 chunks max)
+  parallel_workers: 2           # Keep low to avoid timeout, since Ollama serializes
+  batch_max_tokens: 500
+  enable_synthesis: true
+  synthesis_max_tokens: 2048
+  show_batch_headers: false
+  header_template: "### Batch {index}/{total} - chunks {start}-{end}"
+  join_separator: "\n\n"
+chunking:
+  sizes:
+    witness_statement: 1024  # RECOMMENDED: Match spec for memory efficiency
+    court_filing: 512
+    pleading: 512
+    statute: 512
+    contract: 768
+    disclosure: 512
+    email: 512
+  overlaps:
+    witness_statement: 512
+    court_filing: 256
+    pleading: 256
+    statute: 256
+    contract: 384
+    disclosure: 256
+    email: 256
+  separators:
+  - "\n\n"
+  - "\n"
+  - ". "
+  - " "
+paths:
+  documents: data/documents
+  vector_db: data/chroma_db
+  keyword_index: data/keyword_index
+  logs: logs
+performance:
+  embed_batch_size: 64          # Increased for faster ingestion (was 32)
+  rerank_batch_size: 32         # Larger batches for GPU (was 8)
+  max_workers: 8                # Match available parallelism (was 4)
+  cache_embeddings: true
+ui:
+  show_confidence_scores: true
+  theme: system
+  default_model: mistral-nemo:12b-instruct-2407-q8_0
+
+# Background task configuration
+# Controls model selection and task execution for overnight/background operations
+background_tasks:
+  # Model selection strategy:
+  # - "largest_available": Use largest model from priority list
+  # - "specific": Use specific_model
+  # - "default": Use default LLM model
+  model_selection: "largest_available"
+  
+  # Specific model to use (only if model_selection = "specific")
+  specific_model: "qwen2.5:32b-instruct"
+  
+  # Priority list for largest_available strategy (checked in order)
+  # Use Ollama models for simplicity and reliability
+  model_priority:
+    - "gpt-oss:120b"           # 120B model (requires ~60GB VRAM)
+    - "qwen2.5:32b-instruct"   # Your main model (fallback)
+    - "qwen2.5:14b-instruct"   # Smaller fallback if available
+  
+  # Tasks that should use background model selection
+  enabled_for:
+    - "case_graph_generation"
+    - "timeline_generation"
+    - "case_overview_generation"
+    - "document_renaming"

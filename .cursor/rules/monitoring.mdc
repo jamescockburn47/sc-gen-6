@@ -1,0 +1,91 @@
+---
+description: Log monitoring and diagnostics rules - ALWAYS check these for errors
+globs: ["**/*.py"]
+alwaysApply: true
+---
+
+# Error Monitoring & Diagnostics (CRITICAL)
+
+## Automatic Log Locations
+
+**ALWAYS check these when debugging issues:**
+
+| Log | Location | Purpose |
+|-----|----------|---------|
+| **Main App** | `logs/sc-gen-6.log` | Primary application log |
+| **Ingestion** | `logs/ingestion.log` | Document parsing/indexing |
+| **LLM Errors** | Console output | llama.cpp/Ollama errors |
+
+## Common Errors & Fixes
+
+### ChromaDB Batch Size Error
+```
+batch size X being greater than max batch of 5461
+```
+**Fix:** VectorStore now auto-batches. If this occurs, check `src/retrieval/vector_store.py` `CHROMA_BATCH_SIZE`.
+
+### Embedding Dimension Mismatch
+```
+Expected dimension X, got Y
+```
+**Fix:** Reset vector store or re-embed all documents with same model.
+
+### LLM Connection Refused
+```
+Connection refused: http://127.0.0.1:8000
+```
+**Fix:** Start llama.cpp server: `scripts/start_llama_server.bat`
+
+### Ollama Not Running
+```
+ollama: connection refused
+```
+**Fix:** Start Ollama: `ollama serve`
+
+## Diagnostic Commands
+
+```bash
+# Full system diagnostic
+python -c "from src.system.diagnostics import run_diagnostics; print(run_diagnostics())"
+
+# Check LLM connectivity
+python tools/test_llm_connection.py
+
+# Check config
+python -m src.utils.first_run
+
+# GPU status (Vulkan)
+vulkaninfo --summary
+
+# Ollama status
+ollama list
+```
+
+## When Ingestion Fails
+
+1. **Check chunk count** - Large documents may exceed batch limits
+2. **Check embedding model** - Ensure model loaded correctly
+3. **Check disk space** - Chroma needs write access to `data/chroma_db`
+4. **Check memory** - Large batches need RAM
+
+## Real-Time Monitoring
+
+```powershell
+# Watch main log
+Get-Content logs/sc-gen-6.log -Wait -Tail 20
+
+# Watch ingestion log
+Get-Content logs/ingestion.log -Wait -Tail 20
+
+# Monitor all logs
+Get-ChildItem logs/*.log | ForEach-Object { Get-Content $_ -Tail 5 }
+```
+
+## For AI Agents
+
+**When user reports an error:**
+
+1. **First** - Check `logs/` directory for recent entries
+2. **Second** - Run diagnostic: `python -m src.system.diagnostics`
+3. **Third** - Check config consistency between YAML and runtime JSON
+4. **Fourth** - Test LLM connection if generation failed

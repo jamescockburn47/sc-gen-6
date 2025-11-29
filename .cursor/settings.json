@@ -1,0 +1,24 @@
+{
+  "cursor.chat.defaultContext": [
+    "agents.md",
+    "config/config.yaml",
+    "config/llm_runtime.json",
+    "logs/"
+  ],
+  "cursor.chat.alwaysIncludeRules": true,
+  "cursor.composer.alwaysIncludeRules": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": true,
+  "editor.formatOnSave": true,
+  "files.associations": {
+    "*.mdc": "markdown"
+  },
+  "files.watcherExclude": {
+    "**/venv/**": true,
+    "**/__pycache__/**": true
+  },
+  "search.exclude": {
+    "**/venv/**": true,
+    "**/__pycache__/**": true
+  }
+}

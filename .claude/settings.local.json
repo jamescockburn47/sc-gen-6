@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(venv\\Scripts\\python.exe -m pip:*)",
+      "Bash(cmd /c \"call venv\\Scripts\\activate.bat && python -m src.ui.main\")",
+      "Bash(cmd /c dir /b *.bat)",
+      "Bash(venvScriptspython.exe:*)",
+      "Bash(cmd /c \"venv\\Scripts\\python.exe -m src.ui.main\")",
+      "Bash(cmd /c \"dir venv\\Scripts\")",
+      "Bash(cmd /c \"type launch_with_lmstudio.bat\")",
+      "Bash(cmd /c:*)",
+      "Bash(wsl --status:*)",
+      "Bash(wsl --install -d Ubuntu-24.04)",
+      "Bash(wsl --install)",
+      "Bash(wsl --list:*)",
+      "Bash(wsl --install:*)",
+      "Bash(wsl -d Ubuntu bash -c \"cp '/mnt/c/Users/James/Desktop/SC Gen 6/setup_rocm.sh' ~/setup_rocm.sh && chmod +x ~/setup_rocm.sh && ls -lh ~/setup_rocm.sh\":*)",
+      "Bash(wsl -d Ubuntu bash:*)",
+      "Bash(test_output.txt)",
+      "Bash(dir:*)",
+      "Bash(tasklist:*)",
+      "Bash(findstr:*)",
+      "Bash(cat:*)",
+      "Bash(nul)",
+      "Bash(find:*)",
+      "Bash(wsl -d Ubuntu-24.04 bash -c:*)",
+      "Bash(wsl -d Ubuntu-24.04 -- bash -c:*)",
+      "Bash(wsl:*)",
+      "Bash(curl:*)",
+      "Bash(start \"Ollama\" /min cmd /c \"set OLLAMA_HOST=0.0.0.0:11434 && ollama serve\")",
+      "Bash(timeout /t 3 /nobreak)",
+      "Bash(start \"Ollama WSL\" \"C:\\Users\\James\\Desktop\\SC Gen 6\\start_ollama_wsl.bat\")",
+      "Bash(netsh advfirewall firewall add rule:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

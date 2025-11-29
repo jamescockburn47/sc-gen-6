@@ -1,0 +1,78 @@
+---
+description: Testing rules and patterns
+globs: ["tests/**/*.py", "test_*.py"]
+alwaysApply: false
+---
+
+# Testing Rules
+
+## Test Framework
+- **pytest** is the primary test framework
+- Tests live in `tests/` directory
+- Test files: `test_*.py` or `*_test.py`
+
+## Running Tests
+
+```bash
+# All tests
+pytest tests/
+
+# Specific test file
+pytest tests/test_config_loader.py
+
+# With coverage
+pytest --cov=src tests/
+
+# Verbose output
+pytest -v tests/
+
+# Stop on first failure
+pytest -x tests/
+```
+
+## Test Patterns
+
+### Unit Tests
+```python
+def test_function_does_expected_thing():
+    """Test description."""
+    # Arrange
+    input_data = ...
+    
+    # Act
+    result = function_under_test(input_data)
+    
+    # Assert
+    assert result == expected
+```
+
+### Mocking LLM Calls
+```python
+from unittest.mock import patch, MagicMock
+
+@patch('src.rag.query_engine.get_llm_client')
+def test_query_without_real_llm(mock_client):
+    mock_client.return_value.chat.completions.create.return_value = MagicMock(
+        choices=[MagicMock(message=MagicMock(content="Test response"))]
+    )
+    # Test code here
+```
+
+### Configuration Tests
+When changing defaults in `src/config_loader.py`, update `tests/test_config_loader.py`.
+
+## Key Test Files
+
+| File | Tests |
+|------|-------|
+| `test_config_loader.py` | Configuration loading |
+| `test_ingestion.py` | Document ingestion |
+| `test_retrieval.py` | RAG retrieval pipeline |
+| `test_citations.py` | Citation verification |
+
+## Integration Tests
+
+Integration tests use real models - run separately:
+```bash
+pytest tests/integration/ -v --slow
+```

@@ -1,0 +1,82 @@
+---
+description: Document type detection and classification rules
+globs: ["src/ingestion/**/*.py", "src/schema.py"]
+alwaysApply: false
+---
+
+# Document Type Classification
+
+## Supported Document Types (UK Litigation)
+
+The system now supports **19 document types** optimized for UK civil fraud & competition law:
+
+### Core Pleadings
+| Type | Description | Key Patterns |
+|------|-------------|--------------|
+| `witness_statement` | First-person factual accounts | "witness statement", "I make this statement", "statement of truth" |
+| `pleading` | Claims, Defences, Replies | "particulars of claim", "defence", "In the High Court" |
+| `skeleton_argument` | Written legal submissions | "skeleton argument", "submissions", "it is submitted" |
+| `court_filing` | Orders, Judgments, Directions | "it is ordered", "judgment", "sealed by the court" |
+
+### Expert & Technical
+| Type | Description | Key Patterns |
+|------|-------------|--------------|
+| `expert_report` | CPR Part 35 expert evidence | "expert report", "CPR 35", "my qualifications" |
+| `schedule_of_loss` | Quantum claims | "schedule of loss", "quantum", "damages claimed" |
+| `medical_report` | Medico-legal reports | "medical report", "diagnosis", "prognosis" |
+
+### Legal Sources
+| Type | Description | Key Patterns |
+|------|-------------|--------------|
+| `statute` | Legislation, regulations | "An Act to", "Be it enacted", section numbering |
+| `case_law` | Reported judgments | `[2024] EWCA`, neutral citations, "approved judgment" |
+| `contract` | Agreements, deeds | "this agreement", "hereby agrees", "in witness whereof" |
+
+### Correspondence & Disclosure
+| Type | Description | Key Patterns |
+|------|-------------|--------------|
+| `email` | Electronic messages | From:/To:/Subject: headers, .eml/.msg files |
+| `letter` | Formal correspondence | "Dear Sir", "Yours faithfully", "without prejudice" |
+| `disclosure` | Exhibits, bundles | "exhibit", "paginated bundle" |
+| `disclosure_list` | Form N265, lists | "list of documents", "Form N265" |
+
+### Court Forms & Management
+| Type | Description | Key Patterns |
+|------|-------------|--------------|
+| `court_form` | N-series CPR forms | "Form N1", "N244", claim forms |
+| `case_management` | CMC orders, directions | "case management conference", "directions order" |
+| `chronology` | Timeline documents | "chronology", date/event format |
+
+### Specialist
+| Type | Description | Key Patterns |
+|------|-------------|--------------|
+| `tribunal_document` | CAT, EAT, ET documents | "Competition Tribunal", "Employment Tribunal" |
+| `regulatory_document` | FCA, CMA decisions | "FCA decision", "regulatory notice" |
+
+## Classification Confidence
+
+The classifier returns a confidence score (0.0-1.0):
+- **>0.7**: High confidence, reliable classification
+- **0.4-0.7**: Medium confidence, may need review
+- **<0.4**: Low confidence, defaults to `disclosure`
+
+## Adding New Document Types
+
+1. **Update `src/schema.py`**: Add to `DocumentType` literal
+2. **Update `src/ingestion/parsers/base_parser.py`**:
+   - Add patterns to `classify_document()`
+   - Add to `_get_all_types()`
+3. **Update `src/ingestion/chunkers/adaptive_chunker.py`**:
+   - Add to `_get_chunk_size()` mapping
+   - Add to `_get_overlap()` mapping
+4. **Test**: Run `python -c "from src.ingestion.parsers.base_parser import BaseParser; ..."`
+
+## Chunking by Document Type
+
+| Type | Size (tokens) | Overlap (tokens) | Rationale |
+|------|---------------|------------------|-----------|
+| Witness statements | 1024-2048 | 500-1024 | Preserve narrative flow |
+| Pleadings | 512-1024 | 200-512 | Keep numbered paras together |
+| Expert reports | 1024-2048 | 500-1024 | Technical detail preservation |
+| Emails | 512-768 | 150-384 | Short, atomic content |
+| Contracts | 768-1536 | 300-768 | Clause integrity |

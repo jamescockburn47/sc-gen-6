@@ -1,0 +1,70 @@
+---
+description: UI development rules (PySide6/PyQt6)
+globs: ["src/ui/**/*.py", "src/gui/**/*.py"]
+alwaysApply: false
+---
+
+# UI Development Rules
+
+## Framework
+- **PySide6** or **PyQt6** for desktop UI
+- Background workers for ALL heavy operations
+- UI thread must NEVER block
+
+## Threading Pattern
+
+```python
+from PySide6.QtCore import QThread, Signal
+
+class WorkerThread(QThread):
+    """Background worker for heavy operations."""
+    progress = Signal(int)
+    finished = Signal(object)
+    error = Signal(str)
+    
+    def run(self):
+        try:
+            # Heavy operation here
+            result = self.do_work()
+            self.finished.emit(result)
+        except Exception as e:
+            self.error.emit(str(e))
+```
+
+## UI Panels
+
+| Panel | Purpose |
+|-------|---------|
+| Documents | Drag-drop ingest, type override, progress |
+| Query | Search box, model dropdown, parameter sliders |
+| Results | Streamed answer, citations, confidence |
+| Settings | Model registry, paths, defaults |
+
+## Streaming Responses
+
+```python
+# Use signals to stream LLM tokens to UI
+class QueryWorker(QThread):
+    token_received = Signal(str)
+    
+    def run(self):
+        for token in self.stream_response():
+            self.token_received.emit(token)
+```
+
+## Citation Click Handler
+
+```python
+# Citations should be clickable → open document at page
+def on_citation_clicked(self, filename: str, page: int):
+    """Open document viewer at specific page."""
+    self.document_viewer.open_at_page(filename, page)
+```
+
+## Responsiveness Checklist
+
+- [ ] All LLM calls in background thread
+- [ ] All embedding operations in background thread
+- [ ] Progress indicators for long operations
+- [ ] Cancel buttons for interruptible operations
+- [ ] Error messages shown in UI, not just logged
