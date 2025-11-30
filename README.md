@@ -8,7 +8,7 @@ A **fully local RAG pipeline** for litigation factual/procedural work (civil fra
 
 ### Core RAG Pipeline
 - **Fully Local**: All operations (parsing → chunking → embeddings → retrieval → reranking → generation) run on-device
-- **Hybrid Retrieval**: BM25 + Dense vector search with Reciprocal Rank Fusion (RRF)
+- **Hybrid Retrieval**: Dense vectors + SQLite FTS5 keyword search with Reciprocal Rank Fusion (RRF)
 - **Cross-Encoder Reranking**: Mandatory reranking before generation for accuracy
 - **Adaptive Chunking**: Document-type aware chunking with high overlap (40-50%)
 - **Citation Enforcement**: Every factual claim must be cited; verification post-generation
@@ -99,7 +99,7 @@ cp .env.example .env
 
 ### 7. Create Data Directories
 ```bash
-mkdir -p data/documents data/chroma_db data/bm25_index logs
+mkdir -p data/documents data/chroma_db data/keyword_index logs
 ```
 
 ## Quick Start
@@ -174,11 +174,14 @@ Summaries → Case Graph (entities + relationships)
 ### Retrieval Pipeline
 
 ```
-Query → Dense (Chroma) [Top N] + BM25 [Top N]
+Query → Dense (Chroma) [Top N] + SQLite FTS5 keyword search [Top N]
      → RRF (k=60)
      → Cross-Encoder Rerank [Top K]
      → Top M chunks to LLM
 ```
+
+Keyword search uses a SQLite FTS5 index stored under `data/keyword_index`. It replaces the earlier pickle-based BM25 index while
+keeping a BM25-compatible interface for existing tools and migration scripts.
 
 ### Citation Format
 
@@ -198,9 +201,9 @@ SC Gen 6/
 │   │   ├── chunkers/             # Adaptive chunking with RCTS
 │   │   └── ingestion_pipeline.py # Parallel ingestion orchestrator
 │   ├── retrieval/
-│   │   ├── hybrid_retriever.py   # BM25 + Dense + RRF + Rerank
+│   │   ├── hybrid_retriever.py   # Dense + FTS5 keyword + RRF + Rerank
 │   │   ├── vector_store.py       # Chroma vector DB
-│   │   └── bm25_index.py         # BM25 keyword index
+│   │   └── fts5_index.py         # SQLite FTS5 keyword index (BM25-compatible)
 │   ├── generation/
 │   │   ├── llm_service.py        # LLM generation service
 │   │   ├── chunk_batcher.py      # Parallel batch generation
@@ -328,7 +331,7 @@ ruff check --fix src tests
 
 ## License
 
-MIT License
+Licensed under the [Apache License 2.0](LICENSE).
 
 ## Support
 
