@@ -1,8 +1,16 @@
 # SC Gen 6 — Litigation Support RAG (Local Desktop)
 
-A **fully local RAG pipeline** for litigation factual/procedural work (civil fraud & competition law). Outputs are **doctrinally exact**, **zero hallucinations**, and **fully cited** to source page/paragraph.
+A **fully local RAG pipeline** for litigation factual/procedural work. It is engineered to prioritize doctrinal accuracy, minimize hallucinations, and always surface citations to the source page/paragraph, but results still require human verification.
+
+> **⚠️ Usage Notice**: Provided solely for **educational and testing purposes**. It is **not legal advice** and must not be relied on for client work or real-world legal analysis. Always review outputs against the cited materials and governing law.
 
 > **⚠️ IMPORTANT FOR AI AGENTS**: This codebase has a well-established architecture. Do NOT make fundamental structural changes without explicit user approval. See [ARCHITECTURE.md](ARCHITECTURE.md) for details.
+
+### Accuracy & Legal Limits
+
+- The pipeline is designed to reduce hallucinations and enforce citations, but it cannot guarantee doctrinal exactness.
+- Generated answers are starting points for human lawyers; they must be cross-checked against cited passages and current authority.
+- Evaluation profiles emphasize procedural fact patterns for contested matters; applicability beyond litigation contexts is untested.
 
 ## Features
 
@@ -33,13 +41,13 @@ A **fully local RAG pipeline** for litigation factual/procedural work (civil fra
 ## Requirements
 
 - **Python**: 3.11, 3.12, or 3.13 (3.14 NOT supported due to PySide6)
-- **LLM Backend**: Ollama (recommended) or llama.cpp server
+- **LLM Backend**: Runs **Ollama by default** (baseline configuration and tests). The stack is tuned for the **GMTEK EVO X2** platform (AMD Radeon 8060S, RDNA 3.5) when using Ollama. A **llama.cpp** path exists for advanced users but is not the primary or performance-tuned configuration.
 - **Tesseract OCR**: For scanned PDFs
 - **Hardware**:
-  - 8GB+ VRAM for 32B models
+  - Tuned for **GMTEK EVO X2** with 128GB RAM and 96GB VRAM allocation (AMD Radeon 8060S, RDNA 3.5)
+  - 8GB+ VRAM minimum for 32B models on lower-end cards
   - 64GB+ VRAM for 120B models (GPT-OSS 120B supported)
-  - 64GB RAM recommended for large corpora
-  - DirectML GPU acceleration (Windows) or CUDA (Linux)
+  - DirectML/Vulkan GPU acceleration on Windows; CUDA is not a primary target and may require retuning
 
 ## Installation
 
@@ -101,6 +109,40 @@ cp .env.example .env
 ```bash
 mkdir -p data/documents data/chroma_db data/keyword_index logs
 ```
+
+## Self-Hosting & Runtime Configuration
+
+The default runtime is **Ollama** on the GMTEK EVO X2 architecture (AMD Radeon 8060S, RDNA 3.5). Other hardware may work but could require retuning model choices and runtime flags. A **llama.cpp** path is available for experimentation, but it is not the optimized or validated path for this repository.
+
+### Environment Variables
+
+Environment variables override the YAML defaults and runtime JSON state:
+
+- `LLM_PROVIDER`: `ollama` (default) or `llama_cpp` (optional)
+- `LLM_BASE_URL`: Base URL for the running server (e.g., `http://127.0.0.1:8000/v1` for llama.cpp or `http://127.0.0.1:11434/v1` for Ollama)
+- `LLM_MODEL_NAME`: Model identifier served by your backend (e.g., `gpt-oss-20b-MXFP4` for llama.cpp, `qwen2.5:32b-instruct` for Ollama)
+
+Copy `.env.example` to `.env` and set these values before launching if you need to override defaults in `config/config.yaml` or `config/llm_runtime.json`.
+
+### Ollama Setup (Default Path)
+
+1. Install Ollama from https://ollama.ai and start the service (`ollama serve`).
+2. Pull a supported instruction model: `ollama pull qwen2.5:32b-instruct`.
+3. Optional: set `OLLAMA_HOST` if the service is not on localhost.
+4. Set `LLM_PROVIDER=ollama`, `LLM_BASE_URL=http://127.0.0.1:11434/v1`, and `LLM_MODEL_NAME=qwen2.5:32b-instruct` in `.env`.
+
+### llama.cpp Setup (Optional Path)
+
+1. Run the llama.cpp server with Vulkan/DirectML, exposing `http://127.0.0.1:8000/v1` (not the default in this repo).
+2. Place or reference your chosen model (e.g., `gpt-oss-20b-MXFP4`) in the llama.cpp models directory.
+3. Set `LLM_PROVIDER=llama_cpp`, `LLM_BASE_URL=http://127.0.0.1:8000/v1`, and `LLM_MODEL_NAME=gpt-oss-20b-MXFP4` in `.env`.
+4. Align `config/llm_runtime.json` if you prefer file-based configuration. Performance characteristics for this path are not tuned or validated in the current release.
+
+### Model Assets
+
+- **LLM**: Use GMTEK-ready quantizations for llama.cpp. For Ollama, pull the matching image tag (e.g., `qwen2.5:32b-instruct`).
+- **Embeddings/Reranker**: Download automatically on first run, or prefetch via `python get_models.py` if available.
+- **OCR**: Ensure Tesseract is installed and on your PATH for scanned PDFs.
 
 ## Quick Start
 
