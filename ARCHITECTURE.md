@@ -37,7 +37,7 @@
 ┌─────────────────────────────────────────────────────────────┐
 │                    Storage Layer                             │
 │  ┌──────────┬──────────┬──────────┬──────────┬───────────┐  │
-│  │ Vector   │  BM25    │  Graph   │ Assess.  │ Perform.  │  │
+│  │ Vector   │  FTS5    │  Graph   │ Assess.  │ Perform.  │  │
 │  │  Store   │  Index   │  Store   │  DB      │  Logs     │  │
 │  └──────────┴──────────┴──────────┴──────────┴───────────┘  │
 └─────────────────────────────────────────────────────────────┘
@@ -61,7 +61,7 @@ IngestionPipeline
 │   └── SpreadsheetParser (.xlsx, .xls)
 ├── AdaptiveChunker (document-type aware)
 ├── Batch Embedding (GPU accelerated)
-└── Parallel Indexing (Vector + BM25)
+└── Parallel Indexing (Vector + FTS5)
 ```
 
 **Key Files**:
@@ -84,7 +84,7 @@ IngestionPipeline
 ```
 Query
 ├── Dense Retrieval (Chroma) → Top N
-├── Keyword Retrieval (BM25) → Top N
+├── Keyword Retrieval (FTS5) → Top N
 ├── Reciprocal Rank Fusion (RRF, k=60)
 ├── Cross-Encoder Reranking (GPU) → Top K
 └── Final Top M chunks to LLM
@@ -93,7 +93,7 @@ Query
 **Key Files**:
 - `hybrid_retriever.py` - Orchestrates hybrid retrieval
 - `vector_store.py` - Chroma vector database
-- `bm25_index.py` - BM25 keyword index
+- `bm25_index.py` - FTS5 keyword index (legacy name, uses SQLite)
 - `reranker.py` - Cross-encoder reranking (ONNX GPU)
 
 **DO NOT CHANGE**:
@@ -277,7 +277,7 @@ AdaptiveChunker.chunk_document()
     ↓
 Batch embedding (GPU)
     ↓
-VectorStore.add_chunks() + BM25Index.add_chunks()
+VectorStore.add_chunks() + FTS5Index.add_chunks()
     ↓
 DocumentCatalog.update_record()
 ```
@@ -289,7 +289,7 @@ User enters query
     ↓
 HybridRetriever.retrieve()
     ├── VectorStore.search() → Top N
-    ├── BM25Index.search() → Top N
+    ├── FTS5Index.search() → Top N
     ├── RRF fusion
     └── Reranker.rerank() → Top K
     ↓
@@ -329,9 +329,9 @@ Update UI with results
 ```yaml
 models:
   llm:
-    provider: "ollama"
+    provider: "llama_cpp"
     available: [list of models]
-    default: "qwen2.5:32b-instruct"
+    default: "qwen2.5-72b"
 
 retrieval:
   semantic_top_n: 30
@@ -377,12 +377,12 @@ background_tasks:
 
 - **Embeddings**: ONNX Runtime with DirectML (Windows) or CUDA (Linux)
 - **Reranking**: ONNX Runtime with GPU acceleration
-- **LLM**: Ollama or llama.cpp with GPU layers
+- **LLM**: llama.cpp with GPU layers
 
 ### Memory Management
 
 - **Vector Store**: Chroma with persistent storage
-- **BM25 Index**: In-memory with pickle persistence
+- **FTS5 Index**: SQLite with FTS5 (on-disk)
 - **Graph**: JSON persistence with lazy loading
 - **Summaries**: SQLite with FTS5 indexing
 
@@ -441,7 +441,7 @@ background_tasks:
 
 ## Version History
 
-- **v6.1** (2025-12-05): AI Quality Assessment, Performance Analytics, Native PySide6 UI
+- **v6.1** (2025-12-05): AI Quality Assessment, Performance Analytics, Native PySide6 UI, FTS5 Search, llama.cpp backend
 - **v6.0** (2025-11-29): Background tasks, case overview, parallel processing
 - **v5.0** (2025-11): Graph system, timeline, summaries
 - **v4.0** (2025-10): Hybrid retrieval, reranking

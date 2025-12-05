@@ -8,7 +8,7 @@ A **fully local RAG pipeline** for litigation factual/procedural work (civil fra
 
 ### Core RAG Pipeline
 - **Fully Local**: All operations (parsing → chunking → embeddings → retrieval → reranking → generation) run on-device
-- **Hybrid Retrieval**: BM25 + Dense vector search with Reciprocal Rank Fusion (RRF)
+- **Hybrid Retrieval**: FTS5 Keyword Search + Dense vector search with Reciprocal Rank Fusion (RRF)
 - **Cross-Encoder Reranking**: Mandatory reranking before generation for accuracy
 - **Adaptive Chunking**: Document-type aware chunking with high overlap (40-50%)
 - **Citation Enforcement**: Every factual claim must be cited; verification post-generation
@@ -22,7 +22,7 @@ A **fully local RAG pipeline** for litigation factual/procedural work (civil fra
 - **Case Overview**: AI-generated high-level case summaries
 - **Document Renaming**: Intelligent document naming from content
 - **Background Tasks**: User-triggered generation with incremental updates
-- **Multiple Model Support**: Ollama, llama.cpp, and LM Studio backends
+- **Multiple Model Support**: llama.cpp (primary), LM Studio, and Ollama (legacy)
 
 ### Desktop UI
 - **PySide6 Interface**: Modern, responsive desktop application
@@ -37,7 +37,7 @@ A **fully local RAG pipeline** for litigation factual/procedural work (civil fra
 ## Requirements
 
 - **Python**: 3.11, 3.12, or 3.13 (3.14 NOT supported due to PySide6)
-- **LLM Backend**: Ollama (recommended) or llama.cpp server
+- **LLM Backend**: llama.cpp server (included/auto-launched)
 - **Tesseract OCR**: For scanned PDFs
 - **Hardware**:
   - 8GB+ VRAM for 32B models
@@ -83,11 +83,8 @@ See `MODEL_SETUP.md` for detailed instructions.
 
 **Quick Setup**:
 ```bash
-# Install Ollama from https://ollama.ai
-ollama pull qwen2.5:32b-instruct
-
+# The system uses llama.cpp server. Models are configured in config/config.yaml
 # Embedding & reranker models download automatically on first use
-# Or run: python get_models.py
 ```
 
 **Large Model Support** (GPT-OSS 120B):
@@ -160,7 +157,7 @@ python -m src.ui.main
 Files → Parallel Parsing (N workers)
      → Parallel Chunking
      → Batch Embedding (GPU)
-     → Parallel Indexing
+     → Parallel Indexing (Chroma + FTS5)
 ```
 
 **Generation Pipeline**:
@@ -183,7 +180,7 @@ Summaries → Case Graph (entities + relationships)
 ### Retrieval Pipeline
 
 ```
-Query → Dense (Chroma) [Top N] + BM25 [Top N]
+Query → Dense (Chroma) [Top N] + Keyword (FTS5) [Top N]
      → RRF (k=60)
      → Cross-Encoder Rerank [Top K]
      → Top M chunks to LLM
@@ -203,8 +200,8 @@ Every factual claim must include a citation. The system verifies citations post-
 SC Gen 6/
 ├── src/
 │   ├── ingestion/            # Parsing, chunking, indexing pipeline
-│   ├── retrieval/            # Hybrid retrieval, vector store, reranking
-│   ├── generation/           # LLM service, batch generation, citation verification
+│   ├── retrieval/            # Hybrid retrieval (FTS5+Chroma), reranking
+│   ├── generation/           # LLM service (llama.cpp), batch generation
 │   ├── assessment/           # Quality assessment, cloud evaluator, suggestions
 │   ├── analytics/            # Performance logging, dashboard backend
 │   ├── graph/                # Case graph, timeline generation
@@ -220,7 +217,7 @@ SC Gen 6/
 ## Configuration
 
 Edit `config/config.yaml` to customize:
-- **Models**: LLM, embeddings, reranker selection
+- **Models**: LLM (llama.cpp), embeddings, reranker selection
 - **Retrieval**: N, K, M, confidence threshold
 - **Quality**: Cloud provider (OpenAI, Anthropic, Google), API keys
 - **Background Tasks**: Model selection strategy, enabled tasks
@@ -279,13 +276,13 @@ ruff check --fix src tests
 
 ## Troubleshooting
 
-### Ollama Connection Issues
-- Ensure Ollama is running: `ollama serve`
-- Check `OLLAMA_HOST` in `.env` matches your setup
+### llama.cpp Connection Issues
+- Ensure llama-server is running (launch.py handles this)
+- Check logs for server startup errors
 
 ### Model Not Found
-- Pull the model: `ollama pull qwen2.5:32b-instruct`
-- Check `config/config.yaml` for correct model names
+- Check `config/config.yaml` for correct model paths/names
+- Ensure models are downloaded to `models/` directory
 
 ### OCR Not Working
 - Install Tesseract: https://github.com/tesseract-ocr/tesseract
@@ -330,3 +327,4 @@ For issues and questions, please open an issue on the repository.
 
 **Version**: 6.1
 **Last Updated**: 2025-12-05
+

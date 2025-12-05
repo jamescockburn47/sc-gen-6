@@ -60,11 +60,11 @@ We use a **Recursive Character Text Splitting (RCTS)** strategy tailored for leg
 ### Hybrid Search
 Combines two distinct search technologies:
 1.  **Semantic Search (Dense):** Uses cosine similarity on vector embeddings to find *conceptual* matches (e.g., "breach of duty" matches text describing failures).
-2.  **Keyword Search (Sparse):** Uses **BM25** algorithm to find *exact* matches (dates, specific clause numbers, names).
+2.  **Keyword Search (Sparse):** Uses **FTS5** (SQLite) to find *exact* matches (dates, specific clause numbers, names).
 
 ### Fusion (RRF)
 *   **Algorithm:** Reciprocal Rank Fusion (RRF).
-*   **Purpose:** Merges the top results from Semantic and BM25 searches into a single unified list, ensuring neither method dominates unfairly.
+*   **Purpose:** Merges the top results from Semantic and Keyword searches into a single unified list, ensuring neither method dominates unfairly.
 
 ### Cross-Encoder Reranking
 *   **Model:** `mixedbread-ai/mxbai-rerank-base-v2` (or large-v2).
@@ -83,7 +83,7 @@ Combines two distinct search technologies:
 
 ## 4. Generation (LLM)
 
-*   **Providers:** Supports `Ollama` (default), `LM Studio`, and `llama.cpp` server.
+*   **Providers:** Supports `llama.cpp` (default), `LM Studio`, and `Ollama` (legacy).
 *   **Local Models:** Optimized for 14B-32B parameter models (e.g., `deepseek-r1:14b`, `qwen2.5:32b`).
 *   **Citation Enforcement:** The system prompts the LLM to strictly cite sources using `[Source: File.pdf]` format.
 *   **Post-Processing:** A citation verifier runs after generation to check if cited sources actually exist in the provided context.
@@ -122,7 +122,7 @@ Combines two distinct search technologies:
 
 ## 7. System Resilience
 
-*   **Reset Capability:** A "Reset All" feature completely wipes the Vector DB and BM25 indexes to recover from corrupted states.
+*   **Reset Capability:** A "Reset All" feature completely wipes the Vector DB and FTS5 indexes to recover from corrupted states.
 *   **Connection Recovery:** The Vector Store automatically refreshes its database connection if it detects a "Collection does not exist" error (common after resets).
 *   **Hardware Acceleration:** Auto-detects GPU availability (CUDA for NVIDIA, DirectML/Vulkan for AMD on Windows).
 
@@ -143,7 +143,7 @@ Combines two distinct search technologies:
 |-----------|-------------|-------|
 | **Embeddings** | ONNX + DirectML | 3.6x speedup over CPU |
 | **Reranking** | ONNX + DirectML | 2.9x speedup over CPU |
-| **LLM** | llama.cpp / Ollama | Separate GPU allocation |
+| **LLM** | llama.cpp | Separate GPU allocation |
 
 ### Configuration
 In `config/config.yaml`:

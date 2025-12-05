@@ -82,19 +82,6 @@ def retrieve(
     use_graph_context: bool = False,    # NEW: user toggle
     ...
 ) -> list[dict]:
-    
-    # Optional query expansion
-    search_query = query
-    expanded_terms = []
-    if use_query_expansion and self.case_graph:
-        expanded_terms = self.case_graph.expand_query(query)
-        if len(expanded_terms) > 1:
-            # Use expanded query for BM25 (OR search)
-            search_query = " OR ".join(f'"{term}"' for term in expanded_terms)
-    
-    # ... existing retrieval pipeline ...
-    
-    # Optional graph context (added to results, not to LLM directly)
     if use_graph_context and self.case_graph:
         chunk_ids = [r["chunk_id"] for r in results]
         graph_context = self.case_graph.get_graph_context(chunk_ids)

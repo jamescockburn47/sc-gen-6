@@ -481,24 +481,6 @@ class MatterConfig:
 
 ```
 data/
-├── matters/
-│   ├── smith-v-acme/
-│   │   ├── matter.json
-│   │   ├── documents/
-│   │   ├── chroma_db/
-│   │   ├── bm25_index/
-│   │   └── case_graph/
-│   │
-│   ├── jones-competition/
-│   │   ├── matter.json
-│   │   ├── documents/
-│   │   ├── chroma_db/
-│   │   ├── bm25_index/
-│   │   └── case_graph/
-│   │
-│   └── fca-alpha/
-│       └── ...
-│
 └── global/
     ├── settings.json
     └── model_cache/
