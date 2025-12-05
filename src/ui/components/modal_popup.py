@@ -287,3 +287,4 @@ class SectionHeader(QLabel):
         """)
 
 
+

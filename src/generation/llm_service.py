@@ -503,8 +503,22 @@ class LLMService:
         return self.llm_env_config.provider != "llama_cpp"
 
     def _post_process_output(self, text: str) -> str:
+        """Post-process LLM output based on provider.
+        
+        For llama.cpp: Extract content from channel markers
+        For other providers: Return as-is
+        """
+        input_len = len(text) if text else 0
+        print(f"[POST_PROCESS DEBUG] Input: {input_len} chars, Provider: {self.llm_env_config.provider}")
+        
         if self.llm_env_config.provider == "llama_cpp":
-            return self._extract_llama_final_channel(text)
+            result = self._extract_llama_final_channel(text)
+            output_len = len(result) if result else 0
+            print(f"[POST_PROCESS DEBUG] After channel extraction: {output_len} chars")
+            return result
+        
+        # For other providers (gpt-oss-20b, etc), return raw output
+        print(f"[POST_PROCESS DEBUG] Non-llama provider, returning raw text: {input_len} chars")
         return text
 
     @staticmethod

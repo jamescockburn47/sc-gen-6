@@ -12,11 +12,26 @@ from src.config.llm_config import LLMConfig
 
 class LLMClient:
     """Base client for OpenAI-compatible endpoints."""
+    
+    # Shared singleton instances for async logger and insight generator
+    _performance_logger = None
+    _insight_generator = None
 
-    def __init__(self, config: LLMConfig, timeout: float = 1800.0):
+    def __init__(self, config: LLMConfig, timeout: float = 1800.0, enable_analytics: bool = True):
         self.config = config
         self.timeout = timeout
         self.session = requests.Session()
+        
+        # Initialize shared analytics components (singleton pattern for zero overhead)
+        if enable_analytics and LLMClient._performance_logger is None:
+            try:
+                from src.analytics.performance_logger import AsyncPerformanceLogger
+                from src.analytics.insight_generator import AutoInsightGenerator
+                
+                LLMClient._performance_logger = AsyncPerformanceLogger()
+                LLMClient._insight_generator = AutoInsightGenerator()
+            except Exception as e:
+                print(f"[ANALYTICS INIT ERROR] {e}")
 
     # ------------------------------------------------------------------#
     # Public API
@@ -29,7 +44,7 @@ class LLMClient:
         **kwargs,
     ) -> str:
         """Send a non-streaming chat completion request."""
-        # Use native Ollama API if configured
+        # Use native Ollama API only if explicitly configured
         if self.config.provider == "ollama":
             return self._generate_ollama_native(messages, model, temperature, stream=False, **kwargs)
 
@@ -45,7 +60,28 @@ class LLMClient:
         choices = data.get("choices") or []
         if not choices:
             raise RuntimeError("No choices returned from LLM response")
-        return choices[0].get("message", {}).get("content", "")
+        
+        # Extract llama.cpp statistics if available
+        usage = data.get("usage", {})
+        timings = data.get("timings", {})
+        
+        content = choices[0].get("message", {}).get("content", "")
+        
+        # Log statistics (async - 0ms overhead)
+        if timings and self.config.provider == "llama_cpp":
+            prompt_ms = timings.get("prompt_ms", 0)
+            completion_ms = timings.get("predicted_ms", 0)
+            completion_tokens = usage.get("completion_tokens", 0)
+            tokens_per_sec = timings.get("predicted_per_second", 0.0)
+            
+            print(f"[LLM STATS] Prompt: {prompt_ms:.0f}ms | "
+                  f"Generation: {completion_ms:.0f}ms | "
+                  f"{completion_tokens} tokens @ {tokens_per_sec:.1f} t/s")
+            
+            # Log to analytics database (async, returns immediately)
+            self._log_performance_async(messages, data, usage, timings, kwargs)
+        
+        return content
     
     def generate(
         self,
@@ -76,7 +112,7 @@ class LLMClient:
         **kwargs,
     ) -> Iterable[str]:
         """Stream tokens from the chat completion endpoint."""
-        # Use native Ollama API if configured
+        # Use native Ollama API only if explicitly configured
         if self.config.provider == "ollama":
             yield from self._stream_ollama_native(messages, model, temperature, **kwargs)
             return
@@ -203,6 +239,9 @@ class LLMClient:
         # For Ollama: Set context window size to handle large prompts
         # Default Ollama context is only 4096, we need more for RAG
         # Note: num_ctx must be passed at the top level for OpenAI-compatible endpoint
+        # For Ollama: Set context window size to handle large prompts
+        # Default Ollama context is only 4096, we need more for RAG
+        # Note: num_ctx must be passed at the top level for OpenAI-compatible endpoint
         if self.config.provider == "ollama":
             # Try both locations - Ollama API is inconsistent
             payload["options"] = {"num_ctx": 16384}
@@ -232,7 +271,12 @@ class LLMClient:
                 try:
                     error_body = response.json()
                     error_msg = error_body.get("error", "")
-                    if "context" in error_msg.lower() and ("exceed" in error_msg.lower() or "size" in error_msg.lower()):
+                    
+                    # Handle both string and dict error messages  
+                    if isinstance(error_msg, dict):
+                        error_msg = str(error_msg.get("message", error_msg))
+                    
+                    if isinstance(error_msg, str) and "context" in error_msg.lower() and ("exceed" in error_msg.lower() or "size" in error_msg.lower()):
                         raise ValueError(
                             f"Request exceeds server context window. "
                             f"Server error: {error_msg}. "
@@ -271,6 +315,51 @@ class LLMClient:
             content = delta.get("content")
             if content:
                 yield content
+
+    def _log_performance_async(self, messages, data, usage, timings, kwargs):
+        """Queue performance metrics (returns immediately - 0ms overhead)."""
+        if not LLMClient._performance_logger:
+            return
+        
+        try:
+            import hashlib
+            from datetime import datetime
+            from src.analytics.performance_logger import LLMMetrics
+            
+            # Hash system prompt for tracking
+            system_prompt_hash = None
+            if messages and messages[0].get("role") == "system":
+                system_prompt_hash = hashlib.sha256(
+                    messages[0]["content"].encode()
+                ).hexdigest()[:16]
+            
+            content = data.get("choices", [{}])[0].get("message", {}).get("content", "")
+            
+            metrics = LLMMetrics(
+                timestamp=datetime.now(),
+                model=data.get("model", self.config.model_name),
+                provider=self.config.provider,
+                query_type=kwargs.get("query_type"),
+                system_prompt_hash=system_prompt_hash,
+                
+                prompt_tokens=usage.get("prompt_tokens", 0),
+                completion_tokens=usage.get("completion_tokens", 0),
+                
+                prompt_ms=timings.get("prompt_ms", 0.0),
+                completion_ms=timings.get("predicted_ms", 0.0),
+                tokens_per_second=timings.get("predicted_per_second", 0.0),
+                
+                context_chunks=kwargs.get("context_chunks", 0),
+                context_chars=sum(len(m.get("content", "")) for m in messages),
+                query_chars=len(messages[-1].get("content", "")) if messages else 0,
+                response_chars=len(content)
+            )
+            
+            # This returns IMMEDIATELY (queue.put_nowait)
+            LLMClient._performance_logger.log_request(metrics)
+            
+        except Exception:
+            pass  # Never fail due to logging error
 
 
 class LmStudioClient(LLMClient):

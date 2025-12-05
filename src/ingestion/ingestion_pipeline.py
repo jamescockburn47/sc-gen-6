@@ -306,10 +306,16 @@ class IngestionPipeline:
                     "doc_type": parsed_doc.document_type,
                 }
                 
+                # Get current model from runtime state to ensure consistency
+                from src.config.runtime_store import load_runtime_state
+                state = load_runtime_state()
+                current_model = state.get("model_name")
+
                 # Generate summaries (uses configured model)
                 summaries = summarizer.summarize_documents(
                     documents=[doc_dict],
                     summary_types=settings.summary.summary_types,
+                    model=current_model,
                 )
                 logger.info(f"Generated {len(summaries)} summaries")
             else:

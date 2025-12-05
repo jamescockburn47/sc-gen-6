@@ -147,6 +147,73 @@ class CompactQueryPanel(QWidget):
 
         main_layout.addWidget(query_section)
 
+        # System Prompt Section (Prominent position)
+        prompt_section = QFrame()
+        prompt_section.setStyleSheet("""
+            QFrame {
+                background-color: #1a1a20;
+                border: 1px solid #27272a;
+                border-radius: 12px;
+            }
+        """)
+        prompt_layout = QVBoxLayout(prompt_section)
+        prompt_layout.setContentsMargins(16, 12, 16, 12)
+        prompt_layout.setSpacing(8)
+
+        # Header with preset dropdown
+        prompt_header = QHBoxLayout()
+        prompt_label = QLabel("💬 System Prompt:")
+        prompt_label.setProperty("styleClass", "muted")
+        prompt_label.setStyleSheet("font-size: 11pt; font-weight: 600;")
+        prompt_header.addWidget(prompt_label)
+        prompt_header.addStretch()
+
+        # Preset dropdown
+        preset_label = QLabel("Preset:")
+        preset_label.setProperty("styleClass", "muted")
+        prompt_header.addWidget(preset_label)
+        
+        self.prompt_preset_combo = QComboBox()
+        self.prompt_preset_combo.setMaximumWidth(200)
+        self.prompt_preset_combo.addItem("Mode Default", None)
+        self.prompt_preset_combo.addItem("Document Synthesis", "litigation")
+        self.prompt_preset_combo.addItem("Factual Extraction", "factual")
+        self.prompt_preset_combo.addItem("Timeline Builder", "timeline")
+        self.prompt_preset_combo.addItem("Witness Comparison", "witness")
+        self.prompt_preset_combo.addItem("Gap Analysis", "gaps")
+        self.prompt_preset_combo.addItem("Contradiction Finder", "contradictions")
+        self.prompt_preset_combo.addItem("Custom", "custom")
+        self.prompt_preset_combo.currentIndexChanged.connect(self._on_prompt_preset_changed)
+        prompt_header.addWidget(self.prompt_preset_combo)
+        
+        prompt_layout.addLayout(prompt_header)
+
+        # Prompt text editor
+        self.system_prompt_text = QTextEdit()
+        self.system_prompt_text.setPlaceholderText(
+            "System prompt will auto-populate based on mode or preset..."
+        )
+        self.system_prompt_text.setMinimumHeight(80)
+        self.system_prompt_text.setMaximumHeight(120)
+        self.system_prompt_text.setStyleSheet("""
+            QTextEdit {
+                background-color: #0f0f12;
+                border: 1px solid #27272a;
+                border-radius: 8px;
+                padding: 10px;
+                font-size: 10pt;
+                color: #d4d4d8;
+                font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+                line-height: 1.4;
+            }
+            QTextEdit:focus {
+                border-color: #8b7cf6;
+            }
+        """)
+        prompt_layout.addWidget(self.system_prompt_text)
+        
+        main_layout.addWidget(prompt_section)
+
         # Quick model selection
         model_layout = QHBoxLayout()
         model_label = QLabel("Model:")
@@ -183,9 +250,13 @@ class CompactQueryPanel(QWidget):
             "Deep Analysis: Wider search, more thorough analysis"
         )
         self.mode_combo.currentTextChanged.connect(self._on_mode_changed)
+        self.mode_combo.currentTextChanged.connect(self._update_system_prompt_from_mode)
         mode_layout.addWidget(self.mode_combo, stretch=1)
 
         main_layout.addLayout(mode_layout)
+        
+        # Initialize system prompt with current mode default
+        self._update_system_prompt_from_mode()
 
         # Action buttons
         button_layout = QHBoxLayout()
@@ -193,6 +264,12 @@ class CompactQueryPanel(QWidget):
         self.submit_button = QPushButton("🚀 Generate Answer")
         self.submit_button.clicked.connect(self._on_submit)
         button_layout.addWidget(self.submit_button)
+
+        # Quality Assessment Toggle
+        self.assess_quality_checkbox = QCheckBox("Assess Quality")
+        self.assess_quality_checkbox.setToolTip("Send result to cloud AI for quality assessment")
+        self.assess_quality_checkbox.setProperty("styleClass", "muted")
+        button_layout.addWidget(self.assess_quality_checkbox)
 
         self.stop_button = QPushButton("Stop")
         self.stop_button.setVisible(False)
@@ -427,17 +504,104 @@ class CompactQueryPanel(QWidget):
         mode = self.mode_combo.currentText()
         if mode == "Fact Lookup":
             return (
-                "You are a litigation support assistant. Provide ONLY the specific facts requested. "
-                "No preamble, no conclusion, no reasoning traces. Just the facts with citations. "
-                "Be extremely concise - answer in 1-3 sentences if possible."
+                "You are a litigation support assistant retrieving specific facts from documents. "
+                "Provide ONLY the requested information from retrieved documents. "
+                "No preamble, no conclusion. Just the facts with [Doc Name, Page X] citations. "
+                "Use complete, grammatical sentences. Answer in 1-3 sentences if possible. "
+                "If not in documents, state: 'Not found in documents.'"
             )
         elif mode == "Deep Analysis":
             return (
-                "You are a litigation support assistant conducting thorough legal analysis. "
-                "Analyze the sources comprehensively, identify patterns, and draw connections. "
-                "Cite every factual claim. Present your analysis clearly without showing internal reasoning steps."
+                "You are a litigation support assistant conducting comprehensive document analysis. "
+                "Analyze ONLY retrieved sources. Synthesize patterns and connections. "
+                "Cite EVERY factual claim with [Doc Name, Page X]. Use complete sentences. "
+                "Structure with ## headings and bullet points. Present conclusions clearly."
             )
         return None  # Standard mode uses default prompt
+
+    def _get_prompt_presets(self) -> dict[str, str]:
+        """RAG-specific litigation query presets."""
+        return {
+            "litigation": (
+                "Answer ONLY using the retrieved documents. Synthesize information from multiple sources. "
+                "Cite every fact with [Doc Name, Page X]. If information is not in the retrieved documents, "
+                "state 'Not found in retrieved documents.' Do NOT use external knowledge.\n\n"
+                "OUTPUT STRUCTURE:\n"
+                "- Use clear section headings (## Section Name)\n"
+                "- Write in complete, grammatically correct sentences\n"
+                "- Format lists with bullet points or numbers\n"
+                "- Use Markdown tables for comparisons:\n"
+                "  | Document | Page | Finding |\n"
+                "  |----------|------|---------|\n"
+                "  | Doc A    | 5    | Fact 1  |"
+            ),
+            "factual": (
+                "Extract ONLY the specific facts requested from the retrieved documents. "
+                "Provide direct quotes where relevant. Cite each fact with [Doc Name, Page X]. "
+                "Write in complete sentences. Be extremely concise—answer in 1-3 sentences if possible. "
+                "If the fact is not in the documents, say 'Not found in documents.'"
+            ),
+            "timeline": (
+                "Build a chronological timeline using ONLY events mentioned in the retrieved documents.\n\n"
+                "FORMAT AS MARKDOWN TABLE:\n"
+                "| Date | Event | Source |\n"
+                "|------|-------|--------|\n"
+                "| YYYY-MM-DD | Description | [Doc, Page X] |\n\n"
+                "Flag any date conflicts between documents. Note timeline gaps. "
+                "Do NOT infer dates not explicitly stated in the documents. Use complete sentences in Event column."
+            ),
+            "witness": (
+                "Compare witness accounts using ONLY the retrieved statements/testimony.\n\n"
+                "FORMAT AS TABLE:\n"
+                "| Witness | Statement | Source | Type |\n"
+                "|---------|-----------|--------|------|\n"
+                "| Name    | Quote     | [Doc, Page X, Line Y] | Corroboration/Contradiction |\n\n"
+                "Identify: (1) Corroborations, (2) Contradictions, (3) Unique claims. "
+                "Present findings objectively without speculation. Use complete sentences."
+            ),
+            "gaps": (
+                "Identify information gaps in the retrieved documents regarding the query. "
+                "List: (1) What the documents DO say (with citations), (2) What is MISSING or unclear. "
+                "Suggest specific documents or discovery items needed. "
+                "Do NOT speculate about missing information."
+            ),
+            "contradictions": (
+                "Find contradictions or inconsistencies across the retrieved documents. "
+                "For each contradiction: cite both sources with [Doc A, Page X] vs [Doc B, Page Y]. "
+                "Quote conflicting statements directly. Categorize as factual conflicts, timeline issues, or claim disputes. "
+                "Do NOT interpret—only report what the documents state."
+            ),
+        }
+
+    def _update_system_prompt_from_mode(self, mode: str = None):
+        """Update system prompt text when mode changes."""
+        # Only update if user hasn't selected a preset manually
+        if self.prompt_preset_combo.currentData() is not None:
+            return
+        
+        prompt = self._get_system_prompt_for_mode()
+        if prompt:
+            self.system_prompt_text.setPlainText(prompt)
+        else:
+            self.system_prompt_text.setPlainText("")
+    
+    def _on_prompt_preset_changed(self):
+        """Handle prompt preset selection."""
+        preset_key = self.prompt_preset_combo.currentData()
+        
+        if preset_key is None:
+            # Mode default - update from current mode
+            self._update_system_prompt_from_mode()
+        elif preset_key == "custom":
+            # Custom - clear prompt for user to type
+            if not self.system_prompt_text.toPlainText().strip():
+                self.system_prompt_text.setPlainText("")
+                self.system_prompt_text.setFocus()
+        else:
+            # Legal preset
+            presets = self._get_prompt_presets()
+            if preset_key in presets:
+                self.system_prompt_text.setPlainText(presets[preset_key])
 
     def _on_submit(self):
         """Handle submit button click."""
@@ -453,7 +617,7 @@ class CompactQueryPanel(QWidget):
             "query": query,
             "model": self._current_model_identifier(),
             "mode": self.mode_combo.currentText(),
-            "system_prompt": self._get_system_prompt_for_mode(),
+            "system_prompt": self.system_prompt_text.toPlainText().strip() or self._get_system_prompt_for_mode(),
             "doc_type_filter": self.doc_type_combo.currentData(),
             "selected_documents": self.selected_documents,
             "skip_reranking": self.skip_rerank_checkbox.isChecked(),
@@ -462,6 +626,7 @@ class CompactQueryPanel(QWidget):
             "use_query_expansion": self.query_expansion_checkbox.isChecked(),
             "use_graph_context": self.graph_context_checkbox.isChecked(),
             "date_filter_mode": self.date_mode_combo.currentData(),
+            "assess_quality": self.assess_quality_checkbox.isChecked(),
             **self._collect_param_values(),
         }
 

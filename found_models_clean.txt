@@ -1,0 +1,10 @@
+C:\Users\James\.lmstudio\models\lmstudio-community\DeepSeek-R1-0528-Qwen3-8B-GGUF\DeepSeek-R1-0528-Qwen3-8B-Q4_K_M.gguf
+C:\Users\James\.lmstudio\models\lmstudio-community\gpt-oss-120b-GGUF\gpt-oss-120b-MXFP4-00001-of-00002.gguf
+C:\Users\James\.lmstudio\models\lmstudio-community\gpt-oss-120b-GGUF\gpt-oss-120b-MXFP4-00002-of-00002.gguf
+C:\Users\James\.lmstudio\models\lmstudio-community\gpt-oss-20b-GGUF\gpt-oss-20b-MXFP4.gguf
+C:\Users\James\.lmstudio\models\lmstudio-community\Mistral-Small-3.2-24B-Instruct-2506-GGUF\Mistral-Small-3.2-24B-Instruct-2506-Q4_K_M.gguf
+C:\Users\James\.lmstudio\models\lmstudio-community\Mistral-Small-3.2-24B-Instruct-2506-GGUF\mmproj-Mistral-Small-3.2-24B-Instruct-2506-F16.gguf
+C:\Users\James\.lmstudio\models\lmstudio-community\Qwen2.5-72B-Instruct-GGUF\Qwen2.5-72B-Instruct-Q4_K_M.gguf
+C:\Users\James\.lmstudio\models\lmstudio-community\Qwen3-14B-GGUF\Qwen3-14B-Q4_K_M.gguf
+C:\Users\James\.lmstudio\models\Mungert\granite-guardian-3.2-5b-GGUF\granite-guardian-3.2-5b-q4_k_s.gguf
+C:\Users\James\.lmstudio\models\unsloth\granite-4.0-h-small-GGUF\granite-4.0-h-small-Q4_K_S.gguf

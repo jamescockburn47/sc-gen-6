@@ -65,7 +65,7 @@ class ONNXEmbeddingService:
         self.tokenizer = None
         self.session = None
         self._embedding_dim = None
-        self._load_model()
+        # Lazy load: self._load_model() is now called on first use
 
     def _get_best_provider(self) -> tuple[str, str]:
         """Determine the best ONNX Runtime execution provider.
@@ -286,6 +286,11 @@ class ONNXEmbeddingService:
 
         return normalized
 
+    def _ensure_model_loaded(self) -> None:
+        """Ensure model and tokenizer are loaded."""
+        if self.session is None or self.tokenizer is None:
+            self._load_model()
+
     def embed_text(self, text: str) -> list[float]:
         """Embed a single text string.
 
@@ -298,6 +303,7 @@ class ONNXEmbeddingService:
         if not text.strip():
             raise ValueError("Text cannot be empty")
 
+        self._ensure_model_loaded()
         embeddings = self._encode([text])
         return embeddings[0].tolist()
 
@@ -319,6 +325,7 @@ class ONNXEmbeddingService:
             raise ValueError("No valid texts to embed")
 
         # Process in batches
+        self._ensure_model_loaded()
         all_embeddings = []
         for i in range(0, len(valid_texts), self.batch_size):
             batch = valid_texts[i : i + self.batch_size]
@@ -340,8 +347,11 @@ class ONNXEmbeddingService:
             raise ValueError("Query cannot be empty")
 
         prefixed_query = f"{self.BGE_QUERY_PREFIX} {query}"
+        self._ensure_model_loaded()
         embeddings = self._encode([prefixed_query])
         return embeddings[0].tolist()
+
+        return self._embedding_dim
 
     def get_embedding_dimension(self) -> int:
         """Get the dimension of embeddings produced by this model.
@@ -349,6 +359,15 @@ class ONNXEmbeddingService:
         Returns:
             Embedding dimension (e.g., 1024 for bge-large-en-v1.5)
         """
+        if self._embedding_dim is None:
+            # Try to get from config without loading full model if possible
+            try:
+                from transformers import AutoConfig
+                config = AutoConfig.from_pretrained(self.model_name)
+                self._embedding_dim = config.hidden_size
+            except Exception:
+                self._ensure_model_loaded()
+                
         return self._embedding_dim
 
     def is_gpu_available(self) -> bool:

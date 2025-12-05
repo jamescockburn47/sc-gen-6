@@ -625,3 +625,4 @@ src/ui/modern_main_window.py    # Add sidebar tabs, matter bar
 ```
 
 
+

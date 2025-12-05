@@ -38,6 +38,7 @@ rank-bm25>=0.2.2  # BM25 implementation
 # LLM Interface
 ollama>=0.1.7  # Ollama client
 openai>=1.0.0  # OpenAI client (for LM Studio compatibility)
+aiohttp>=3.9.0  # Async HTTP client for cloud evaluation
 
 # UI
 PySide6>=6.6.0,<6.10.0  # Desktop GUI (supports Python 3.8-3.13)

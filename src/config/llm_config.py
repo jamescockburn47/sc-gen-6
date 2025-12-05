@@ -67,6 +67,13 @@ def load_llm_config() -> LLMConfig:
     ).strip()
     default_provider_values = DEFAULTS_BY_PROVIDER[provider]
 
+    # Prevent "sticky" base_url from previous provider
+    # If the stored URL matches the default of a DIFFERENT provider, ignore it
+    for other_provider, defaults in DEFAULTS_BY_PROVIDER.items():
+        if other_provider != provider and env_base_url == defaults["base_url"]:
+            env_base_url = ""
+            break
+
     base_url = env_base_url or default_provider_values["base_url"]
     api_key = env_api_key or default_provider_values["api_key"]
     model_name = (

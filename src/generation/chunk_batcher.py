@@ -498,8 +498,12 @@ class ChunkBatchGenerator:
         )
 
         try:
-            # Use configured max tokens or default to 2048 to prevent infinite loops
-            synthesis_limit = max_tokens if max_tokens is not None else getattr(self.settings.generation, "synthesis_max_tokens", 2048)
+            # Use configured max tokens or default to 8192 for comprehensive answers
+            synthesis_limit = max_tokens if max_tokens is not None else getattr(self.settings.generation, "synthesis_max_tokens", 8192)
+            
+            print(f"[SYNTHESIS DEBUG] Starting synthesis...")
+            print(f"[SYNTHESIS DEBUG] Combined notes: {len(combined_notes)} chars")
+            print(f"[SYNTHESIS DEBUG] Max tokens: {synthesis_limit}")
             
             synthesized = self.base_service.generate(
                 prompt=user_prompt,
@@ -509,8 +513,21 @@ class ChunkBatchGenerator:
                 cancel_event=cancel_event,
                 max_tokens=synthesis_limit,
             )
-            return synthesized or ""
+            
+            print(f"[SYNTHESIS DEBUG] Raw generation returned: {len(synthesized) if synthesized else 0} chars")
+            print(f"[SYNTHESIS DEBUG] Type: {type(synthesized)}, Is None: {synthesized is None}, Is Empty: {not synthesized}")
+            
+            if not synthesized or len(synthesized.strip()) == 0:
+                print(f"[SYNTHESIS DEBUG] WARNING: Synthesis returned empty!")
+                print(f"[SYNTHESIS DEBUG] Query was: {query[:100]}...")
+                print(f"[SYNTHESIS DEBUG] FALLBACK: Returning combined batch notes instead")
+                return combined_notes
+            
+            print(f"[SYNTHESIS DEBUG] Synthesis successful: {len(synthesized)} chars")
+            return synthesized
         except Exception as exc:
-            print(f"[BATCH DEBUG] Synthesis failed: {exc}")
-            return ""
+            print(f"[BATCH DEBUG] Synthesis failed with exception: {exc}")
+            print(f"[SYNTHESIS DEBUG] FALLBACK: Returning combined notes")
+            return combined_notes
+
 

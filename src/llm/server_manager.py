@@ -59,7 +59,7 @@ class LlamaServerManager:
             api_key,
             "--parallel",
             str(parallel),
-            "--batch",
+            "-b",
             str(batch),
             "--timeout",
             str(timeout),

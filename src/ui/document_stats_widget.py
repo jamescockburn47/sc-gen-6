@@ -79,10 +79,11 @@ class DocumentStatsWidget(QWidget):
         self.catalog = DocumentCatalog()
         self._setup_ui()
 
-        # Auto-refresh timer (every 30 seconds)
+        # Auto-refresh timer - DISABLED FOR PERFORMANCE
+        # User can refresh manually with button
         self.refresh_timer = QTimer(self)
         self.refresh_timer.timeout.connect(self.refresh_stats)
-        self.refresh_timer.start(30000)
+        # self.refresh_timer.start(30000)  # DISABLED
 
         # Initial load
         self.refresh_stats()

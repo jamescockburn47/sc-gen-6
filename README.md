@@ -15,6 +15,8 @@ A **fully local RAG pipeline** for litigation factual/procedural work (civil fra
 - **Parallel Processing**: Multi-threaded ingestion and batch generation for maximum GPU utilization
 
 ### Advanced Features
+- **AI Quality Assessment**: Automated evaluation of RAG outputs using cloud models (GPT-5.1, Claude 3.5, Gemini 1.5)
+- **Performance Analytics**: Real-time tracking of generation speed, token usage, and system health
 - **Case Graph**: Automatic entity and relationship extraction from documents
 - **Timeline Generation**: Chronological event extraction with source tracking
 - **Case Overview**: AI-generated high-level case summaries
@@ -26,6 +28,8 @@ A **fully local RAG pipeline** for litigation factual/procedural work (civil fra
 - **PySide6 Interface**: Modern, responsive desktop application
 - **Document Management**: Drag-and-drop ingestion with metadata editing
 - **Query Interface**: Real-time streaming responses with citation verification
+- **Quality Dashboard**: View assessment scores and apply optimization suggestions
+- **Performance Dashboard**: Monitor system metrics and LLM performance
 - **Graph Visualization**: Interactive entity and relationship graphs
 - **Timeline View**: Chronological case events with source documents
 - **Case Overview**: High-level case summary with key parties and dates
@@ -130,14 +134,18 @@ python -m src.ui.main
 - Adjust retrieval parameters (N, K, M, confidence threshold)
 - Select model and document type filters
 - Click **"Run Query"** for streaming results with citations
-- Batch generation automatically parallelizes for speed
+- Toggle **"Assess Quality"** to enable cloud-based evaluation
 
-#### 3. Case Graph & Timeline
+#### 3. Quality & Performance
+- Navigate to **"Quality"** tab to review assessment scores and suggestions
+- Check **"Performance"** tab for real-time system metrics and insights
+
+#### 4. Case Graph & Timeline
 - Navigate to **"Case Graph"** tab for entity visualization
 - View **"Timeline"** for chronological events
 - Check **"Case Overview"** for AI-generated summary
 
-#### 4. Background Tasks (Advanced)
+#### 5. Background Tasks (Advanced)
 - Go to **Settings** → **Background Tasks**
 - Click **"🚀 Generate All (Full)"** to run all generators
 - Or use **"⚡ Update All (Incremental)"** for new documents only
@@ -161,6 +169,7 @@ Query → Retrieval (Hybrid)
      → Reranking (GPU)
      → Batch Generation (if enabled)
      → Citation Verification
+     → Quality Assessment (Async)
 ```
 
 **Background Tasks**:
@@ -193,36 +202,19 @@ Every factual claim must include a citation. The system verifies citations post-
 ```
 SC Gen 6/
 ├── src/
-│   ├── ingestion/
-│   │   ├── parsers/              # PDF, DOCX, Email, OCR, Spreadsheet
-│   │   ├── chunkers/             # Adaptive chunking with RCTS
-│   │   └── ingestion_pipeline.py # Parallel ingestion orchestrator
-│   ├── retrieval/
-│   │   ├── hybrid_retriever.py   # BM25 + Dense + RRF + Rerank
-│   │   ├── vector_store.py       # Chroma vector DB
-│   │   └── bm25_index.py         # BM25 keyword index
-│   ├── generation/
-│   │   ├── llm_service.py        # LLM generation service
-│   │   ├── chunk_batcher.py      # Parallel batch generation
-│   │   ├── background_task_manager.py # Background task orchestrator
-│   │   ├── case_overview_generator.py # Case overview from summaries
-│   │   └── document_renamer.py   # Intelligent document naming
-│   ├── graph/
-│   │   ├── case_graph.py         # Case graph storage
-│   │   ├── graph_generator.py    # Entity/relationship extraction
-│   │   └── timeline_generator.py # Timeline event extraction
-│   ├── ui/
-│   │   ├── modern_main_window.py # Main application window
-│   │   ├── case_overview_widget.py # Case overview UI
-│   │   └── background_task_dialog.py # Background task progress
-│   └── config_loader.py          # Configuration management
-├── config/
-│   ├── config.yaml               # Main configuration
-│   ├── model_presets.json        # Model presets (inc. GPT-OSS 120B)
-│   └── llm_runtime.json          # Runtime LLM state
-├── data/                         # Documents, vector DB, indexes
-├── models/                       # Model registry
-└── tests/                        # Unit and integration tests
+│   ├── ingestion/            # Parsing, chunking, indexing pipeline
+│   ├── retrieval/            # Hybrid retrieval, vector store, reranking
+│   ├── generation/           # LLM service, batch generation, citation verification
+│   ├── assessment/           # Quality assessment, cloud evaluator, suggestions
+│   ├── analytics/            # Performance logging, dashboard backend
+│   ├── graph/                # Case graph, timeline generation
+│   ├── ui/                   # PySide6 desktop application
+│   └── config/               # Configuration management
+├── config/                   # Config files (yaml, json)
+├── data/                     # Data storage (documents, db, indexes)
+├── docs/                     # Documentation
+├── models/                   # Model registry
+└── tests/                    # Test suite
 ```
 
 ## Configuration
@@ -230,7 +222,7 @@ SC Gen 6/
 Edit `config/config.yaml` to customize:
 - **Models**: LLM, embeddings, reranker selection
 - **Retrieval**: N, K, M, confidence threshold
-- **Chunking**: Settings per document type
+- **Quality**: Cloud provider (OpenAI, Anthropic, Google), API keys
 - **Background Tasks**: Model selection strategy, enabled tasks
 - **Paths**: Data directories, model paths
 
@@ -336,5 +328,5 @@ For issues and questions, please open an issue on the repository.
 
 ---
 
-**Version**: 6.0  
-**Last Updated**: 2025-11-29
+**Version**: 6.1
+**Last Updated**: 2025-12-05

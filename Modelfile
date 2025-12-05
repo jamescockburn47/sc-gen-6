@@ -1,0 +1,9 @@
+FROM ./Qwen_Qwen3-Next-80B-A3B-Instruct-Q4_K_M.gguf
+TEMPLATE """{{ if .System }}<|im_start|>system
+{{ .System }}<|im_end|>
+{{ end }}{{ if .User }}<|im_start|>user
+{{ .User }}<|im_end|>
+{{ end }}<|im_start|>assistant
+"""
+PARAMETER stop "<|im_start|>"
+PARAMETER stop "<|im_end|>"

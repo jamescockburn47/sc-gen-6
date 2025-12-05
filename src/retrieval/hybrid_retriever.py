@@ -177,7 +177,16 @@ class HybridRetriever:
         _check_cancel("start")
 
         # Pre-compute query embedding (needed for semantic search)
+        embed_start = time.time()
         query_embedding = self.embedding_service.embed_query(query)
+        embed_time_ms = (time.time() - embed_start) * 1000
+        
+        # Log embedding time for performance monitoring
+        if embed_time_ms > 100:
+            print(f"[PERF WARNING] Query embedding took {embed_time_ms:.1f}ms (expected 10-50ms)")
+        else:
+            print(f"[TIMING] Query embedding: {embed_time_ms:.1f}ms")
+        
         where_clause = self._build_where_clause(doc_type_filter, date_range, selected_documents)
 
         # Step 1 & 2: Run semantic and keyword search IN PARALLEL

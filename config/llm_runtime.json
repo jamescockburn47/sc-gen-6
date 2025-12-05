@@ -1,12 +1,25 @@
 {
-  "provider": "ollama",
-  "base_url": "http://localhost:11434",
-  "api_key": "",
-  "model_name": "qwen2.5:32b",
+  "provider": "llama_cpp",
+  "base_url": "http://127.0.0.1:8000/v1",
+  "api_key": "local-llama",
+  "model_name": "gpt-oss-20b",
+  "llama_server": {
+    "executable": "C:/Users/James/Desktop/SC Gen 6/llama-cpp/llama-server.exe",
+    "model_path": "C:/Users/James/.lmstudio/models/lmstudio-community/gpt-oss-20b-GGUF/gpt-oss-20b-MXFP4.gguf",
+    "context": 131072,
+    "gpu_layers": 80,
+    "parallel": 8,
+    "batch": 512,
+    "timeout": 1800,
+    "host": "127.0.0.1",
+    "port": 8000,
+    "flash_attn": true,
+    "extra_args": ""
+  },
   "_comments": {
-    "provider": "Using Ollama - native API with 16K context forced in code",
-    "base_url": "Standard Ollama endpoint (code handles /api/chat vs /v1)",
-    "model_name": "Standard qwen2.5:32b-instruct",
-    "context_fix": "Managed via src/llm/client.py native implementation"
+    "provider": "Using llama.cpp with gpt-oss-20b for parallel chunk processing",
+    "context": "MASSIVELY increased to 131072 tokens (128K) to handle multiple chunks + system prompt",
+    "model_note": "gpt-oss-20b MXFP4 quantization for speed and quality",
+    "parallel": "Set to 8 for efficient batch parallelization during generation"
   }
 }

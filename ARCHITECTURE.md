@@ -18,7 +18,7 @@
 ┌─────────────────────────────────────────────────────────────┐
 │                      Desktop UI (PySide6)                    │
 │  ┌──────────┬──────────┬──────────┬──────────┬───────────┐  │
-│  │  Query   │Documents │  Graph   │ Timeline │ Overview  │  │
+│  │  Query   │Documents │  Graph   │ Quality  │ Perform.  │  │
 │  └──────────┴──────────┴──────────┴──────────┴───────────┘  │
 └─────────────────────────────────────────────────────────────┘
                             ↓
@@ -28,13 +28,17 @@
 │  │  Ingestion   │  Retrieval   │  Generation              │ │
 │  │  Pipeline    │  (Hybrid)    │  (LLM + Batch)           │ │
 │  └──────────────┴──────────────┴──────────────────────────┘ │
+│                 ┌──────────────────────────┐                │
+│                 │  Quality Assessment      │                │
+│                 │  (Cloud Evaluator)       │                │
+│                 └──────────────────────────┘                │
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
 │                    Storage Layer                             │
 │  ┌──────────┬──────────┬──────────┬──────────┬───────────┐  │
-│  │ Vector   │  BM25    │  Graph   │ Summary  │ Catalog   │  │
-│  │  Store   │  Index   │  Store   │  Store   │           │  │
+│  │ Vector   │  BM25    │  Graph   │ Assess.  │ Perform.  │  │
+│  │  Store   │  Index   │  Store   │  DB      │  Logs     │  │
 │  └──────────┴──────────┴──────────┴──────────┴───────────┘  │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -125,7 +129,47 @@ LLMService
 - Batch generation algorithm
 - LLM client interface
 
-### 4. Background Tasks
+### 4. Quality Assessment System
+
+**Location**: `src/assessment/`
+
+**Purpose**: Automated evaluation of RAG outputs using cloud models
+
+**Architecture**:
+```
+AssessmentPipeline
+├── AssessmentCollector (metadata capture)
+├── CloudEvaluator (OpenAI/Anthropic/Google)
+├── AssessmentWorker (async background thread)
+├── SuggestionParser (feedback analysis)
+└── SuggestionApplicator (auto-optimization)
+```
+
+**Key Files**:
+- `cloud_evaluator.py` - Cloud API client
+- `assessment_worker.py` - Background worker
+- `assessment_db.py` - SQLite storage for results
+- `suggestion_applicator.py` - Config optimization
+
+### 5. Performance Analytics System
+
+**Location**: `src/analytics/`
+
+**Purpose**: Real-time monitoring and insights
+
+**Architecture**:
+```
+PerformanceSystem
+├── PerformanceLogger (metrics collection)
+├── PerformanceDashboard (visualization)
+└── InsightGenerator (LLM-based analysis)
+```
+
+**Key Files**:
+- `performance_logger.py` - Metrics logging
+- `performance_dashboard.py` - UI widget
+
+### 6. Background Tasks
 
 **Location**: `src/generation/` and `src/graph/`
 
@@ -158,7 +202,7 @@ Generators (inherit from SummaryBasedGenerator)
 - Incremental update mechanism
 - Model selection strategy
 
-### 5. Graph System
+### 7. Graph System
 
 **Location**: `src/graph/`
 
@@ -184,7 +228,7 @@ CaseGraph
 - Graph persistence format
 - Source document tracking
 
-### 6. UI System
+### 8. UI System
 
 **Location**: `src/ui/`
 
@@ -200,7 +244,9 @@ ModernMainWindow
 │   ├── Graph View (visualization)
 │   ├── Timeline View (chronological)
 │   ├── Summaries View (generation)
-│   └── Case Overview View (synthesis)
+│   ├── Case Overview View (synthesis)
+│   ├── Performance View (analytics)
+│   └── Quality View (suggestions)
 └── Details Panel (results, progress)
 ```
 
@@ -208,7 +254,8 @@ ModernMainWindow
 - `modern_main_window.py` - Main window
 - `document_manager.py` - Document management
 - `case_overview_widget.py` - Case overview UI
-- `background_task_dialog.py` - Background task progress
+- `suggestions_viewer.py` - Quality suggestions
+- `performance_dashboard.py` - Performance metrics
 
 **DO NOT CHANGE**:
 - Main window structure
@@ -252,6 +299,11 @@ LLMService.generate_with_context()
     └── Verify citations
     ↓
 Display result with citations
+    ↓
+(Async) AssessmentWorker.run()
+    ├── Collect metadata
+    ├── Call CloudEvaluator
+    └── Save suggestions
 ```
 
 ### Background Task Flow
@@ -286,6 +338,10 @@ retrieval:
   keyword_top_n: 30
   rerank_top_k: 40
   context_to_llm: 10
+
+quality:
+  provider: "openai"
+  model: "gpt-5.1-instant"
 
 background_tasks:
   model_selection: "largest_available"
@@ -385,6 +441,7 @@ background_tasks:
 
 ## Version History
 
+- **v6.1** (2025-12-05): AI Quality Assessment, Performance Analytics, Native PySide6 UI
 - **v6.0** (2025-11-29): Background tasks, case overview, parallel processing
 - **v5.0** (2025-11): Graph system, timeline, summaries
 - **v4.0** (2025-10): Hybrid retrieval, reranking
@@ -394,5 +451,5 @@ background_tasks:
 
 ---
 
-**Last Updated**: 2025-11-29  
+**Last Updated**: 2025-12-05
 **Maintained By**: SC Gen 6 Development Team

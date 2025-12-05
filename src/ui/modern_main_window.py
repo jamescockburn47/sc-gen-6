@@ -47,7 +47,11 @@ from src.generation.chunk_batcher import ChunkBatchGenerator
 from src.retrieval.hybrid_retriever import HybridRetriever, RetrieverProgressSignals
 from src.generation.citation import verify_citations
 from src.guardrails.service import GuardrailService
+from src.guardrails.service import GuardrailService
 from src.ui.components.llm_status_bar import LLMStatusBar
+from src.ui.components.suggestions_viewer import SuggestionsViewer
+from src.assessment.assessment_collector import AssessmentCollector
+from src.assessment.assessment_worker import AssessmentWorker
 
 
 import time
@@ -59,6 +63,47 @@ from src.llm.constants import LLAMA_SERVER_LOG_PATH
 from src.llm.server_manager import manager as llama_manager
 from src.system.gpu_monitor import get_gpu_stats, get_ollama_gpu_info
 from src.chat.history import ChatHistory, ChatEntry
+
+
+import requests
+from time import sleep
+
+class ServerReadinessWorker(QThread):
+    """Worker to wait for LLM server to be ready."""
+    ready = Signal()
+    failed = Signal(str)
+    
+    def __init__(self, url: str, timeout: int = 60):
+        super().__init__()
+        self.url = url
+        self.timeout = timeout
+        self._stop_event = threading.Event()
+
+    def run(self):
+        start_time = time.time()
+        # Try /health first, then /v1/models
+        endpoints = ["/health", "/v1/models"]
+        
+        while not self._stop_event.is_set():
+            if time.time() - start_time > self.timeout:
+                self.failed.emit(f"Server startup timed out after {self.timeout}s")
+                return
+
+            for endpoint in endpoints:
+                try:
+                    target = f"{self.url.rstrip('/')}{endpoint}"
+                    response = requests.get(target, timeout=2)
+                    if response.status_code == 200:
+                        self.ready.emit()
+                        return
+                except requests.RequestException:
+                    pass
+            
+            sleep(1)
+
+    def stop(self):
+        self._stop_event.set()
+
 
 
 class QueryWorker(QThread):
@@ -272,7 +317,9 @@ class ModernMainWindow(QMainWindow):
         super().__init__()
         self.settings = get_settings()
         self.worker = None
+        self.readiness_worker = None
         self.auto_started_llama = False
+        self.server_ready = False  # Track server readiness
         self._last_logged_batch_progress = (-1, -1)
         self.preview_dialog = None
         self.chat_history = ChatHistory()
@@ -284,7 +331,11 @@ class ModernMainWindow(QMainWindow):
         # Initialize services with progress hooks
         self.retriever = HybridRetriever(progress_signals=self.retriever_signals)
         self.llm_service = LLMService(progress_signals=self.generation_signals)
+        self.retriever = HybridRetriever(progress_signals=self.retriever_signals)
+        self.llm_service = LLMService(progress_signals=self.generation_signals)
         self.chunk_batcher = ChunkBatchGenerator(self.llm_service)
+        self.assessment_collector = AssessmentCollector()
+        self._last_query_data = {}
 
         self._setup_window()
         self._setup_ui()
@@ -388,6 +439,16 @@ class ModernMainWindow(QMainWindow):
         self.btn_specs.setProperty("styleClass", "nav")
         self.btn_specs.clicked.connect(lambda: self._switch_view(6))
         
+        self.btn_performance = QPushButton("Performance")
+        self.btn_performance.setCheckable(True)
+        self.btn_performance.setProperty("styleClass", "nav")
+        self.btn_performance.clicked.connect(lambda: self._switch_view(7))
+        
+        self.btn_quality = QPushButton("Quality")
+        self.btn_quality.setCheckable(True)
+        self.btn_quality.setProperty("styleClass", "nav")
+        self.btn_quality.clicked.connect(lambda: self._switch_view(8))
+        
         self.btn_settings = QPushButton("Settings")
         self.btn_settings.setProperty("styleClass", "nav")
         self.btn_settings.clicked.connect(self._show_settings)
@@ -399,6 +460,8 @@ class ModernMainWindow(QMainWindow):
         sidebar_layout.addWidget(self.btn_summaries)
         sidebar_layout.addWidget(self.btn_overview)
         sidebar_layout.addWidget(self.btn_specs)
+        sidebar_layout.addWidget(self.btn_performance)
+        sidebar_layout.addWidget(self.btn_quality)
         sidebar_layout.addWidget(self.btn_settings)
         
         sidebar_layout.addSpacing(16)
@@ -522,6 +585,16 @@ class ModernMainWindow(QMainWindow):
         self.specs_panel = TechnicalSpecsPanel(self)
         self.view_stack.addWidget(self.specs_panel)
 
+        # -- View 7: Performance Analytics --
+        from src.ui.performance_dashboard import PerformanceDashboard
+        self.performance_dashboard = PerformanceDashboard(self)
+        self.performance_dashboard = PerformanceDashboard(self)
+        self.view_stack.addWidget(self.performance_dashboard)
+
+        # -- View 8: Quality Suggestions --
+        self.suggestions_viewer = SuggestionsViewer(self)
+        self.view_stack.addWidget(self.suggestions_viewer)
+
         # === 3. Details Panel (Right) ===
         self.detail_panel = ResultsDetailPanel(self)
         self.detail_panel.setMinimumWidth(300)
@@ -564,6 +637,9 @@ class ModernMainWindow(QMainWindow):
             (self.btn_summaries, 4),
             (self.btn_overview, 5),
             (self.btn_specs, 6),
+            (self.btn_specs, 6),
+            (self.btn_performance, 7),
+            (self.btn_quality, 8),
         ]
         
         for btn, btn_index in nav_buttons:
@@ -584,6 +660,10 @@ class ModernMainWindow(QMainWindow):
             self.summary_panel._refresh_stats()
         elif index == 5:  # Case Overview
             self.case_overview_widget._load_overview()
+        elif index == 7:  # Performance
+            self.performance_dashboard.refresh_insights()
+        elif index == 8:  # Quality
+            self.suggestions_viewer.refresh_data()
 
     def _on_summaries_generated(self):
         """Handle completion of summary generation."""
@@ -645,9 +725,23 @@ class ModernMainWindow(QMainWindow):
         """Handle query request."""
         self._switch_view(0) # Ensure we are in chat view
         
+        # Check server readiness if we auto-started it
+        if self.auto_started_llama and not self.server_ready:
+            self.output_panel.clear_output()
+            self.output_panel.show_progress(True)
+            self.output_panel.set_status("Waiting for Server...", "#fbbf24")
+            self.detail_panel.append_log("Query queued: waiting for llama.cpp server to be ready...")
+            
+            # Queue the query to run when ready
+            self._queued_query = query_data
+            return
+
         self._last_logged_batch_progress = (-1, -1)
-        # Store query for history
+        # Store query for history and assessment
         self._current_query = query_data.get("query", "")
+        self._last_query_data = query_data
+        
+        # Clear previous output
         
         # Clear previous output
         self.output_panel.clear_output()
@@ -730,6 +824,42 @@ class ModernMainWindow(QMainWindow):
         
         if self.preview_dialog:
             self.preview_dialog.close()
+
+        # Trigger Quality Assessment if requested
+        if self._last_query_data.get("assess_quality"):
+            self._start_quality_assessment(response, chunks, metrics, verification)
+
+    def _start_quality_assessment(self, response: str, chunks: list, metrics: dict, verification: dict):
+        """Start the background quality assessment."""
+        self.llm_status_bar.set_status("Running Quality Assessment...", "#8b7cf6")
+        
+        # Collect payload
+        payload = self.assessment_collector.collect(
+            query=self._last_query_data.get("query", ""),
+            retrieved_chunks=chunks,
+            generated_answer=response,
+            model_used=self._last_query_data.get("model", "unknown"),
+            system_prompt=self._last_query_data.get("system_prompt", ""),
+            generation_config=self._last_query_data,
+            diagnostics={**metrics, **verification}
+        )
+        
+        # Start worker
+        self.assessment_worker = AssessmentWorker(payload)
+        self.assessment_worker.finished.connect(self._handle_assessment_finished)
+        self.assessment_worker.error.connect(self._handle_assessment_error)
+        self.assessment_worker.start()
+        
+    def _handle_assessment_finished(self, result):
+        """Handle successful assessment."""
+        self.llm_status_bar.set_status(f"Assessment Complete: {result.overall_rating}/10", "#4ade80")
+        self.detail_panel.append_log(f"Quality Assessment: {result.overall_rating}/10")
+        # TODO: Show a toast or notification, or update a specific UI element
+        
+    def _handle_assessment_error(self, error_msg):
+        """Handle assessment error."""
+        self.llm_status_bar.set_status("Assessment Failed", "#ef4444")
+        self.detail_panel.append_log(f"Assessment Error: {error_msg}")
         
         # Ensure the final response is displayed (overwriting any streaming artifacts if needed)
         # This fixes the "no output" issue if streaming didn't catch the final synthesis
@@ -810,9 +940,10 @@ class ModernMainWindow(QMainWindow):
             self.output_panel.set_reasoning(synthesis_reasoning)
 
         # Store full synthesis output and show view button
-        synthesis_full = metrics.get("synthesis_full")
-        if synthesis_full:
-            self.output_panel.set_full_synthesis(synthesis_full)
+        # NOTE: Disabled - EnhancedOutputPanel doesn't have set_full_synthesis method
+        # synthesis_full = metrics.get("synthesis_full")
+        # if synthesis_full:
+        #     self.output_panel.set_full_synthesis(synthesis_full)
 
         tokens = metrics.get("token_count", 0) or 0
         speed = metrics.get("tokens_per_sec", 0) or 0
@@ -883,6 +1014,10 @@ class ModernMainWindow(QMainWindow):
     def _auto_start_llama_if_needed(self):
         """Start llama.cpp server automatically when configured."""
         try:
+            # CRITICAL: Fix AMD Vulkan allocation limit on Windows
+            import os
+            os.environ['GGML_VK_FORCE_MAX_ALLOCATION_SIZE'] = '4294967295'
+            
             cfg = load_llm_config()
             if cfg.provider != "llama_cpp":
                 self.detail_panel.append_log("LLM provider is not llama_cpp; auto-start skipped.")
@@ -903,7 +1038,7 @@ class ModernMainWindow(QMainWindow):
             host, port = _parse_host_port(cfg.base_url)
             extra_args: list[str] = []
             if llama_cfg.get("flash_attn"):
-                extra_args.append("--flash-attn")
+                extra_args.extend(["-fa", "on"])
             if llama_cfg.get("extra_args"):
                 extra_args.extend(shlex.split(llama_cfg.get("extra_args", "")))
 
@@ -923,9 +1058,37 @@ class ModernMainWindow(QMainWindow):
                 extra_args=extra_args,
             )
             self.auto_started_llama = True
-            self.detail_panel.append_log("llama.cpp server auto-started.")
+            self.detail_panel.append_log("llama.cpp server process started. Waiting for readiness...")
+            
+            # Start readiness checker
+            base_url = f"http://{host}:{port}"
+            self.readiness_worker = ServerReadinessWorker(base_url, timeout=120) # 2 min timeout for 80B model
+            self.readiness_worker.ready.connect(self._on_server_ready)
+            self.readiness_worker.failed.connect(self._on_server_failed)
+            self.readiness_worker.start()
+            
+            self.llm_status_bar.set_status("Loading Model...", True)
+
         except Exception as exc:
             self.detail_panel.append_log(f"llama.cpp auto-start failed: {exc}")
+
+    def _on_server_ready(self):
+        """Handle server ready state."""
+        self.detail_panel.append_log("llama.cpp server is ready and listening.")
+        self.llm_status_bar.finish(True)
+        self.server_ready = True
+        
+        # Process queued query if any
+        if hasattr(self, "_queued_query") and self._queued_query:
+            self.detail_panel.append_log("Processing queued query...")
+            query = self._queued_query
+            del self._queued_query
+            self._handle_query(query)
+
+    def _on_server_failed(self, error: str):
+        """Handle server startup failure."""
+        self.detail_panel.append_log(f"llama.cpp startup failed: {error}")
+        self.llm_status_bar.set_error("Server Timeout")
 
     def closeEvent(self, event):
         """Ensure auto-started server is stopped."""
@@ -954,7 +1117,8 @@ class ModernMainWindow(QMainWindow):
         # Reduced from 1500ms to 300ms for real-time progress monitoring
         self.llama_log_timer.setInterval(300)
         self.llama_log_timer.timeout.connect(self._refresh_llama_console)
-        self.llama_log_timer.start()
+        # DISABLED FOR PERFORMANCE: Timer causes UI sluggishness
+        # self.llama_log_timer.start()
         self._select_llama_log_path(announce=True)
         self._refresh_llama_console(force_full=True)
 
@@ -1062,7 +1226,8 @@ class ModernMainWindow(QMainWindow):
         # Update every 5 seconds (was 1s - too frequent, spams Ollama logs)
         self.gpu_monitor_timer.setInterval(5000)
         self.gpu_monitor_timer.timeout.connect(self._refresh_gpu_stats)
-        self.gpu_monitor_timer.start()
+        # DISABLED FOR PERFORMANCE: GPU monitoring not needed with llama.cpp
+        # self.gpu_monitor_timer.start()
         self._refresh_gpu_stats()
         
         # Initialize diagnostics panel with GPU info

@@ -91,3 +91,4 @@ if __name__ == "__main__":
     print(f"Speedup: {seq_time/par_time:.2f}x")
 
 
+

@@ -28,6 +28,7 @@ from PySide6.QtWidgets import (
 from src.config_loader import get_settings, get_config_profile
 from src.ui.llm_control_panel import LLMControlPanel
 from src.ui.background_tasks_tab import BackgroundTasksTab
+from src.config.api_key_manager import APIKeyManager
 
 
 class DiagnosticsWorker(QThread):
@@ -63,6 +64,8 @@ class SettingsDialog(QDialog):
         self.paths_widgets = {}
         self.retrieval_widgets = {}
         self.model_widgets = {}
+        self.quality_widgets = {}
+        self.api_key_manager = APIKeyManager()
 
         self._setup_ui()
 
@@ -105,6 +108,10 @@ class SettingsDialog(QDialog):
         # LLM control tab
         llm_tab = LLMControlPanel(self)
         tabs.addTab(llm_tab, "LLM Server")
+
+        # Quality Assessment tab
+        quality_tab = self._create_quality_tab()
+        tabs.addTab(quality_tab, "Quality Assessment")
 
         # Buttons
         button_box = QDialogButtonBox(
@@ -385,6 +392,94 @@ class SettingsDialog(QDialog):
         main_layout.addWidget(scroll)
         return widget
 
+    def _create_quality_tab(self) -> QWidget:
+        """Create quality assessment settings tab."""
+        widget = QWidget()
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        content = QWidget()
+        layout = QVBoxLayout(content)
+
+        # API Keys Section
+        keys_group = QGroupBox("Cloud Provider API Keys")
+        keys_layout = QFormLayout(keys_group)
+        
+        # OpenAI Key
+        openai_key = QLineEdit()
+        openai_key.setEchoMode(QLineEdit.Password)
+        openai_key.setText(self.api_key_manager.get_key("openai") or "")
+        keys_layout.addRow("OpenAI API Key:", openai_key)
+        self.quality_widgets["openai_key"] = openai_key
+        
+        # Anthropic Key
+        anthropic_key = QLineEdit()
+        anthropic_key.setEchoMode(QLineEdit.Password)
+        anthropic_key.setText(self.api_key_manager.get_key("anthropic") or "")
+        keys_layout.addRow("Anthropic API Key:", anthropic_key)
+        self.quality_widgets["anthropic_key"] = anthropic_key
+        
+        # Google Key
+        google_key = QLineEdit()
+        google_key.setEchoMode(QLineEdit.Password)
+        google_key.setText(self.api_key_manager.get_key("google") or "")
+        keys_layout.addRow("Google API Key:", google_key)
+        self.quality_widgets["google_key"] = google_key
+        
+        layout.addWidget(keys_group)
+        
+        # Configuration Section
+        config_group = QGroupBox("Assessment Configuration")
+        config_layout = QFormLayout(config_group)
+        
+        # Provider Selection
+        provider_combo = QComboBox()
+        provider_combo.addItems([
+            "GPT-5.1 Instant (OpenAI)", 
+            "GPT-5.1 Nano (OpenAI)",
+            "GPT-5.1 Thinking (OpenAI)",
+            "Claude Sonnet 4.5 (Anthropic)", 
+            "Gemini 3 Pro (Google)"
+        ])
+        
+        # Set current selection based on config or default
+        current_provider = "GPT-5.1 Instant (OpenAI)" # Default
+        if hasattr(self.settings, "quality") and hasattr(self.settings.quality, "provider"):
+             # Map internal name to display name
+             if self.settings.quality.provider == "anthropic":
+                 current_provider = "Claude Sonnet 4.5 (Anthropic)"
+             elif self.settings.quality.provider == "google":
+                 current_provider = "Gemini 3 Pro (Google)"
+             elif self.settings.quality.provider == "openai":
+                 # Check model variant if stored, otherwise default to Instant
+                 model = getattr(self.settings.quality, "model", "gpt-5.1-instant")
+                 if model == "gpt-5.1-nano":
+                     current_provider = "GPT-5.1 Nano (OpenAI)"
+                 elif model == "gpt-5.1-thinking":
+                     current_provider = "GPT-5.1 Thinking (OpenAI)"
+                 else:
+                     current_provider = "GPT-5.1 Instant (OpenAI)"
+        
+        provider_combo.setCurrentText(current_provider)
+        config_layout.addRow("Evaluator Model:", provider_combo)
+        self.quality_widgets["provider"] = provider_combo
+        
+        layout.addWidget(config_group)
+        
+        # Info
+        info_label = QLabel(
+            "Quality assessment sends generation data to the selected cloud provider.\n"
+            "Ensure you have sufficient credits and are comfortable with the privacy implications."
+        )
+        info_label.setStyleSheet("color: #666; font-style: italic;")
+        layout.addWidget(info_label)
+
+        layout.addStretch()
+        scroll.setWidget(content)
+        
+        main_layout = QVBoxLayout(widget)
+        main_layout.addWidget(scroll)
+        return widget
+
     def _browse_folder(self, line_edit: QLineEdit):
         """Open folder browser dialog."""
         from PySide6.QtWidgets import QFileDialog
@@ -433,6 +528,27 @@ class SettingsDialog(QDialog):
             
             # if "lmstudio" not in config["models"]: config["models"]["lmstudio"] = {}
             # config["models"]["lmstudio"]["host"] = self.model_widgets["lmstudio_host"].text()
+
+            # Update Quality Settings
+            if "quality" not in config: config["quality"] = {}
+            
+            provider_map = {
+                "GPT-5.1 Instant (OpenAI)": ("openai", "gpt-5.1-instant"),
+                "GPT-5.1 Nano (OpenAI)": ("openai", "gpt-5.1-nano"),
+                "GPT-5.1 Thinking (OpenAI)": ("openai", "gpt-5.1-thinking"),
+                "Claude Sonnet 4.5 (Anthropic)": ("anthropic", "claude-3-sonnet-20240229"), # Assuming ID
+                "Gemini 3 Pro (Google)": ("google", "gemini-1.5-pro") # Assuming ID
+            }
+            selected_provider_text = self.quality_widgets["provider"].currentText()
+            provider_info = provider_map.get(selected_provider_text, ("openai", "gpt-5.1-instant"))
+            
+            config["quality"]["provider"] = provider_info[0]
+            config["quality"]["model"] = provider_info[1]
+            
+            # Save API Keys
+            self.api_key_manager.set_key("openai", self.quality_widgets["openai_key"].text())
+            self.api_key_manager.set_key("anthropic", self.quality_widgets["anthropic_key"].text())
+            self.api_key_manager.set_key("google", self.quality_widgets["google_key"].text())
 
             # Save config
             with config_path.open("w", encoding="utf-8") as f:

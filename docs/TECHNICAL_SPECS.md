@@ -9,6 +9,7 @@ The system uses a **local-first Hybrid RAG** architecture designed for high-prec
 1.  **Ingestion:** Parsing -> Adaptive Chunking -> Embedding -> Vector Storage
 2.  **Retrieval:** Query -> Hybrid Search (Dense + Sparse) -> Reciprocal Rank Fusion (RRF) -> Cross-Encoder Reranking -> Context Filtering
 3.  **Generation:** Context Assembly -> LLM Generation -> Citation Verification
+4.  **Assessment:** (Optional) Cloud-based Quality Evaluation -> Suggestion Generation
 
 ---
 
@@ -89,7 +90,37 @@ Combines two distinct search technologies:
 
 ---
 
-## 5. System Resilience
+## 5. AI Quality Assessment
+
+*   **Purpose:** Automated evaluation of RAG outputs using superior cloud models.
+*   **Evaluators:** Supports `OpenAI` (GPT-5.1), `Anthropic` (Claude 3.5), and `Google` (Gemini 1.5).
+*   **Metrics:**
+    *   **Answer Quality:** Accuracy, completeness, clarity (1-10).
+    *   **Retrieval Quality:** Relevance of chunks to query (1-10).
+    *   **Prompt Effectiveness:** How well the system prompt guided the model (1-10).
+*   **Process:**
+    1.  Collect metadata (query, chunks, answer, config).
+    2.  Send to cloud provider via `CloudEvaluator`.
+    3.  Parse JSON response for scores and actionable suggestions.
+    4.  Store in `AssessmentDB` (SQLite).
+*   **Feedback Loop:** Suggestions can automatically update system configuration (e.g., "Increase temperature to 0.7").
+
+---
+
+## 6. Performance Analytics
+
+*   **Purpose:** Real-time monitoring of system health and LLM performance.
+*   **Metrics Tracked:**
+    *   **Generation Speed:** Tokens per second (TPS).
+    *   **Latency:** Time to first token (TTFT), total generation time.
+    *   **Resource Usage:** CPU/GPU utilization, VRAM usage.
+    *   **Throughput:** Requests per minute.
+*   **Storage:** Time-series data stored in JSON logs (`logs/performance/`).
+*   **Visualization:** Real-time dashboard with historical trend analysis.
+
+---
+
+## 7. System Resilience
 
 *   **Reset Capability:** A "Reset All" feature completely wipes the Vector DB and BM25 indexes to recover from corrupted states.
 *   **Connection Recovery:** The Vector Store automatically refreshes its database connection if it detects a "Collection does not exist" error (common after resets).
@@ -97,7 +128,7 @@ Combines two distinct search technologies:
 
 ---
 
-## 6. GPU Acceleration Details
+## 8. GPU Acceleration Details
 
 ### Supported Backends (Priority Order)
 | Backend | Device | Platform | Use Case |
@@ -114,22 +145,6 @@ Combines two distinct search technologies:
 | **Reranking** | ONNX + DirectML | 2.9x speedup over CPU |
 | **LLM** | llama.cpp / Ollama | Separate GPU allocation |
 
-### Performance Benchmarks (AMD Radeon 8060S)
-
-**Embeddings (500 texts):**
-| Method | Time | Per-Text |
-|--------|------|----------|
-| GPU (ONNX+DirectML) | 3,037ms | 6.1ms |
-| CPU (sentence-transformers) | 11,000ms | 22.0ms |
-| **Speedup** | **3.6x** | - |
-
-**Reranking (50 chunks):**
-| Method | Time | Per-Chunk |
-|--------|------|-----------|
-| GPU (ONNX+DirectML) | 880ms | 17.6ms |
-| CPU (CrossEncoder) | 2,535ms | 50.7ms |
-| **Speedup** | **2.9x** | - |
-
 ### Configuration
 In `config/config.yaml`:
 - `models.embedding.use_onnx_gpu: true` - Enable GPU for embeddings (default: true)
@@ -139,5 +154,5 @@ Both are enabled by default. Set to `false` to force CPU-only mode.
 
 ---
 
-*Last Updated: 2025-11-26*
+*Last Updated: 2025-12-05*
 

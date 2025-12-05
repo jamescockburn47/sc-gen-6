@@ -22,6 +22,13 @@ class ModelPreset:
     vram_gb: Optional[float] = None  # VRAM requirement in GB
     description: Optional[str] = None  # Human-readable description
     provider: str = "llama_cpp"  # Provider: "llama_cpp" or "ollama"
+    context: Optional[int] = None  # Context window size
+    gpu_layers: Optional[int] = None  # GPU layers to offload
+    parallel: Optional[int] = None  # Parallel slots
+    batch: Optional[int] = None  # Batch size
+    flash_attn: Optional[bool] = None  # Flash Attention
+    cache_type_k: Optional[str] = None  # KV cache type (K)
+    cache_type_v: Optional[str] = None  # KV cache type (V)
 
 
 def get_model_presets(force_refresh: bool = False) -> List[ModelPreset]:
@@ -50,6 +57,11 @@ def apply_model_preset(preset: ModelPreset, restart_server: bool = True) -> None
     # Update llama_server section
     # Update llama_server section only if provider is llama_cpp
     if preset.provider == "llama_cpp":
+        # Clear base_url so it defaults to llama_cpp default (localhost:8000)
+        # instead of sticking to Ollama's localhost:11434
+        if "base_url" in state:
+            del state["base_url"]
+
         if "llama_server" not in state:
             state["llama_server"] = {}
             

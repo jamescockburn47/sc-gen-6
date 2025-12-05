@@ -188,3 +188,4 @@ class PulsingDot(QWidget):
         self.update()
 
 
+
