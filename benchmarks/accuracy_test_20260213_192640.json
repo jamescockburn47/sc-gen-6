@@ -1,0 +1,237 @@
+{
+  "timestamp": "2026-02-13T19:26:40.464712",
+  "model": "glm-4.7-flash",
+  "provider": "ollama",
+  "summary": {
+    "total_tests": 12,
+    "avg_accuracy": 0.194,
+    "avg_fact_recall": 0.194,
+    "hallucination_rate": 0.0,
+    "refusal_count": 5,
+    "perfect_scores": 2,
+    "passing_scores": 2,
+    "total_time_s": 184.3
+  },
+  "results": [
+    {
+      "test_id": "T01",
+      "category": "quantum",
+      "question": "What was the total amount misappropriated from client accounts in Phoenix v Meridian?",
+      "found_facts": [],
+      "missing_facts": [
+        "47.3 million",
+        "\u00a347.3"
+      ],
+      "hallucinations": [],
+      "fact_recall": 0.0,
+      "hallucination_free": true,
+      "is_refusal": false,
+      "accuracy_score": 0.0,
+      "answer_preview": "Summary:\n- The judgment confirms that Stewarts acquired good title to \u00a32,000,000, which was applied to reduce the Orb Claimants' outstanding legal fees [Source: 1762462081828 - 690.pdf | Page 164, Para 491 | \"Mr Justice Foxton Approved Judgment\"].\n- The document references a guarantee and proceeding",
+      "retrieval_time_s": 15.25,
+      "chunks_retrieved": 3
+    },
+    {
+      "test_id": "T02",
+      "category": "factual_detail",
+      "question": "How many wire transfers were identified by the forensic accountant Gerald Thornton?",
+      "found_facts": [
+        "48 "
+      ],
+      "missing_facts": [],
+      "hallucinations": [],
+      "fact_recall": 1.0,
+      "hallucination_free": true,
+      "is_refusal": false,
+      "accuracy_score": 1.0,
+      "answer_preview": "Summary:\n- The forensic accountant Gerald Thornton identified a total misappropriation sum of \u00a347.3 million, which was transferred via 48 wire transfers over a period of approximately three years [Source: TEST_witness_statement_thornton.txt | Page 1 | Para 6.1].\n- The total sum misappropriated from ",
+      "retrieval_time_s": 12.42,
+      "chunks_retrieved": 3
+    },
+    {
+      "test_id": "T03",
+      "category": "asset_tracing",
+      "question": "What was the name of the yacht purchased with misappropriated funds and what was its purchase price?",
+      "found_facts": [],
+      "missing_facts": [
+        "Artemis",
+        "6.2 million"
+      ],
+      "hallucinations": [],
+      "fact_recall": 0.0,
+      "hallucination_free": true,
+      "is_refusal": true,
+      "accuracy_score": 0.0,
+      "answer_preview": "Summary:\n- The documents provided do not contain information regarding a yacht purchased with misappropriated funds or its purchase price. [Source: 1762462313201 - 131.pdf | Page 1 | Para 1] [Source: 1762462081828 - 690.pdf | Page 47 | Para 153] [Source: 1762462081828 - 690.pdf | Page 140 | Para 438",
+      "retrieval_time_s": 14.38,
+      "chunks_retrieved": 4
+    },
+    {
+      "test_id": "T04",
+      "category": "factual_detail",
+      "question": "What percentage of Meridian's shares did James Harrington hold?",
+      "found_facts": [],
+      "missing_facts": [
+        "72%"
+      ],
+      "hallucinations": [],
+      "fact_recall": 0.0,
+      "hallucination_free": true,
+      "is_refusal": true,
+      "accuracy_score": 0.0,
+      "answer_preview": "Summary:\n- The provided documents do not contain information regarding the percentage of shares held by James Harrington in Meridian. [Source: 1762462081828 - 690.pdf | Page 87, Para 274 | \"Mr Justice Foxton Approved Judgment\"]\n- The documents discuss legal assignments of debt and fund rights, as we",
+      "retrieval_time_s": 8.62,
+      "chunks_retrieved": 3
+    },
+    {
+      "test_id": "T05",
+      "category": "regulatory",
+      "question": "What was the FCA financial penalty imposed on Meridian and on Harrington personally?",
+      "found_facts": [
+        "12.8 million",
+        "3.2 million"
+      ],
+      "missing_facts": [],
+      "hallucinations": [],
+      "fact_recall": 1.0,
+      "hallucination_free": true,
+      "is_refusal": false,
+      "accuracy_score": 1.0,
+      "answer_preview": "Summary:\n- The FCA imposed a financial penalty of \u00a312.8 million on Meridian and \u00a33.2 million personally on Mr Harrington [Source: TEST_judgment_phoenix_v_meridian.txt | Page 10 | \"Approved Judgment\"].\n- The FCA found that Mr Harrington breached Principles 1, 2, and 11 of the FCA's Principles for Bus",
+      "retrieval_time_s": 12.81,
+      "chunks_retrieved": 3
+    },
+    {
+      "test_id": "T06",
+      "category": "liability",
+      "question": "What evidence showed that Catherine Pemberton knew about the misappropriation?",
+      "found_facts": [],
+      "missing_facts": [
+        "September 2019",
+        "reconciliation",
+        "email",
+        "gap"
+      ],
+      "hallucinations": [],
+      "fact_recall": 0.0,
+      "hallucination_free": true,
+      "is_refusal": true,
+      "accuracy_score": 0.0,
+      "answer_preview": "Summary:\n- The documents do not contain specific evidence regarding Catherine Pemberton's knowledge of misappropriation. [Source: 1762462081828 - 690.pdf | Page 22, Para 78 | \"Messrs Thomas and Taylor\u2019s adverse inference case\"] [Source: 1762462081828 - 690.pdf | Page 14, Para 54 | \"Anthony Stevens\"]",
+      "retrieval_time_s": 13.87,
+      "chunks_retrieved": 3
+    },
+    {
+      "test_id": "T07",
+      "category": "mechanism",
+      "question": "Describe the round-tripping mechanism used to conceal the fraud at Meridian",
+      "found_facts": [],
+      "missing_facts": [
+        "14.2 million",
+        "month-end",
+        "quarterly",
+        "Northern Trust"
+      ],
+      "hallucinations": [],
+      "fact_recall": 0.0,
+      "hallucination_free": true,
+      "is_refusal": false,
+      "accuracy_score": 0.0,
+      "answer_preview": "Summary:\n- Dr Smith was convicted of fraudulently obtaining a \u00a350,000 COVID-19 bounce back loan for personal use via a fraudulent application [Source: 1762462313201 - 131.pdf | Page 58 | Para 222].\n- A portion of the funds obtained from this fraud were used to pay costs orders owed to the SFO [Sourc",
+      "retrieval_time_s": 15.55,
+      "chunks_retrieved": 3
+    },
+    {
+      "test_id": "T08",
+      "category": "quantum",
+      "question": "What was the total judgment amount awarded including interest?",
+      "found_facts": [],
+      "missing_facts": [
+        "9.27 million",
+        "\u00a39.27"
+      ],
+      "hallucinations": [],
+      "fact_recall": 0.0,
+      "hallucination_free": true,
+      "is_refusal": true,
+      "accuracy_score": 0.0,
+      "answer_preview": "Summary:\n- The documents do not contain a specific total judgment amount awarded including interest. [Source: 1762462081828 - 690.pdf | Page 191 | Para 592]\n- One document references a corrected figure of \u00a315m regarding loans to Dr Cochrane, but does not specify this as a judgment amount. [Source: 1",
+      "retrieval_time_s": 18.85,
+      "chunks_retrieved": 3
+    },
+    {
+      "test_id": "T09",
+      "category": "asset_tracing",
+      "question": "Where was the Villa Les Oliviers located and how much was it purchased for?",
+      "found_facts": [],
+      "missing_facts": [
+        "Saint-Jean-Cap-Ferrat",
+        "8.4 million"
+      ],
+      "hallucinations": [],
+      "fact_recall": 0.0,
+      "hallucination_free": true,
+      "is_refusal": true,
+      "accuracy_score": 0.0,
+      "answer_preview": "Summary:\n- The Villa Les Oliviers is not mentioned in the provided documents. [Source: 1762462081828 - 690.pdf | Page 34 | Para 114]\n- The documents list various property transactions, including Walham Court, Goodwood Court, Montrose and Antoinette Gardens, Moor Lane, and Montagu Square, but do not ",
+      "retrieval_time_s": 13.73,
+      "chunks_retrieved": 3
+    },
+    {
+      "test_id": "T10",
+      "category": "legal_principles",
+      "question": "What legal tests did the court apply for constructive trust and dishonest assistance?",
+      "found_facts": [],
+      "missing_facts": [
+        "Foskett",
+        "Royal Brunei"
+      ],
+      "hallucinations": [],
+      "fact_recall": 0.0,
+      "hallucination_free": true,
+      "is_refusal": false,
+      "accuracy_score": 0.0,
+      "answer_preview": "Summary:\n- The court noted that reliance on Article 33 leaves open the question of who can be a constructive trustee as a matter of Jersey law and highlighted difficulties in delineating equitable interests in land versus movables [Source: 1762462081828 - 690.pdf | Page 180, Para 559 | \"Approved Jud",
+      "retrieval_time_s": 29.2,
+      "chunks_retrieved": 3
+    },
+    {
+      "test_id": "T11",
+      "category": "entities",
+      "question": "What was Caledonia Ventures Ltd and who owned it?",
+      "found_facts": [
+        "British Virgin Islands"
+      ],
+      "missing_facts": [
+        "Harrington Family Trust",
+        "Mr Harrington"
+      ],
+      "hallucinations": [],
+      "fact_recall": 0.33,
+      "hallucination_free": true,
+      "is_refusal": false,
+      "accuracy_score": 0.33,
+      "answer_preview": "Summary:\n- Caledonia Ventures Ltd is identified as one of the Arena Holdcos, which are companies incorporated in the British Virgin Islands (BVI) and comprise six of the eighteen Transferred Companies [Source: 1762462081828 - 690.pdf | Page 28, Para 96 | \"The Cambulo Transaction\"].\n- The ownership o",
+      "retrieval_time_s": 15.01,
+      "chunks_retrieved": 3
+    },
+    {
+      "test_id": "T12",
+      "category": "quantum",
+      "question": "What was the estimated realisable value of traced assets according to the expert report?",
+      "found_facts": [],
+      "missing_facts": [
+        "26.4 million",
+        "\u00a326.4"
+      ],
+      "hallucinations": [],
+      "fact_recall": 0.0,
+      "hallucination_free": true,
+      "is_refusal": false,
+      "accuracy_score": 0.0,
+      "answer_preview": "Summary:\n- The provided documents do not contain the estimated realisable value of traced assets. [Source: 1762462081828 - 690.pdf | Page 108, Para 340 | \"Phoenix advanced two reasons why it is said this principle does not apply here\"]\n- The documents discuss legal principles regarding equitable ass",
+      "retrieval_time_s": 14.62,
+      "chunks_retrieved": 3
+    }
+  ]
+}

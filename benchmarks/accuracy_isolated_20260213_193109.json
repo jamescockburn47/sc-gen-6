@@ -1,0 +1,159 @@
+{
+  "model": "glm-4.7-flash",
+  "results": [
+    {
+      "id": "T01",
+      "score": 1.0,
+      "found": [
+        "47.3 million"
+      ],
+      "missing": [],
+      "refusal": false,
+      "chunks": 8,
+      "time": 16.0,
+      "preview": "Summary:\n- The total sum at issue in Phoenix v Meridian is \u00a347.3 million, comprising funds belonging to 23 institutional investors managed under discretionary investment mandates between January 2019 and December 2021. [Source: TEST_judgment_phoenix_"
+    },
+    {
+      "id": "T02",
+      "score": 1.0,
+      "found": [
+        "48"
+      ],
+      "missing": [],
+      "refusal": false,
+      "chunks": 8,
+      "time": 11.1,
+      "preview": "Summary:\n- Gerald Thornton identified a total of 48 individual wire transfers from client custody accounts to entities connected to Mr Harrington. [Source: TEST_witness_statement_thornton.txt | Page 1, Para 3.1 | \"EXPERT REPORT OF GERALD THORNTON FCA"
+    },
+    {
+      "id": "T03",
+      "score": 0.5,
+      "found": [
+        "Artemis"
+      ],
+      "missing": [
+        "6.2 million"
+      ],
+      "refusal": false,
+      "chunks": 8,
+      "time": 7.5,
+      "preview": "Summary:\n- The motor yacht involved in the proceedings is named \"Artemis\" (IMO 9876543) [Source: TEST_witness_statement_thornton.txt | Page 1, Para (b) | \"Witness Statement\"].\n- The purchase price for the yacht was \u20ac6,200,000 [Source: TEST_witness_st"
+    },
+    {
+      "id": "T04",
+      "score": 1.0,
+      "found": [
+        "72%"
+      ],
+      "missing": [],
+      "refusal": false,
+      "chunks": 8,
+      "time": 9.4,
+      "preview": "Summary:\n- James Harrington was the Chief Executive Officer and majority shareholder of Meridian, holding 72% of its issued share capital. [Source: TEST_judgment_phoenix_v_meridian.txt | Page 3, Para 3 | \"The Second Defendant, James Edward Harrington"
+    },
+    {
+      "id": "T05",
+      "score": 1.0,
+      "found": [
+        "12.8 million"
+      ],
+      "missing": [],
+      "refusal": false,
+      "chunks": 8,
+      "time": 14.6,
+      "preview": "Summary:\n- The Financial Conduct Authority (FCA) imposed a financial penalty of \u00a312.8 million on Meridian [Source: TEST_judgment_phoenix_v_meridian.txt | Page 1, Para 10 | \"The FCA published its Final Notice\"].\n- The FCA also imposed a penalty of \u00a33."
+    },
+    {
+      "id": "T06",
+      "score": 1.0,
+      "found": [
+        "September 2019",
+        "email",
+        "reconciliation"
+      ],
+      "missing": [],
+      "refusal": false,
+      "chunks": 8,
+      "time": 12.7,
+      "preview": "Summary:\n- The judgment finds that Ms Pemberton knew of the misappropriation by no later than September 2019, evidenced by an email stating the reconciliation gap was too large to cover with the reserve account [Source: TEST_judgment_phoenix_v_meridi"
+    },
+    {
+      "id": "T07",
+      "score": 0.5,
+      "found": [
+        "14.2 million"
+      ],
+      "missing": [
+        "month-end"
+      ],
+      "refusal": false,
+      "chunks": 8,
+      "time": 14.6,
+      "preview": "Summary:\n- The fraud was concealed by a round-tripping mechanism where client funds were temporarily moved to connected entities and replaced with funds from Meridian's reserves to mask deficits during quarterly reporting. [Source: TEST_judgment_phoe"
+    },
+    {
+      "id": "T08",
+      "score": 1.0,
+      "found": [
+        "9.27 million"
+      ],
+      "missing": [],
+      "refusal": false,
+      "chunks": 8,
+      "time": 8.4,
+      "preview": "Summary:\n- The judgment sum awarded against the Defendants is \u00a39.27 million, comprising \u00a37.8 million for unrecovered loss and \u00a31.47 million for interest [Source: TEST_judgment_phoenix_v_meridian.txt | Page 1, Para 18 | \"Judgment Sum\"].\n- The total ju"
+    },
+    {
+      "id": "T09",
+      "score": 1.0,
+      "found": [
+        "Saint-Jean-Cap-Ferrat",
+        "8.4 million"
+      ],
+      "missing": [],
+      "refusal": false,
+      "chunks": 8,
+      "time": 8.7,
+      "preview": "Summary:\n- Villa Les Oliviers is a residential property located at Chemin du Cap, 06230 Saint-Jean-Cap-Ferrat, Saint-Jean-Cap-Ferrat, France, and was purchased for \u20ac8.4 million on 12 August 2019 by Caledonia [Source: TEST_judgment_phoenix_v_meridian."
+    },
+    {
+      "id": "T10",
+      "score": 1.0,
+      "found": [
+        "Foskett",
+        "Royal Brunei"
+      ],
+      "missing": [],
+      "refusal": false,
+      "chunks": 8,
+      "time": 14.6,
+      "preview": "Summary:\n- The court applied the test in *Royal Brunei Airlines v Tan* as refined in *Ivey v Genting Casinos* to establish liability for dishonest assistance, finding the conduct objectively dishonest [Source: TEST_judgment_phoenix_v_meridian.txt | P"
+    },
+    {
+      "id": "T11",
+      "score": 1.0,
+      "found": [
+        "British Virgin Islands",
+        "Harrington Family Trust"
+      ],
+      "missing": [],
+      "refusal": false,
+      "chunks": 8,
+      "time": 15.6,
+      "preview": "Summary:\n- Caledonia Ventures Ltd was incorporated in the British Virgin Islands on 4 April 2018 and received \u00a328.6 million from client custody accounts between January 2019 and March 2020 [Source: TEST_judgment_phoenix_v_meridian.txt | Page 1, Para "
+    },
+    {
+      "id": "T12",
+      "score": 1.0,
+      "found": [
+        "26.4 million"
+      ],
+      "missing": [],
+      "refusal": false,
+      "chunks": 8,
+      "time": 11.3,
+      "preview": "Summary:\n- The expert estimated the total realisable value of traced assets to be \u00a326.4 million, comprising property, a yacht, other assets, and cash. [Source: TEST_witness_statement_thornton.txt | Page 1, Para 5.2 | \"5.2 Total estimated realisable v"
+    }
+  ],
+  "avg": 0.917
+}

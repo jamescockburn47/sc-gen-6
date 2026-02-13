@@ -1,0 +1,85 @@
+IN THE HIGH COURT OF JUSTICE
+BUSINESS AND PROPERTY COURTS OF ENGLAND AND WALES
+COMMERCIAL COURT (KBD)
+CASE NO: BL-2022-001847
+
+BETWEEN:
+PHOENIX CAPITAL PARTNERS LLP (Claimant)
+- and -
+MERIDIAN ASSET MANAGEMENT LIMITED (First Defendant)
+JAMES EDWARD HARRINGTON (Second Defendant)
+CATHERINE LOUISE PEMBERTON (Third Defendant)
+
+EXPERT REPORT OF GERALD THORNTON FCA
+Forensic Accountant
+
+Date: 22 November 2023
+
+I, GERALD THORNTON, of Thornton Forensic Advisory LLP, 8 Moorgate, London EC2R 6DA, MAKE THIS REPORT as follows:
+
+1. QUALIFICATIONS AND EXPERIENCE
+
+1.1 I am a Fellow of the Institute of Chartered Accountants in England and Wales (FCA). I have 28 years of experience in forensic accounting, specialising in fraud investigations and asset tracing. I have given expert evidence in over 40 cases in the Commercial Court and the Chancery Division.
+
+1.2 I have been instructed by Clifford Chance LLP on behalf of the Claimant to provide an expert forensic accounting report addressing: (a) the pattern and mechanism of fund transfers from client accounts; (b) the tracing of misappropriated funds into identifiable assets; and (c) the quantum of loss.
+
+2. METHODOLOGY
+
+2.1 I have reviewed the following categories of documents: (a) Northern Trust custody account statements for the period January 2018 to March 2022 (approximately 4,800 pages); (b) Meridian's internal accounting records, including general ledger, bank statements and reconciliation files; (c) bank account statements for Caledonia Ventures Ltd, Evergreen Property Holdings SA, and Atlas Maritime Corp obtained pursuant to Bankers Trust orders; (d) FCA investigation files (redacted) disclosed under the FCA's co-operation framework.
+
+2.2 My analysis covered 156 client accounts managed by Meridian. Of these, 23 accounts were affected by the misappropriation, all of which were discretionary managed accounts with mandates exceeding £500,000.
+
+3. FUND TRANSFER ANALYSIS
+
+3.1 I identified a total of 48 individual wire transfers from client custody accounts at Northern Trust to accounts controlled by entities connected to Mr Harrington. The transfers occurred between 14 January 2019 and 17 December 2021, with the following breakdown:
+
+(a) First Period (January 2019 - March 2020): 17 transfers totalling £28,614,722.38
+(b) Second Period (April 2020 - December 2021): 31 transfers totalling £18,685,277.62
+(c) Grand total: 48 transfers totalling £47,300,000.00
+
+3.2 Each transfer was authorised using Mr Harrington's personal digital authentication token (Northern Trust Passport ID: NT-JH-2847). No transfer was co-authorised by the compliance department, despite Meridian's internal procedures requiring dual authorisation for transfers exceeding £250,000.
+
+3.3 The transfers to Caledonia Ventures Ltd were routed through an intermediate account at HSBC Hong Kong (account number 747-291836-838) before being credited to Caledonia's account at Banco Santander, Geneva (account number CH93 0876 3947 2816 4591 0). This two-stage routing added a 24-48 hour delay which I believe was designed to complicate any subsequent tracing exercise.
+
+4. THE ROUND-TRIPPING MECHANISM
+
+4.1 I identified a systematic pattern of "round-tripping" designed to conceal the deficit in client accounts during quarterly reporting periods. The mechanism operated as follows:
+
+(a) Between the 13th and 17th of each month, funds were transferred from client accounts to the connected entities;
+(b) Between the 25th and 28th of each month — timed to coincide with Northern Trust's month-end reporting cut-off — equivalent sums were transferred from Meridian's proprietary reserve account (Account: GB47 HSBC 4021 7368 9127) to the client custody accounts;
+(c) Between the 1st and 5th working day of the following month, the replacement funds were withdrawn back to Meridian's reserve account.
+
+4.2 The total value of funds used in round-tripping was £14,200,000. This figure represents the maximum single-month deficit that needed to be covered. The round-tripping ceased in November 2021 when Meridian's proprietary reserves were exhausted.
+
+5. ASSET TRACING SUMMARY
+
+5.1 I have traced the misappropriated funds into the following principal assets:
+
+(a) Villa Les Oliviers, Saint-Jean-Cap-Ferrat, France: Purchased 12 August 2019 for €8,400,000 by Caledonia. Funded by three transfers from client accounts totalling £7,856,000 (converted at prevailing EUR/GBP rates). Current estimated value: €9.1 million.
+
+(b) Motor yacht "Artemis" (IMO 9876543): Purchased 3 March 2020 for €6,200,000 by Atlas Maritime Corp. Funded by two transfers from client accounts totalling £5,634,000. Current estimated value: €4.8 million (reflecting depreciation).
+
+(c) Luxembourg commercial property portfolio: Three office buildings acquired by Evergreen between June 2020 and February 2021 for a combined total of €10,800,000. Funded by transfers totalling £9,472,000. Current estimated value: €11.3 million.
+
+(d) Cash balances: As at 30 September 2023, I have identified the following cash balances traceable to misappropriated funds:
+    - Banco Santander, Geneva: CHF 2,147,000 (approximately £1.9 million)
+    - Credit Suisse, Zurich: CHF 1,834,000 (approximately £1.6 million)  
+    - Julius Baer, Singapore: SGD 2,148,000 (approximately £1.3 million)
+    Total cash: approximately £4.8 million
+
+5.2 Total estimated realisable value of traced assets: £26.4 million (comprising property £16.8m, yacht £4.1m, other assets £0.7m, and cash £4.8m).
+
+5.3 The remaining £20.9 million of misappropriated funds has not been traced to identifiable assets. Based on my analysis, approximately £12.4 million was consumed in operating costs of the connected entities (management fees, maintenance, crew costs for the yacht, property upkeep), £5.3 million was spent on personal expenditure by Mr Harrington (including school fees, travel, and luxury goods), and £3.2 million remains unaccounted for.
+
+6. CONCLUSION
+
+6.1 The total sum misappropriated from client accounts was £47.3 million, transferred via 48 wire transfers over a period of approximately three years.
+
+6.2 The misappropriation was concealed through a round-tripping mechanism with a peak monthly deficit of £14.2 million.
+
+6.3 Of the £47.3 million, approximately £26.4 million is potentially recoverable through the traced assets.
+
+Statement of Truth: I confirm that I have made clear which facts and matters referred to in this report are within my own knowledge and which are not. I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest belief in its truth.
+
+GERALD THORNTON FCA
+22 November 2023

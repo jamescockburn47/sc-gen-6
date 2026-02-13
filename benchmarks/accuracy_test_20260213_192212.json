@@ -1,0 +1,248 @@
+{
+  "timestamp": "2026-02-13T19:22:12.576758",
+  "model": "glm-4.7-flash",
+  "provider": "ollama",
+  "summary": {
+    "total_tests": 12,
+    "avg_accuracy": 0.45,
+    "avg_fact_recall": 0.5,
+    "hallucination_rate": 0.083,
+    "refusal_count": 1,
+    "perfect_scores": 4,
+    "passing_scores": 6,
+    "total_time_s": 421.2
+  },
+  "results": [
+    {
+      "test_id": "T01",
+      "category": "quantum",
+      "question": "What was the total amount misappropriated from client accounts in Phoenix v Meridian?",
+      "found_facts": [
+        "47.3 million",
+        "\u00a347.3"
+      ],
+      "missing_facts": [],
+      "hallucinations": [],
+      "fact_recall": 1.0,
+      "hallucination_free": true,
+      "is_refusal": false,
+      "accuracy_score": 1.0,
+      "answer_preview": "Summary:\n- The total sum misappropriated from client accounts was \u00a347.3 million, transferred via 48 wire transfers over a period of approximately three years [Source: TEST_judgment_phoenix_v_meridian.txt | Page 1, Para 1 | \"Introduction\"].\n- This amount comprised funds belonging to 23 institutional ",
+      "retrieval_time_s": 18.28,
+      "chunks_retrieved": 15
+    },
+    {
+      "test_id": "T02",
+      "category": "factual_detail",
+      "question": "How many wire transfers were identified by the forensic accountant Gerald Thornton?",
+      "found_facts": [
+        "48"
+      ],
+      "missing_facts": [],
+      "hallucinations": [
+        "50",
+        "46"
+      ],
+      "fact_recall": 1.0,
+      "hallucination_free": false,
+      "is_refusal": false,
+      "accuracy_score": 0.4,
+      "answer_preview": "Summary:\n- Gerald Thornton identified a total of 48 wire transfers totalling \u00a347,300,000.00, categorised into two distinct periods [Source: TEST_witness_statement_thornton.txt | Page 1, Para 4.1 | \"4.1 I identified a systematic pattern of 'round-tripping'...\"].\n- The transfers were authorised using ",
+      "retrieval_time_s": 23.66,
+      "chunks_retrieved": 15
+    },
+    {
+      "test_id": "T03",
+      "category": "asset_tracing",
+      "question": "What was the name of the yacht purchased with misappropriated funds and what was its purchase price?",
+      "found_facts": [
+        "Artemis",
+        "6.2 million"
+      ],
+      "missing_facts": [
+        "\u20ac6,200,000",
+        "6,200,000"
+      ],
+      "hallucinations": [],
+      "fact_recall": 0.5,
+      "hallucination_free": true,
+      "is_refusal": false,
+      "accuracy_score": 0.5,
+      "answer_preview": "Summary:\n- The yacht purchased with misappropriated funds was named \"Artemis\" [Source: TEST_judgment_phoenix_v_meridian.txt | Page 1 | \"(a) A residential property...\"].\n- The purchase price for the yacht was \u20ac6.2 million [Source: TEST_judgment_phoenix_v_meridian.txt | Page 1 | \"(b) A 42-metre motor ",
+      "retrieval_time_s": 45.1,
+      "chunks_retrieved": 15
+    },
+    {
+      "test_id": "T04",
+      "category": "factual_detail",
+      "question": "What percentage of Meridian's shares did James Harrington hold?",
+      "found_facts": [],
+      "missing_facts": [
+        "72%",
+        "72 per cent",
+        "72 percent"
+      ],
+      "hallucinations": [],
+      "fact_recall": 0.0,
+      "hallucination_free": true,
+      "is_refusal": false,
+      "accuracy_score": 0.0,
+      "answer_preview": "Summary:\n- The provided documents do not contain information regarding the percentage of Meridian's shares held by James Harrington. [Source: TEST_judgment_phoenix_v_meridian.txt | Page 1, Para 1 | \"Introduction\"]\n- The documents detail the misappropriation of client funds and the legal proceedings ",
+      "retrieval_time_s": 16.79,
+      "chunks_retrieved": 15
+    },
+    {
+      "test_id": "T05",
+      "category": "regulatory",
+      "question": "What was the FCA financial penalty imposed on Meridian and on Harrington personally?",
+      "found_facts": [],
+      "missing_facts": [
+        "12.8 million",
+        "3.2 million"
+      ],
+      "hallucinations": [],
+      "fact_recall": 0.0,
+      "hallucination_free": true,
+      "is_refusal": false,
+      "accuracy_score": 0.0,
+      "answer_preview": "Summary:\n- The documents do not specify the exact financial penalty amount imposed by the FCA on Meridian or on James Edward Harrington personally. [Source: TEST_judgment_phoenix_v_meridian.txt | Page 1, Para 1 | \"This claim arises from the alleged misappropriation...\"]\n- The judgment notes that rec",
+      "retrieval_time_s": 20.77,
+      "chunks_retrieved": 15
+    },
+    {
+      "test_id": "T06",
+      "category": "liability",
+      "question": "What evidence showed that Catherine Pemberton knew about the misappropriation?",
+      "found_facts": [],
+      "missing_facts": [
+        "September 2019",
+        "reconciliation",
+        "email",
+        "gap"
+      ],
+      "hallucinations": [],
+      "fact_recall": 0.0,
+      "hallucination_free": true,
+      "is_refusal": true,
+      "accuracy_score": 0.0,
+      "answer_preview": "Summary:\n- The documents do not contain specific evidence regarding Catherine Pemberton's knowledge of misappropriation. [Source: TEST_judgment_phoenix_v_meridian.txt | Page 1 | \"Parties\"]\n- The judgment details the misappropriation of assets by Dr Cochrane and SMA, but does not attribute this condu",
+      "retrieval_time_s": 44.83,
+      "chunks_retrieved": 15
+    },
+    {
+      "test_id": "T07",
+      "category": "mechanism",
+      "question": "Describe the round-tripping mechanism used to conceal the fraud at Meridian",
+      "found_facts": [
+        "14.2 million",
+        "month-end",
+        "quarterly",
+        "Northern Trust"
+      ],
+      "missing_facts": [],
+      "hallucinations": [],
+      "fact_recall": 1.0,
+      "hallucination_free": true,
+      "is_refusal": false,
+      "accuracy_score": 1.0,
+      "answer_preview": "Summary:\n- Meridian utilized a round-tripping mechanism involving transfers to connected entities and subsequent replacement from proprietary reserves to conceal deficits in client accounts during quarterly reporting periods. [Source: TEST_judgment_phoenix_v_meridian | Page 12, Para 12 | \"Expert evi",
+      "retrieval_time_s": 24.46,
+      "chunks_retrieved": 15
+    },
+    {
+      "test_id": "T08",
+      "category": "quantum",
+      "question": "What was the total judgment amount awarded including interest?",
+      "found_facts": [
+        "9.27 million",
+        "\u00a39.27"
+      ],
+      "missing_facts": [],
+      "hallucinations": [],
+      "fact_recall": 1.0,
+      "hallucination_free": true,
+      "is_refusal": false,
+      "accuracy_score": 1.0,
+      "answer_preview": "Summary:\n- The total judgment amount awarded including interest is \u00a39.27 million, comprising a principal sum of \u00a37.8 million and interest totalling \u00a31.47 million [Source: TEST_judgment_phoenix_v_meridian.txt | Page 1 | \"18\"].\n- The principal judgment sum of \u00a37.8 million represents the net unrecovere",
+      "retrieval_time_s": 49.92,
+      "chunks_retrieved": 15
+    },
+    {
+      "test_id": "T09",
+      "category": "asset_tracing",
+      "question": "Where was the Villa Les Oliviers located and how much was it purchased for?",
+      "found_facts": [
+        "Saint-Jean-Cap-Ferrat",
+        "8.4 million"
+      ],
+      "missing_facts": [
+        "\u20ac8,400,000",
+        "8,400,000"
+      ],
+      "hallucinations": [],
+      "fact_recall": 0.5,
+      "hallucination_free": true,
+      "is_refusal": false,
+      "accuracy_score": 0.5,
+      "answer_preview": "Summary:\n- Villa Les Oliviers is located at Chemin du Cap, 06230 Saint-Jean-Cap-Ferrat, France, and was purchased for \u20ac8.4 million on 12 August 2019 by Caledonia [Source: TEST_judgment_phoenix_v_meridian.txt | Page 1 | \"(a)\"].\n- The property was funded by three transfers totalling \u00a37,856,000 from cl",
+      "retrieval_time_s": 45.78,
+      "chunks_retrieved": 15
+    },
+    {
+      "test_id": "T10",
+      "category": "legal_principles",
+      "question": "What legal tests did the court apply for constructive trust and dishonest assistance?",
+      "found_facts": [],
+      "missing_facts": [
+        "Foskett v McKeown",
+        "Royal Brunei",
+        "Ivey v Genting"
+      ],
+      "hallucinations": [],
+      "fact_recall": 0.0,
+      "hallucination_free": true,
+      "is_refusal": false,
+      "accuracy_score": 0.0,
+      "answer_preview": "Summary:\n- The court applied the test that a constructive trust arises by operation of law when transfers are made in breach of fiduciary duty [Source: TEST_judgment_phoenix_v_meridian.txt | Page 13 | \"Judgment\"].\n- The court noted that Jersey law does not recognize any type of constructive trust in",
+      "retrieval_time_s": 58.92,
+      "chunks_retrieved": 15
+    },
+    {
+      "test_id": "T11",
+      "category": "entities",
+      "question": "What was Caledonia Ventures Ltd and who owned it?",
+      "found_facts": [],
+      "missing_facts": [
+        "British Virgin Islands",
+        "Harrington Family Trust",
+        "Mr Harrington"
+      ],
+      "hallucinations": [],
+      "fact_recall": 0.0,
+      "hallucination_free": true,
+      "is_refusal": false,
+      "accuracy_score": 0.0,
+      "answer_preview": "Summary:\n- Caledonia Ventures Ltd is a company that purchased a residential property in France and received funds from Meridian, which were held on constructive trust for investors. [Source: TEST_judgment_phoenix_v_meridian.txt | Page 1, Para 13 | \"Approved Judgment\"] [Source: TEST_judgment_phoenix_",
+      "retrieval_time_s": 36.97,
+      "chunks_retrieved": 15
+    },
+    {
+      "test_id": "T12",
+      "category": "quantum",
+      "question": "What was the estimated realisable value of traced assets according to the expert report?",
+      "found_facts": [
+        "26.4 million",
+        "\u00a326.4"
+      ],
+      "missing_facts": [],
+      "hallucinations": [],
+      "fact_recall": 1.0,
+      "hallucination_free": true,
+      "is_refusal": false,
+      "accuracy_score": 1.0,
+      "answer_preview": "Summary:\n- The total estimated realisable value of traced assets is \u00a326.4 million, which includes the value of specific properties and cash balances identified by the forensic accountant [Source: TEST_judgment_phoenix_v_meridian.txt | Page 17 | \"17\"].\n- This figure is derived from the estimated valu",
+      "retrieval_time_s": 35.73,
+      "chunks_retrieved": 15
+    }
+  ]
+}

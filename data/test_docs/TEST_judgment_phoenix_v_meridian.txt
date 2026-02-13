@@ -1,0 +1,84 @@
+NEUTRAL CITATION: [2024] EWHC 4417 (Comm)
+CASE NO: BL-2022-001847
+IN THE HIGH COURT OF JUSTICE
+BUSINESS AND PROPERTY COURTS OF ENGLAND AND WALES
+COMMERCIAL COURT (KBD)
+
+BETWEEN:
+PHOENIX CAPITAL PARTNERS LLP (Claimant)
+- and -
+MERIDIAN ASSET MANAGEMENT LIMITED (First Defendant)
+JAMES EDWARD HARRINGTON (Second Defendant)
+CATHERINE LOUISE PEMBERTON (Third Defendant)
+
+BEFORE THE HONOURABLE MR JUSTICE WHITFIELD
+
+APPROVED JUDGMENT
+
+Date: 15 March 2024
+
+A. INTRODUCTION
+
+1. This claim arises from the alleged misappropriation of client funds held by Meridian Asset Management Limited ("Meridian") between January 2019 and December 2021. The total sum at issue is £47.3 million, comprising funds belonging to 23 institutional investors managed under discretionary investment mandates.
+
+2. The Claimant, Phoenix Capital Partners LLP ("Phoenix"), is a limited liability partnership incorporated in England and Wales, which acted as lead investor and was appointed representative of the investor group pursuant to an Assignment of Claims Agreement dated 14 June 2022.
+
+3. The Second Defendant, James Edward Harrington ("Mr Harrington"), was at all material times the Chief Executive Officer and majority shareholder of Meridian, holding 72% of its issued share capital. The Third Defendant, Catherine Louise Pemberton ("Ms Pemberton"), served as Chief Financial Officer from March 2018 until her resignation on 3 January 2022.
+
+B. FACTUAL BACKGROUND
+
+4. Meridian was incorporated on 12 September 2011 and was authorised and regulated by the Financial Conduct Authority under reference number FRN-847291. It operated from offices at 14 Bishopsgate, London EC2N 4BQ. At its peak in 2020, Meridian managed assets under management totalling approximately £2.1 billion across 156 institutional clients.
+
+5. The investment mandates required Meridian to invest client funds in accordance with agreed Investment Policy Statements ("IPS"), which specified permissible asset classes, concentration limits, and risk parameters. The standard IPS prohibited investment in unregulated collective investment schemes, direct real estate, and any single-counterparty exposure exceeding 10% of the mandate value.
+
+6. Between January 2019 and March 2020 (the "First Period"), Mr Harrington authorised 17 transfers totalling £28.6 million from client custody accounts at Northern Trust to an account held by Caledonia Ventures Ltd ("Caledonia") at Banco Santander, Geneva. Caledonia was incorporated in the British Virgin Islands on 4 April 2018 and was wholly owned by the Harrington Family Trust, of which Mr Harrington was the sole settlor and a discretionary beneficiary.
+
+7. Between April 2020 and December 2021 (the "Second Period"), a further 31 transfers totalling £18.7 million were made to three entities: (i) Caledonia (£9.2 million); (ii) Evergreen Property Holdings SA, a Luxembourg company ("Evergreen") (£5.8 million); and (iii) Atlas Maritime Corp, a Marshall Islands company ("Atlas") (£3.7 million). Both Evergreen and Atlas were ultimately owned by the same Harrington Family Trust structure.
+
+8. Ms Pemberton's role is disputed. Phoenix alleges that she was actively involved in creating false reconciliation reports that concealed the transfers. Ms Pemberton maintains that she was unaware of the true nature of the transfers, believing them to be legitimate investment transactions authorised by Meridian's investment committee. I address this issue at paragraphs 89-127 below.
+
+C. THE REGULATORY INVESTIGATION
+
+9. The FCA commenced a formal investigation into Meridian on 17 February 2022, designated as case reference ENF-2022-00341. On 28 March 2022, the FCA issued a First Supervisory Notice restricting Meridian from conducting any regulated activity. The FCA's investigation identified what it described as "systematic misuse of client assets over a sustained period."
+
+10. On 14 September 2022, the FCA published its Final Notice (reference FCA/2022/0891) imposing a financial penalty of £12.8 million on Meridian and £3.2 million personally on Mr Harrington. The FCA found that Mr Harrington had breached Principles 1 (Integrity), 2 (Skill, care and diligence), and 11 (Relations with regulators) of the FCA's Principles for Businesses.
+
+D. THE NORTHERN TRUST CUSTODIAN RECORDS
+
+11. The Northern Trust monthly custody statements, which were disclosed by non-party disclosure order dated 7 July 2023, revealed a pattern of transfers followed by immediate reinvestment of equivalent sums from Meridian's own reserves. This "round-tripping" had the effect of temporarily masking the deficit in client accounts during quarterly reporting periods. The total value of round-tripped funds was £14.2 million.
+
+12. Expert evidence from Mr Gerald Thornton FCA, a forensic accountant instructed by Phoenix, established that the round-tripping mechanism operated as follows: (a) client funds were transferred to Caledonia or the other connected entities on or around the 15th of each month; (b) equivalent funds were transferred from Meridian's proprietary account to the client custody account between the 25th and 28th of each month; (c) these replacement funds were withdrawn again within the first five working days of the following month.
+
+E. CONSTRUCTIVE TRUST AND TRACING
+
+13. I find that the monies transferred to Caledonia, Evergreen, and Atlas were held on constructive trust for the investor clients from the moment of transfer. The trust arises by operation of law because the transfers were made in breach of fiduciary duty: Mr Harrington, as CEO and controlling mind of Meridian, owed fiduciary duties to the clients whose funds were under management.
+
+14. Applying the principles in Foskett v McKeown [2001] 1 AC 102 and FHR European Ventures Ltd v Cedar Capital Partners LLC [2014] UKSC 45, I hold that Phoenix is entitled to trace the misappropriated funds into the assets acquired with those funds. The tracing exercise conducted by Mr Thornton identified the following principal assets:
+
+(a) A residential property at Villa Les Oliviers, Chemin du Cap, 06230 Saint-Jean-Cap-Ferrat, France, purchased on 12 August 2019 for €8.4 million by Caledonia;
+(b) A 42-metre motor yacht named "Artemis" (IMO 9876543), purchased on 3 March 2020 for €6.2 million through Atlas Maritime Corp;
+(c) A commercial property portfolio in Luxembourg held through Evergreen, comprising three office buildings valued at approximately €11.3 million as at December 2023;
+(d) Cash balances totalling approximately £4.7 million held across accounts at Banco Santander (Geneva), Credit Suisse (Zurich), and Julius Baer (Singapore).
+
+F. MS PEMBERTON'S LIABILITY
+
+15. Having considered Ms Pemberton's evidence carefully, including cross-examination over three days, I find on the balance of probabilities that Ms Pemberton knew of the misappropriation from no later than September 2019. The contemporaneous email correspondence, particularly the email from Ms Pemberton to Mr Harrington dated 23 September 2019 stating "the reconciliation gap is now too large to cover with the reserve account — we need to discuss alternatives," demonstrates awareness of the deficit.
+
+16. I therefore find that Ms Pemberton is liable as a dishonest assistant in a breach of trust, applying the test in Royal Brunei Airlines v Tan [1995] 2 AC 378 as refined in Ivey v Genting Casinos [2017] UKSC 67. Her conduct was objectively dishonest: she knew that the reconciliation reports she prepared were misleading and failed to report the matter to the FCA or to Meridian's compliance officer.
+
+G. QUANTUM
+
+17. The total loss suffered by the investor group is £47.3 million, being the aggregate value of funds transferred to Caledonia, Evergreen, and Atlas. Against this, I allow credit for: (a) recoveries from the FCA enforcement process of £8.1 million; (b) the estimated realisable value of traced assets of £26.4 million; and (c) insurance proceeds under Meridian's professional indemnity policy of £5 million.
+
+18. The net unrecovered loss is therefore £7.8 million. I award judgment against all three Defendants jointly and severally in the sum of £7.8 million, together with interest at the rate of 3% above base rate from 1 January 2022 to the date of judgment, totalling £1.47 million. The total judgment sum is therefore £9.27 million.
+
+H. FREEZING ORDER
+
+19. I grant a worldwide freezing order against Mr Harrington and Ms Pemberton up to the value of £9.27 million. Given the evidence of dissipation risk, including the purchase of assets through offshore structures and Mr Harrington's failure to comply with the FCA's asset restriction requirements, I am satisfied that there is a real risk of dissipation absent such an order.
+
+I. COSTS
+
+20. The Claimant having succeeded on substantially all issues, the Defendants shall pay the Claimant's costs of and incidental to the proceedings, to be assessed on the standard basis if not agreed. I order an interim payment on account of costs in the sum of £2.3 million, to be paid within 28 days.
+
+MR JUSTICE WHITFIELD
+15 March 2024
