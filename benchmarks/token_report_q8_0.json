@@ -1,0 +1,48 @@
+{
+  "kv_cache": "q8_0",
+  "tests": [
+    {
+      "prompt_tokens": 6,
+      "gen_tokens": 50,
+      "prompt_tps": 68.9,
+      "gen_tps": 55.9,
+      "gen_time_s": 0.894
+    },
+    {
+      "prompt_tokens": 17,
+      "gen_tokens": 200,
+      "prompt_tps": 119.4,
+      "gen_tps": 54.9,
+      "gen_time_s": 3.642
+    },
+    {
+      "prompt_tokens": 28,
+      "gen_tokens": 500,
+      "prompt_tps": 195.9,
+      "gen_tps": 54.1,
+      "gen_time_s": 9.248
+    },
+    {
+      "prompt_tokens": 58,
+      "gen_tokens": 300,
+      "prompt_tps": 230.9,
+      "gen_tps": 54.3,
+      "gen_time_s": 5.525
+    },
+    {
+      "prompt_tokens": 911,
+      "gen_tokens": 300,
+      "prompt_tps": 618.8,
+      "gen_tps": 51.1,
+      "gen_time_s": 5.874
+    },
+    {
+      "prompt_tokens": 28,
+      "gen_tokens": 1000,
+      "prompt_tps": 193.7,
+      "gen_tps": 53.1,
+      "gen_time_s": 18.819
+    }
+  ],
+  "avg_gen_tps": 53.9
+}

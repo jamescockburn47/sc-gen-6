@@ -146,6 +146,7 @@ class LLMClient:
             "model": model or self.config.model_name,
             "messages": messages,
             "stream": stream,
+            "think": False,  # Disable thinking tokens — saves 80%+ generation time
             "options": {
                 "temperature": temperature,
                 "num_ctx": 32768,  # 32K context for RAG queries
@@ -183,6 +184,7 @@ class LLMClient:
             "model": model or self.config.model_name,
             "messages": messages,
             "stream": True,
+            "think": False,  # Disable thinking tokens — saves 80%+ generation time
             "options": {
                 "temperature": temperature,
                 "num_ctx": 32768,  # 32K context for RAG queries

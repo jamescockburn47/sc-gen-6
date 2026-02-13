@@ -1,0 +1,34 @@
+{
+  "kv_cache": "q4_0",
+  "tests": [
+    {
+      "prompt_tokens": 6,
+      "gen_tokens": 50,
+      "prompt_tps": 29.6,
+      "gen_tps": 50.5,
+      "gen_time_s": 0.99
+    },
+    {
+      "prompt_tokens": 14,
+      "gen_tokens": 200,
+      "prompt_tps": 102.3,
+      "gen_tps": 54.3,
+      "gen_time_s": 3.68
+    },
+    {
+      "prompt_tokens": 19,
+      "gen_tokens": 500,
+      "prompt_tps": 155.9,
+      "gen_tps": 53.4,
+      "gen_time_s": 9.364
+    },
+    {
+      "prompt_tokens": 14,
+      "gen_tokens": 1000,
+      "prompt_tps": 104.6,
+      "gen_tps": 52.3,
+      "gen_time_s": 19.121
+    }
+  ],
+  "avg_gen_tps": 52.6
+}

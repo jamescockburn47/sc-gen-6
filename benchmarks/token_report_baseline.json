@@ -1,0 +1,86 @@
+{
+  "timestamp": "2026-02-13T18:28:46.221017",
+  "model": "glm-4.7-flash",
+  "backend": "Ollama + Vulkan",
+  "gpu": "AMD Radeon 8060S (gfx1151, RADV)",
+  "tests": [
+    {
+      "test": "warmup_short",
+      "prompt_tokens": 6,
+      "generated_tokens": 50,
+      "total_time_s": 8.378,
+      "load_time_s": 7.216,
+      "prompt_eval_time_s": 0.249,
+      "generation_time_s": 0.89,
+      "prompt_processing_tps": 24.1,
+      "token_generation_tps": 56.2,
+      "response_preview": ""
+    },
+    {
+      "test": "short_prompt_200tok",
+      "prompt_tokens": 17,
+      "generated_tokens": 200,
+      "total_time_s": 10.611,
+      "load_time_s": 6.843,
+      "prompt_eval_time_s": 0.144,
+      "generation_time_s": 3.566,
+      "prompt_processing_tps": 117.7,
+      "token_generation_tps": 56.1,
+      "response_preview": ""
+    },
+    {
+      "test": "short_prompt_500tok",
+      "prompt_tokens": 28,
+      "generated_tokens": 500,
+      "total_time_s": 9.384,
+      "load_time_s": 0.133,
+      "prompt_eval_time_s": 0.142,
+      "generation_time_s": 8.99,
+      "prompt_processing_tps": 196.9,
+      "token_generation_tps": 55.6,
+      "response_preview": ""
+    },
+    {
+      "test": "rag_context_300tok",
+      "prompt_tokens": 274,
+      "generated_tokens": 300,
+      "total_time_s": 6.092,
+      "load_time_s": 0.14,
+      "prompt_eval_time_s": 0.47,
+      "generation_time_s": 5.416,
+      "prompt_processing_tps": 582.4,
+      "token_generation_tps": 55.4,
+      "response_preview": ""
+    },
+    {
+      "test": "large_context_300tok",
+      "prompt_tokens": 1350,
+      "generated_tokens": 300,
+      "total_time_s": 14.974,
+      "load_time_s": 6.893,
+      "prompt_eval_time_s": 2.353,
+      "generation_time_s": 5.615,
+      "prompt_processing_tps": 573.8,
+      "token_generation_tps": 53.4,
+      "response_preview": ""
+    },
+    {
+      "test": "sustained_1000tok",
+      "prompt_tokens": 36,
+      "generated_tokens": 1000,
+      "total_time_s": 18.664,
+      "load_time_s": 0.145,
+      "prompt_eval_time_s": 0.209,
+      "generation_time_s": 18.097,
+      "prompt_processing_tps": 172.1,
+      "token_generation_tps": 55.3,
+      "response_preview": ""
+    }
+  ],
+  "summary": {
+    "avg_prompt_tps": 277.8,
+    "avg_generation_tps": 55.3,
+    "min_generation_tps": 53.4,
+    "max_generation_tps": 56.2
+  }
+}

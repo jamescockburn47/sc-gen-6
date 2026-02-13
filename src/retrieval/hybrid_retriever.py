@@ -101,18 +101,27 @@ class HybridRetriever:
             print("[Retrieval] Using FTS5 keyword index (SQLite)")
             self.keyword_index = FTS5IndexCompat(settings=self.settings)
         
-        # Use factory function to get best reranker service (ONNX GPU or CPU)
-        if reranker_service is None:
-            from src.models.reranker import get_reranker_service
-            self.reranker_service = get_reranker_service(settings=self.settings)
-        else:
-            self.reranker_service = reranker_service
+        # Reranker is lazy-loaded on first use to save RAM
+        # (CrossEncoder model uses ~20GB RAM)
+        self._reranker_service = reranker_service
+        self._reranker_loaded = reranker_service is not None
             
         # Initialize summary store if enabled
         self.summary_store = None
         if self.settings.retrieval.use_summaries:
             from src.retrieval.summary_store import SummaryStore
             self.summary_store = SummaryStore(settings=self.settings)
+
+    @property
+    def reranker_service(self):
+        """Lazy-load reranker service on first access to save RAM."""
+        if not self._reranker_loaded:
+            print("[Reranker] Loading model (first use)...")
+            from src.models.reranker import get_reranker_service
+            self._reranker_service = get_reranker_service(settings=self.settings)
+            self._reranker_loaded = True
+        return self._reranker_service
+
 
     def retrieve(
         self,
@@ -436,9 +445,9 @@ class HybridRetriever:
                 "time_ms": filtering_time
             })
 
-        # Apply confidence threshold (if not already applied by the MIN_GUARANTEED logic)
-        # This ensures that if MIN_GUARANTEED was met but scores were low, they are now filtered
-        results = [r for r in results if r["score"] >= self.settings.retrieval.confidence_threshold]
+        # NOTE: Confidence threshold already applied during reranking (line ~406).
+        # The MIN_GUARANTEED logic intentionally keeps low-scoring chunks to avoid
+        # empty results. Do NOT re-filter here — it defeats the guarantee.
         
         # --- Advanced Retrieval Pipeline ---
         if self.settings.advanced_retrieval.enabled:

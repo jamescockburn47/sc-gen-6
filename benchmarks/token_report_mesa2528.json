@@ -1,0 +1,30 @@
+{
+  "driver": "Mesa_RADV_25.2.8",
+  "kv_cache": "q8_0",
+  "results": [
+    {
+      "prompt_tps": 23.4,
+      "gen_tps": 55.0,
+      "gen_tokens": 50,
+      "total_s": 8.31
+    },
+    {
+      "prompt_tps": 49.5,
+      "gen_tps": 54.7,
+      "gen_tokens": 200,
+      "total_s": 11.12
+    },
+    {
+      "prompt_tps": 144.6,
+      "gen_tps": 54.2,
+      "gen_tokens": 500,
+      "total_s": 9.61
+    },
+    {
+      "prompt_tps": 149.1,
+      "gen_tps": 52.9,
+      "gen_tokens": 1000,
+      "total_s": 25.97
+    }
+  ]
+}

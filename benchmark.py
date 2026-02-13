@@ -26,14 +26,16 @@ from src.config.llm_config import load_llm_config
 
 
 BENCHMARK_QUERIES = [
-    "What is the test for abuse of dominant position under section 18 Competition Act 1998?",
-    "What is the limitation period for follow-on competition damages claims in the CAT?",
-    "What are the requirements for a collective proceedings order under section 47B Competition Act 1998?",
-    "Explain the pass-on defence in competition law damages claims",
-    "What did the Supreme Court decide in Merricks v Mastercard about certification?",
-    "How is the relevant market defined for Chapter I and Chapter II prohibitions?",
-    "What is the standard of proof for binding infringement decisions in follow-on claims?",
-    "Describe the disclosure obligations in CAT proceedings",
+    # Case-specific queries matching [2021] EWHC 1272 (Comm) — CL-2017-000323
+    # Civil fraud & asset-tracing: Smith, Cochrane, Ruhan, HPII, Harbour
+    "What role did Dr Cochrane play in the IOM Settlement and what assets were transferred?",
+    "Was Mr Stevens acting as Mr Ruhan's nominee in the Cambulo Transaction?",
+    "What did the court find regarding the priority of competing equitable interests in this case?",
+    "Describe the LICSA and whether it effected an equitable assignment to Phoenix",
+    "What was the Harbour litigation funding arrangement and was it enforceable after PACCAR?",
+    "What findings were made about the misappropriation of assets by HPII's liquidators?",
+    "How was the £10m payment under the IOM Settlement treated — was it held on trust?",
+    "What privilege issues arose from Ms Aird-Brown's conversation with Mr Campbell?",
 ]
 
 

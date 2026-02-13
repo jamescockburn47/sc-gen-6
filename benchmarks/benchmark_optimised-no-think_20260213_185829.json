@@ -1,0 +1,136 @@
+{
+  "label": "optimised-no-think",
+  "timestamp": "2026-02-13T18:57:14.992740",
+  "config": {
+    "provider": "ollama",
+    "model": "glm-4.7-flash",
+    "embedding_model": "BAAI/bge-large-en-v1.5",
+    "reranker_model": "mixedbread-ai/mxbai-rerank-base-v2",
+    "vector_store_count": 556,
+    "generation_enabled": true
+  },
+  "init_time_s": 1.39,
+  "queries": [
+    {
+      "query": "What role did Dr Cochrane play in the IOM Settlement and what assets were transferred?",
+      "retrieval_error": null,
+      "generation_error": "Cannot generate answer without context chunks",
+      "retrieval_time_s": 3.72,
+      "generation_time_s": 0,
+      "total_time_s": 3.72,
+      "chunks_retrieved": 0,
+      "top_chunks": [],
+      "answer_preview": ""
+    },
+    {
+      "query": "Was Mr Stevens acting as Mr Ruhan's nominee in the Cambulo Transaction?",
+      "retrieval_error": null,
+      "generation_error": "Cannot generate answer without context chunks",
+      "retrieval_time_s": 3.36,
+      "generation_time_s": 0,
+      "total_time_s": 3.36,
+      "chunks_retrieved": 0,
+      "top_chunks": [],
+      "answer_preview": ""
+    },
+    {
+      "query": "What did the court find regarding the priority of competing equitable interests in this case?",
+      "retrieval_error": null,
+      "generation_error": "Cannot generate answer without context chunks",
+      "retrieval_time_s": 3.53,
+      "generation_time_s": 0,
+      "total_time_s": 3.53,
+      "chunks_retrieved": 0,
+      "top_chunks": [],
+      "answer_preview": ""
+    },
+    {
+      "query": "Describe the LICSA and whether it effected an equitable assignment to Phoenix",
+      "retrieval_error": null,
+      "generation_error": "Cannot generate answer without context chunks",
+      "retrieval_time_s": 3.6,
+      "generation_time_s": 0,
+      "total_time_s": 3.6,
+      "chunks_retrieved": 0,
+      "top_chunks": [],
+      "answer_preview": ""
+    },
+    {
+      "query": "What was the Harbour litigation funding arrangement and was it enforceable after PACCAR?",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 3.93,
+      "generation_time_s": 17.97,
+      "total_time_s": 21.9,
+      "chunks_retrieved": 1,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_93c18ff1_c0035_1d7e8b16",
+          "text_preview": "nfirmed by Foxton J\u2019s 18 April \n2024 ruling which I refer to below. \n11 On 31 May 2024, we replied to Mr Thomas to indicate that Harbour did not accept the liability alleged in his letter \n(page 389A)"
+        }
+      ],
+      "answer_preview": "Summary:\n- Harbour entered into an Indemnity Agreement (Harbour IA) with the Settlement Parties, which Dr Smith and his proxies have sought to undermine by challenging its enforceability following the PACCAR Decision. [Source: 1762462313201 - 131.pdf | Page 18, Para 52 | \"E. The actions of Dr Cochrane specifically\"]\n- The Settlement Parties, including Harbour, have been forced to expend further time and costs due to these orchestrated actions, which are viewed as an attempt to erode the value of"
+    },
+    {
+      "query": "What findings were made about the misappropriation of assets by HPII's liquidators?",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 3.1,
+      "generation_time_s": 9.29,
+      "total_time_s": 12.39,
+      "chunks_retrieved": 1,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_df9b7163_c0244_467726c5",
+          "text_preview": "ntage of relevant bad faith vis-\u00e0-vis Mr Ruhan. Where, however, HPII wishes to assert \nits entitlements irrespective of the position of Mr Ruhan, only bad faith vis-a-vis HPII could \nbe relevant. \n473"
+        }
+      ],
+      "answer_preview": "Summary:\n- The judgment finds that Dr. Smith was not acting in bad faith vis-\u00e0-vis HPII regarding the IOM Settlement, as the assertion that he was a shadow director was not made good before the court [Source: 1762462081828 - 690.pdf | Page 157, Para 473 | \"In re Gerald Martin Smith\"].\n- The court rejected the argument that the 2003 Oral Agreement involved a breach of fiduciary duties by Dr. Smith, noting that Mr. Ruhan acquired ultimate beneficial ownership of HPII and its assets at that time [S"
+    },
+    {
+      "query": "How was the \u00a310m payment under the IOM Settlement treated \u2014 was it held on trust?",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 3.61,
+      "generation_time_s": 11.29,
+      "total_time_s": 14.9,
+      "chunks_retrieved": 1,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_df9b7163_c0022_bf5b7d67",
+          "text_preview": "haw Goddard LLP v Wood [2015] \nEWHC B12 (Costs), [99-122]; Re Fuld [1968] P 727, 736 (Scarman J) and Clifford Harris \n& Co v Solland International Ltd [2005] EWHC 141 (Ch); [2005] 3 Costs LR 414, \n[21"
+        }
+      ],
+      "answer_preview": "Summary:\n- The IOM Settlement was entered into by the Orb Claimants or their affiliates, including Orb, Dr Cochrane, and SMA [Source: 1762462081828 - 690.pdf | Page 57, Para 171 | \"Mr Justice Foxton Approved Judgment\"].\n- The IOM Settlement is considered to have arisen out of or related to the Causes of Action, satisfying the definition of \"Success in the Proceeding\" within the Harbour IA [Source: 1762462081828 - 690.pdf | Page 57, Para 175 | \"Mr Justice Foxton Approved Judgment\"].\n\nKey Facts:\n1"
+    },
+    {
+      "query": "What privilege issues arose from Ms Aird-Brown's conversation with Mr Campbell?",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 3.08,
+      "generation_time_s": 8.45,
+      "total_time_s": 11.53,
+      "chunks_retrieved": 1,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_1c9b99da_c0001_66fcc20f",
+          "text_preview": "2021 \nC1/1\n\n2 \n- - - - - - - - - - - - - - - - - - - - -\n\nApproved Judgment\n\nI direct that no official shorthand note shall be taken of this Judgment and that copies \nof this version as handed down ma"
+        }
+      ],
+      "answer_preview": "Summary:\n- The judgment discusses adverse inferences and legal principles but does not explicitly detail the specific privilege issues arising from Ms Aird-Brown's conversation with Mr Campbell [Source: 1762462081828 - 690.pdf | Page 1 | Para 9].\n- The document outlines the adverse inference case for HPII and other parties but does not provide the specific facts regarding the conversation or the resulting privilege disputes [Source: 1762462081828 - 690.pdf | Page 1 | Para 9].\n\nKey Facts:\n1. The "
+    }
+  ],
+  "summary": {
+    "total_queries": 8,
+    "retrieval_errors": 0,
+    "generation_errors": 4,
+    "avg_retrieval_time_s": 3.49,
+    "avg_generation_time_s": 11.75,
+    "avg_total_time_s": 9.37,
+    "avg_chunks_retrieved": 0.5
+  }
+}

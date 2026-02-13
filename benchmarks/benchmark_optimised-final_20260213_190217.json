@@ -1,0 +1,240 @@
+{
+  "label": "optimised-final",
+  "timestamp": "2026-02-13T18:59:29.264852",
+  "config": {
+    "provider": "ollama",
+    "model": "glm-4.7-flash",
+    "embedding_model": "BAAI/bge-large-en-v1.5",
+    "reranker_model": "mixedbread-ai/mxbai-rerank-base-v2",
+    "vector_store_count": 556,
+    "generation_enabled": true
+  },
+  "init_time_s": 1.3,
+  "queries": [
+    {
+      "query": "What role did Dr Cochrane play in the IOM Settlement and what assets were transferred?",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 4.09,
+      "generation_time_s": 16.38,
+      "total_time_s": 20.47,
+      "chunks_retrieved": 3,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_df9b7163_c0112_b4a9680d",
+          "text_preview": "ond issue (knowledge of Dr Smith and Dr Cochrane\u2019s use of the Transferred \nAssets), Mr Taylor accepted that he was aware that he was receiving sums from Dr Smith \nwhich came from the IOM Settlement (w"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_1c9b99da_c0223_c9b73753",
+          "text_preview": "uest to carry out such behaviour \u2026. and evidence that Mr Anciano was \nrecruited by Mr Ruhan in the Autumn of 2015 to try to suborn one such security officer\u201d \nand that: \n\u201cAs Andrew Smith J observed in"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_1c9b99da_c0177_b74b81b0",
+          "text_preview": "to parties who had \nmade misleading statements to bolster the truth, albeit that these were cases where \u201cthe \nmisconduct was by way of deception in the course of the very litigation directed to securi"
+        }
+      ],
+      "answer_preview": "Summary:\n- Dr Cochrane was involved in the IOM Settlement, which totalled approximately \u00a31.6m, and was receiving regular payments from Dr Smith alongside Mr Taylor. [Source: 1762462081828 - 690.pdf | Page 184, Para 571 | \"Approved Judgment In re Gerald Martin Smith\"]\n- Mr Taylor accepted that he was aware Dr Smith and Dr Cochrane were using the proceeds for their own benefit and procuring substantial payments through a company called Arcana. [Source: 1762462081828 - 690.pdf | Page 184, Para 571 "
+    },
+    {
+      "query": "Was Mr Stevens acting as Mr Ruhan's nominee in the Cambulo Transaction?",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 3.66,
+      "generation_time_s": 15.58,
+      "total_time_s": 19.24,
+      "chunks_retrieved": 3,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_1c9b99da_c0253_e4fa5f87",
+          "text_preview": "owing paragraphs had been \na genuine third party loan.\u201d \n453. \nHPII submits this passage shows that the Orb Claimants were fully aware that very large \nsums had been paid back into Arena Settlement fr"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_1c9b99da_c0251_74c3a2d4",
+          "text_preview": "Bridgehouse \nPartners companies by Mr McNally in eleven different capacities, \ni.e. this document suggests that Mr McNally was an authorised \nsignatory of all of these eleven companies, \nFrom the abov"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_df9b7163_c0356_2a0e9d6b",
+          "text_preview": "him \u2026.)\u201d. \n100. \nOn 4 August 2015, Stewarts wrote to Mr Ruhan\u2019s solicitors explaining that the Orb \nClaimants had been advised that a settlement under which Mr Stevens would receive a \nsignificantly g"
+        }
+      ],
+      "answer_preview": "Summary:\n- The documents indicate that the Orb Claimants sought to trace funds into Mr Stevens, believing he received the money as a nominee rather than in his own right [Source: 1762462081828 - 690.pdf | Page 148, Para 462 | \"Mr Justice Foxton Approved Judgment In re Gerald Martin Smith\"].\n- Evidence suggests that the Hyde Park Hotels were used to leverage finance for a Qatar Project, resulting in a sum of \u00a391,839,921.09 being transferred to a bank account of Legion Management Corp. [Source: 17"
+    },
+    {
+      "query": "What did the court find regarding the priority of competing equitable interests in this case?",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 3.89,
+      "generation_time_s": 12.03,
+      "total_time_s": 15.92,
+      "chunks_retrieved": 3,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_df9b7163_c0162_865f4c5e",
+          "text_preview": "and persuasive arguments can be (and were) made on \nboth sides. Proponents of the \u201cpriority\u201d model derive support not merely from the status of \nsuccessive equitable charges, but also from the treatme"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_1c9b99da_c0164_5e1bbd54",
+          "text_preview": "and persuasive arguments can be (and were) made on \nboth sides. Proponents of the \u201cpriority\u201d model derive support not merely from the status of \nsuccessive equitable charges, but also from the treatme"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_df9b7163_c0164_5e1bbd54",
+          "text_preview": "a position to constitute the \nHarbour Trust, and treated in equity as having done so. However, the interests which \nwere at the disposal of the Orb Claimants (picking up the language of Tailby), and \n"
+        }
+      ],
+      "answer_preview": "Summary:\n- The court discusses the \"priority model\" for equitable interests, which applies rules of priority to successive equitable assignments rather than treating the second transfer as a nullity, specifically noting the \"first in time\" rule and the rule in Dearle v Hall [Source: 1762462081828 - 690.pdf | Page 99, Para 311 | \"Approved Judgment In re Gerald Martin Smith\"].\n- The court found that if an equitable assignment had been effected by the LICSA, it would have been subject to the Harbou"
+    },
+    {
+      "query": "Describe the LICSA and whether it effected an equitable assignment to Phoenix",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 3.92,
+      "generation_time_s": 24.74,
+      "total_time_s": 28.66,
+      "chunks_retrieved": 3,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_1c9b99da_c0130_4ee76085",
+          "text_preview": "They do not extend to consensual relationships which arise \nbetween parties whose relationship was not adversarial at the time of the Confidential \nSettlement Deed, nor to proprietary claims the sourc"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_df9b7163_c0003_77bf3404",
+          "text_preview": "They do not extend to consensual relationships which arise \nbetween parties whose relationship was not adversarial at the time of the Confidential \nSettlement Deed, nor to proprietary claims the sourc"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_df9b7163_c0148_5d2fc56c",
+          "text_preview": "luable consideration will, if the new chose in \naction is at the disposal of the assignor, take precisely the same right \nand interest as if it had belonged to him, or had been within his \ndisposition"
+        }
+      ],
+      "answer_preview": "Summary:\n- The London International Commodities Settlement Agreement (LICSA) was entered into on 29 April 2016 and contains drafting infelicities, making its commercial rationale difficult to derive from its terms [Source: 1762462081828 - 690.pdf | Page 80, Para 245 | \"The terms of the LICSA\"].\n- Phoenix alleges that the LICSA involved a transfer of rights by SMA in the form of an equitable assignment, which would take those rights out of any trust arising in favour of the Settlement Parties or "
+    },
+    {
+      "query": "What was the Harbour litigation funding arrangement and was it enforceable after PACCAR?",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 4.2,
+      "generation_time_s": 15.31,
+      "total_time_s": 19.51,
+      "chunks_retrieved": 3,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_9c9bd059_c0002_146493ca",
+          "text_preview": "t of the \nfinancial benefit obtained by the recipient\u201d. \n75 \nMy understanding is that the PACCAR Decision revolved principally around the first of \nthese grounds, and established that litigation funde"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_1c0fcbb7_c0035_1d7e8b16",
+          "text_preview": "t of the \nfinancial benefit obtained by the recipient\u201d. \n75 \nMy understanding is that the PACCAR Decision revolved principally around the first of \nthese grounds, and established that litigation funde"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_5287c124_c0035_1d7e8b16",
+          "text_preview": "t of the \nfinancial benefit obtained by the recipient\u201d. \n75 \nMy understanding is that the PACCAR Decision revolved principally around the first of \nthese grounds, and established that litigation funde"
+        }
+      ],
+      "answer_preview": "Summary:\n- The Harbour litigation funding arrangement (Harbour IA) is structured as a contingent funding, non-recourse agreement where the funder only receives a return if the funded parties succeed and proceeds are received [Source: 1762462313201 - 131.pdf | Page 26, Para 76 | \"Section Title\"].\n- The PACCAR Decision established that litigation funders are providers of \"claims management services,\" and Harbour proceeds on this basis [Source: 1762462313201 - 131.pdf | Page 26, Para 75 | \"Section "
+    },
+    {
+      "query": "What findings were made about the misappropriation of assets by HPII's liquidators?",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 3.3,
+      "generation_time_s": 25.6,
+      "total_time_s": 28.9,
+      "chunks_retrieved": 3,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_df9b7163_c0021_74029c98",
+          "text_preview": "that this \nmight be the position (or to appreciate that there was a serious possibility that this was the \nposition), and to undertake reasonable investigations which would have led to type 1 \nconstru"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_1c9b99da_c0020_ee2f198f",
+          "text_preview": "In Re Bletchley Boat Co Ltd [1974] 1 WLR 630, 637, Brightman J \nstated that such powers were not to be used \u201cto gain an advantage in the action \u2026 over and \nabove the ordinary advantages available to a"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_df9b7163_c0233_a56c187e",
+          "text_preview": "ular, \nHPII alleges that Mr Stevens was acting as Mr Ruhan\u2019s nominee at the time of the Cambulo \nTransaction (defined at [63] below) and the Geneva Settlement. That issue has already been \nthe subject"
+        }
+      ],
+      "answer_preview": "Summary:\n- The judgment finds that Dr Smith was aware that HPII's dissolution did not extinguish its claims, which vested in the Crown as bona vacantia, and that he could have restored HPII to the register to assert them retrospectively [Source: 1762462081828 - 690.pdf | Page 143, Para 447 | \"Mr Justice Foxton Approved Judgment In re Gerald Martin Smith\"].\n- The court found that Dr Smith would not have believed Mr Ruhan\u2019s secret involvement in the Cambulo Transaction did not involve a breach of "
+    },
+    {
+      "query": "How was the \u00a310m payment under the IOM Settlement treated \u2014 was it held on trust?",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 3.98,
+      "generation_time_s": 14.5,
+      "total_time_s": 18.48,
+      "chunks_retrieved": 3,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_df9b7163_c0092_af10cad2",
+          "text_preview": "reed to provide as a condition of the sale by Orb to him of the various assets. \n33. \nMr Taylor\u2019s claim in this action arises under the trust created by the Harbour IA (defined \nat [34] below). Howeve"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_df9b7163_c0022_bf5b7d67",
+          "text_preview": "haw Goddard LLP v Wood [2015] \nEWHC B12 (Costs), [99-122]; Re Fuld [1968] P 727, 736 (Scarman J) and Clifford Harris \n& Co v Solland International Ltd [2005] EWHC 141 (Ch); [2005] 3 Costs LR 414, \n[21"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_df9b7163_c0362_e70b8d5a",
+          "text_preview": "f the \ndefendant solicitors' knowledge (actual or imputed) at the date when \nthey received payments of their costs and disbursements. At that date \nthey cannot have had more than knowledge of the clai"
+        }
+      ],
+      "answer_preview": "Summary:\n- Mr Taylor received payments in 2014, 2015, and 2016 that he understood to represent the proceeds of the IOM Settlement, despite Harbour having a prior interest under the Harbour Trust [Source: 1762462081828 - 690.pdf | Page 19, Para 34 | \"Mr Justice Foxton Approved Judgment In re Gerald Martin Smith\"].\n- The IOM Settlement Cash was subject to Mr Ruhan\u2019s equitable proprietary rights at the time of transfer, meaning no rival equitable proprietary interest arose in favour of the Orb Clai"
+    },
+    {
+      "query": "What privilege issues arose from Ms Aird-Brown's conversation with Mr Campbell?",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 3.5,
+      "generation_time_s": 13.13,
+      "total_time_s": 16.63,
+      "chunks_retrieved": 3,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_df9b7163_c0240_3445fe5c",
+          "text_preview": "Ruhan\u2019s nominee. By clause 6.2 of the Confidential Settlement Deed, the \nOrb Claimants were content to release \u201cany claims or causes of action which may be \nbrought in light of the Claimants\u2019 allegati"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_1c9b99da_c0001_66fcc20f",
+          "text_preview": "2021 \nC1/1\n\n2 \n- - - - - - - - - - - - - - - - - - - - -\n\nApproved Judgment\n\nI direct that no official shorthand note shall be taken of this Judgment and that copies \nof this version as handed down ma"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_1c9b99da_c0020_ee2f198f",
+          "text_preview": "In Re Bletchley Boat Co Ltd [1974] 1 WLR 630, 637, Brightman J \nstated that such powers were not to be used \u201cto gain an advantage in the action \u2026 over and \nabove the ordinary advantages available to a"
+        }
+      ],
+      "answer_preview": "Summary:\n- Ms Aird-Brown requested information from Mr Campbell regarding settlement offers and internal discussions, which risked eliciting privileged material against HPII [Source: 1762462081828 - 690.pdf | Page 18, Para 30 | \"Section Title\"].\n- The judge accepted that Ms Aird-Brown did not identify the risk of producing privileged communications in the immediate pressure of the moment [Source: 1762462081828 - 690.pdf | Page 18, Para 31 | \"Section Title\"].\n\nKey Facts:\n1. Ms Aird-Brown sent an "
+    }
+  ],
+  "summary": {
+    "total_queries": 8,
+    "retrieval_errors": 0,
+    "generation_errors": 0,
+    "avg_retrieval_time_s": 3.82,
+    "avg_generation_time_s": 17.16,
+    "avg_total_time_s": 20.98,
+    "avg_chunks_retrieved": 3.0
+  }
+}
