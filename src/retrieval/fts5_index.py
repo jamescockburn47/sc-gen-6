@@ -272,10 +272,13 @@ class FTS5Index:
         """Prepare query for FTS5 search.
         
         Handles special characters and converts to FTS5 syntax.
+        Quotes individual terms to prevent FTS5 column reference interpretation
+        (e.g., "follow-on" or reserved words like "on", "in").
         """
         # Remove characters that break FTS5 syntax
-        # Keep: alphanumeric, spaces, quotes, asterisk (prefix), hyphen
-        cleaned = re.sub(r'[^\w\s"*\-]', ' ', query)
+        # Keep: alphanumeric, spaces, quotes, asterisk (prefix)
+        # Remove hyphens as they cause FTS5 column:term interpretation
+        cleaned = re.sub(r'[^\w\s"*]', ' ', query)
         
         # Collapse multiple spaces
         cleaned = re.sub(r'\s+', ' ', cleaned).strip()
@@ -283,12 +286,16 @@ class FTS5Index:
         if not cleaned:
             return '""'  # Empty query
         
-        # If query has no special operators, wrap each word for OR matching
+        # If query has no special operators, quote each word for safe OR matching
         if '"' not in cleaned and '*' not in cleaned:
             words = cleaned.split()
             if len(words) > 1:
-                # Use OR for multiple words (more results)
-                cleaned = " OR ".join(words)
+                # Quote each word to prevent FTS5 syntax issues
+                quoted_words = [f'"{w}"' for w in words if len(w) > 1]
+                if quoted_words:
+                    cleaned = " OR ".join(quoted_words)
+                else:
+                    cleaned = '""'
         
         return cleaned
 

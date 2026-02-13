@@ -1,0 +1,240 @@
+{
+  "label": "pre-fix-retrieval-only",
+  "timestamp": "2026-02-13T17:22:05.832062",
+  "config": {
+    "provider": "ollama",
+    "model": "glm-4.7-flash",
+    "embedding_model": "BAAI/bge-large-en-v1.5",
+    "reranker_model": "mixedbread-ai/mxbai-rerank-base-v2",
+    "vector_store_count": 556,
+    "generation_enabled": false
+  },
+  "init_time_s": 2.05,
+  "queries": [
+    {
+      "query": "What is the test for abuse of dominant position under section 18 Competition Act 1998?",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 3.44,
+      "generation_time_s": 0,
+      "total_time_s": 3.44,
+      "chunks_retrieved": 15,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_93c18ff1_c0028_421611a2",
+          "text_preview": "position to Dr Cochrane \nin correspondence. By way of example, in a letter of 10 August 2023 (pages 452-453), my \nfirm responded to Dr Cochrane as follows: \n\u201c5. As to paragraph 7 of your letter, Harbo"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_93c18ff1_c0024_c9fd0863",
+          "text_preview": "position to Dr Cochrane \nin correspondence. By way of example, in a letter of 10 August 2023 (pages 452-453), my \nfirm responded to Dr Cochrane as follows: \n\u201c5. As to paragraph 7 of your letter, Harbo"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_1c0fcbb7_c0054_44480d55",
+          "text_preview": ". We also made it clear that \nHarbour expected its minimum return to be calculated on the basis of the multiples \nincluded in Schedule 2. It should be noted that the Orb Claimants (Messrs Thomas and \n"
+        }
+      ],
+      "answer_preview": ""
+    },
+    {
+      "query": "What is the limitation period for follow-on competition damages claims in the CAT?",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 2.93,
+      "generation_time_s": 0,
+      "total_time_s": 2.93,
+      "chunks_retrieved": 15,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_93c18ff1_c0062_f14f6ed8",
+          "text_preview": "owing paragraphs had been \na genuine third party loan.\u201d \n453. \nHPII submits this passage shows that the Orb Claimants were fully aware that very large \nsums had been paid back into Arena Settlement fr"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_9c9bd059_c0061_9033025f",
+          "text_preview": "sent \npurposes, it is sufficient to note that: \ni) \nOn 29 March 2019, Moulder J fixed the Directed Trial to commence on 13 January \n2020, with a time estimate of 10 weeks. \nii) \nThe Settlement Parties"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_df9b7163_c0348_2f862f1e",
+          "text_preview": "mants\u201d) on 10 \nJuly 2013 (the \u201cHarbour IA\u201d) (pages 32-86) and other matters with which this Court is \nfamiliar. As such, Harbour has sought a stay of the Jersey Recall Applications pending the \ndeterm"
+        }
+      ],
+      "answer_preview": ""
+    },
+    {
+      "query": "What are the requirements for a collective proceedings order under section 47B Competition Act 1998?",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 3.59,
+      "generation_time_s": 0,
+      "total_time_s": 3.59,
+      "chunks_retrieved": 15,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_1c0fcbb7_c0037_02a7af22",
+          "text_preview": "set out in the CLSA 1990 it is a DBA which must \nalso comply with the requirements of the DBA Regulations, in particular Section 3 of those \nregulations: \n3.  The requirements prescribed for the purpo"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_5287c124_c0037_02a7af22",
+          "text_preview": "set out in the CLSA 1990 it is a DBA which must \nalso comply with the requirements of the DBA Regulations, in particular Section 3 of those \nregulations: \n3.  The requirements prescribed for the purpo"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_1c0fcbb7_c0036_b1d2efbe",
+          "text_preview": "CLSA 1990. \nUnfortunately given the timing of the General Election, it has not yet been possible for this legislation to be passed. \nWhile Harbour, alongside others in the funding industry, remain hop"
+        }
+      ],
+      "answer_preview": ""
+    },
+    {
+      "query": "Explain the pass-on defence in competition law damages claims",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 2.59,
+      "generation_time_s": 0,
+      "total_time_s": 2.59,
+      "chunks_retrieved": 15,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_93c18ff1_c0008_d523cfc5",
+          "text_preview": "ion of Schedule 2 and any arguments about how the \nsurviving wording may be interpreted, pending receipt of Mr Thomas\u2019s responsive \nevidence. \nA1.5/40\n\n41\n\n122 \nIt is my understanding that, for severa"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_93c18ff1_c0054_44480d55",
+          "text_preview": "dress at [90] of the Strike-Out Judgment. \n466. \nFor essentially the same reasons, I do not accept that a reasonable person in the position of \nthose acting for the Orb Claimants would have concluded "
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_df9b7163_c0063_4f8f11af",
+          "text_preview": "e because: \n\u201cThe solicitors must shew that both the plaintiffs and the defendants \nentered into the compromise with the intention of depriving them of \ntheir lien. Now there is here absolutely no evid"
+        }
+      ],
+      "answer_preview": ""
+    },
+    {
+      "query": "What did the Supreme Court decide in Merricks v Mastercard about certification?",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 3.07,
+      "generation_time_s": 0,
+      "total_time_s": 3.07,
+      "chunks_retrieved": 15,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_df9b7163_c0304_69945055",
+          "text_preview": "would be \nbreached, received limited exploration before me. \n344. \nIn their supplemental closing note, P&M rely on clause 2.6 of the LICSA as imposing an \nobligation on SMA to direct the JLs to make p"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_1c9b99da_c0289_4dadefb0",
+          "text_preview": "667 (CA) , Mustill LJ said (at p. 684G) \n\u2018The fact that the plaintiffs' expert was not able to do \nmore than assert, in this novel situation, his own view \non how the German court would react when fac"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_df9b7163_c0183_b441e87a",
+          "text_preview": "identified by Peter Gibson J in Baden v Soci\u00e9t\u00e9 G\u00e9n\u00e9rale pour Favoriser le D\u00e9veloppement \ndu Commerce et de l'Industrie en France SA (Note) [1993] 1 WLR 509. \n425. \nActual notice of a proprietary righ"
+        }
+      ],
+      "answer_preview": ""
+    },
+    {
+      "query": "How is the relevant market defined for Chapter I and Chapter II prohibitions?",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 3.12,
+      "generation_time_s": 0,
+      "total_time_s": 3.12,
+      "chunks_retrieved": 15,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_df9b7163_c0371_a1275d34",
+          "text_preview": "78, 1002-1005 \u2013 were cases in which legal \ntitle fell to be conferred by a \u201cneutral\u201d third party (they were cases of share sales where it \nis registration by the company which gives the buyer of share"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_9c9bd059_c0061_9033025f",
+          "text_preview": "itled to when the surplus was distributed in \naccordance with BVI insolvency legislation (with the result that if none of the Settlement \nParties had such an entitlement under the BVI insolvency legis"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_93c18ff1_c0061_9033025f",
+          "text_preview": "ties in the context of the Part 8 Claim). \n137.1 Stewarts Law: \u00a32.3 million \n137.2 The Viscount: \u00a32.5 million \n137.3 The SFO: \u00a31.8 million \n137.4 The Joint Liquidators: \u00a33.4 million \n137.5 The Enforce"
+        }
+      ],
+      "answer_preview": ""
+    },
+    {
+      "query": "What is the standard of proof for binding infringement decisions in follow-on claims?",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 2.74,
+      "generation_time_s": 0,
+      "total_time_s": 2.74,
+      "chunks_retrieved": 15,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_df9b7163_c0254_951f494e",
+          "text_preview": "to parties who had \nmade misleading statements to bolster the truth, albeit that these were cases where \u201cthe \nmisconduct was by way of deception in the course of the very litigation directed to securi"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_df9b7163_c0349_9f7cefb9",
+          "text_preview": "owing paragraphs had been \na genuine third party loan.\u201d \n453. \nHPII submits this passage shows that the Orb Claimants were fully aware that very large \nsums had been paid back into Arena Settlement fr"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_9c9bd059_c0050_a1d70b3e",
+          "text_preview": "o \nimagine he was so desirous of damaging his other creditors that he was willing to \ntransfer assets into the hands of the Orb Claimants at an undervalue to achieve that \nend. \n643. \nIn these circums"
+        }
+      ],
+      "answer_preview": ""
+    },
+    {
+      "query": "Describe the disclosure obligations in CAT proceedings",
+      "retrieval_error": null,
+      "generation_error": null,
+      "retrieval_time_s": 3.0,
+      "generation_time_s": 0,
+      "total_time_s": 3.0,
+      "chunks_retrieved": 15,
+      "top_chunks": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_93c18ff1_c0061_9033025f",
+          "text_preview": "set out in the CLSA 1990 it is a DBA which must \nalso comply with the requirements of the DBA Regulations, in particular Section 3 of those \nregulations: \n3.  The requirements prescribed for the purpo"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_df9b7163_c0063_4f8f11af",
+          "text_preview": "set out in the CLSA 1990 it is a DBA which must \nalso comply with the requirements of the DBA Regulations, in particular Section 3 of those \nregulations: \n3.  The requirements prescribed for the purpo"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_df9b7163_c0043_a02ad751",
+          "text_preview": "schedule 2. They include: \n\u201c2.  \nThe lodging of a notice of dismissal in the agreed form \nbetween the Orb Claimants and Mr A J Ruhan in the High \nCourt in relation to proceedings (together 'the Procee"
+        }
+      ],
+      "answer_preview": ""
+    }
+  ],
+  "summary": {
+    "total_queries": 8,
+    "retrieval_errors": 0,
+    "generation_errors": 0,
+    "avg_retrieval_time_s": 3.06,
+    "avg_generation_time_s": 0,
+    "avg_total_time_s": 3.06,
+    "avg_chunks_retrieved": 15.0
+  }
+}

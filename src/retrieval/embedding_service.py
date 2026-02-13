@@ -42,13 +42,12 @@ class EmbeddingService:
         self.model_name = model_name or self.settings.models.embedding.default
         self.batch_size = self.settings.performance.embed_batch_size
 
-        # Force CPU for embeddings - DirectML causes "version_counter for inference tensor" errors
-        # sentence-transformers has issues with DirectML. CPU is fast enough for embeddings.
-        if device is None:
-            # Auto-detect device
-            self.device, self.device_label = resolve_torch_device(None)
-        else:
-            self.device, self.device_label = resolve_torch_device(device)
+        # Force CPU for embeddings:
+        # - DirectML causes "version_counter for inference tensor" errors
+        # - ROCm on AMD gfx1151 has compute corruption (output degenerates)
+        # - CPU is fast enough for sentence-transformers embeddings
+        self.device = "cpu"
+        self.device_label = "cpu"
 
         # Load model
         self.model: Optional[SentenceTransformer] = None

@@ -134,9 +134,6 @@ def build_user_prompt(
     """
     # Check if any chunks have document summaries
     has_summaries = include_summaries and any(chunk.get("document_summary") for chunk in chunks)
-    # #region agent log
-    open(r'c:\Users\James\Desktop\SC Gen 6\.cursor\debug.log','a').write('{"location":"prompts.py:build_user_prompt","message":"checking summaries","data":{"include_summaries":'+str(include_summaries).lower()+',"has_summaries":'+str(has_summaries).lower()+',"chunk_count":'+str(len(chunks))+'},"timestamp":'+str(int(__import__('time').time()*1000))+',"sessionId":"debug-session","hypothesisId":"H2-D"}\n')
-    # #endregion
     
     if has_summaries:
         # Group chunks by document and include summary once per document

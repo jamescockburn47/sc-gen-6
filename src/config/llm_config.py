@@ -17,8 +17,8 @@ except ImportError:  # pragma: no cover
 load_dotenv()
 
 
-DEFAULT_PROVIDER = "llama_cpp"
-DEFAULT_MODEL_NAME = "qwen2.5:32b"
+DEFAULT_PROVIDER = "ollama"
+DEFAULT_MODEL_NAME = "glm-4.7-flash"
 DEFAULTS_BY_PROVIDER = {
     "llama_cpp": {
         "base_url": "http://127.0.0.1:8000/v1",

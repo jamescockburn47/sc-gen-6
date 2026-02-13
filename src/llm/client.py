@@ -148,7 +148,7 @@ class LLMClient:
             "stream": stream,
             "options": {
                 "temperature": temperature,
-                "num_ctx": 16384,  # Explicit 16K context
+                "num_ctx": 32768,  # 32K context for RAG queries
                 "num_batch": 2048,  # Improve prompt processing speed
             }
         }
@@ -156,7 +156,6 @@ class LLMClient:
         # Add other options if needed
         if "max_tokens" in kwargs:
             payload["options"]["num_predict"] = kwargs["max_tokens"]
-        # #region agent log
 
             
         response = self.session.post(url, json=payload, timeout=self.timeout)
@@ -186,7 +185,7 @@ class LLMClient:
             "stream": True,
             "options": {
                 "temperature": temperature,
-                "num_ctx": 16384,  # Explicit 16K context
+                "num_ctx": 32768,  # 32K context for RAG queries
                 "num_batch": 2048,  # Improve prompt processing speed
             }
         }
@@ -244,8 +243,8 @@ class LLMClient:
         # Note: num_ctx must be passed at the top level for OpenAI-compatible endpoint
         if self.config.provider == "ollama":
             # Try both locations - Ollama API is inconsistent
-            payload["options"] = {"num_ctx": 16384}
-            payload["num_ctx"] = 16384  # Also at top level
+            payload["options"] = {"num_ctx": 32768}
+            payload["num_ctx"] = 32768  # Also at top level
         
         payload.update(kwargs)
         return payload

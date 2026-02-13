@@ -110,57 +110,74 @@ class IngestionWorker(QThread):
                     self.error.emit(f"Failed to parse a file")
 
             # Auto-index if requested
+            print(f"[IngestionWorker] auto_index={self.auto_index}, parsed_docs={len(parsed_docs) if parsed_docs else 0}")
             if self.auto_index and parsed_docs:
-                self.progress.emit("Chunking and indexing documents...")
-                from src.config_loader import get_settings
-                from datetime import datetime
+                try:
+                    print("[IngestionWorker] Starting auto-index...")
+                    self.progress.emit("Chunking and indexing documents...")
+                    from src.config_loader import get_settings
+                    from datetime import datetime
 
-                settings = get_settings()
-                chunker = AdaptiveChunker(settings=settings)
-                
-                # Use factory function to get best embedding service (ONNX GPU or CPU)
-                embedding_service = get_embedding_service(settings=settings)
-                
-                vector_store = VectorStore(settings=settings)
-                
-                # Always use FTS5 keyword index
-                from src.retrieval.fts5_index import FTS5IndexCompat
-                keyword_index = FTS5IndexCompat(settings=settings)
-
-                all_chunks = []
-                doc_chunk_counts: dict[str, int] = {}  # Track chunks per doc
-                
-                for doc in parsed_docs:
-                    chunks = chunker.chunk_document(doc)
-                    doc_chunk_counts[doc.file_path] = len(chunks)
-                    all_chunks.extend(chunks)
-
-                if all_chunks:
-                    gpu_status = "GPU" if embedding_service.is_gpu_available() else "CPU"
-                    self.progress.emit(f"Generating embeddings for {len(all_chunks)} chunks ({gpu_status})...")
-                    # Generate embeddings for all chunks
-                    chunk_texts = [chunk.text for chunk in all_chunks]
-                    embeddings = embedding_service.embed_batch(chunk_texts)
-
-                    self.progress.emit(f"Adding {len(all_chunks)} chunks to indexes...")
-                    vector_store.add_chunks(all_chunks, embeddings)
+                    settings = get_settings()
+                    chunker = AdaptiveChunker(settings=settings)
                     
-                    # Keyword index: Add chunks incrementally (handles merging internally)
-                    keyword_index.add_chunks(all_chunks)
-                    keyword_index.save()  # No-op for FTS5, saves pickle for BM25
+                    # Use factory function to get best embedding service (ONNX GPU or CPU)
+                    self.progress.emit("Initializing embedding service...")
+                    embedding_service = get_embedding_service(settings=settings)
                     
-                    # Update catalog records with indexing status
-                    timestamp = datetime.now().isoformat()
+                    vector_store = VectorStore(settings=settings)
+                    
+                    # Always use FTS5 keyword index
+                    from src.retrieval.fts5_index import FTS5IndexCompat
+                    keyword_index = FTS5IndexCompat(settings=settings)
+
+                    all_chunks = []
+                    doc_chunk_counts: dict[str, int] = {}  # Track chunks per doc
+                    
                     for doc in parsed_docs:
-                        record = self.catalog.get_record(doc.file_path)
-                        if record:
-                            record.indexed = True
-                            record.chunk_count = doc_chunk_counts.get(doc.file_path, 0)
-                            record.ingested_at = timestamp
-                            record.error = None
-                            self.catalog.update_record(record)
-                    
-                    self.progress.emit("Indexing complete!")
+                        chunks = chunker.chunk_document(doc)
+                        doc_chunk_counts[doc.file_path] = len(chunks)
+                        all_chunks.extend(chunks)
+                        self.progress.emit(f"Chunked {doc.file_name}: {len(chunks)} chunks")
+
+                    if all_chunks:
+                        gpu_status = "GPU" if embedding_service.is_gpu_available() else "CPU"
+                        self.progress.emit(f"Generating embeddings for {len(all_chunks)} chunks ({gpu_status})...")
+                        # Generate embeddings for all chunks
+                        chunk_texts = [chunk.text for chunk in all_chunks]
+                        embeddings = embedding_service.embed_batch(chunk_texts)
+                        
+                        if not embeddings or len(embeddings) == 0:
+                            self.error.emit(f"Embedding service returned no embeddings!")
+                            return
+
+                        self.progress.emit(f"Adding {len(all_chunks)} chunks to indexes...")
+                        vector_store.add_chunks(all_chunks, embeddings)
+                        
+                        # Keyword index: Add chunks incrementally (handles merging internally)
+                        keyword_index.add_chunks(all_chunks)
+                        keyword_index.save()  # No-op for FTS5, saves pickle for BM25
+                        
+                        # Update catalog records with indexing status
+                        timestamp = datetime.now().isoformat()
+                        for doc in parsed_docs:
+                            record = self.catalog.get_record(doc.file_path)
+                            if record:
+                                record.indexed = True
+                                record.chunk_count = doc_chunk_counts.get(doc.file_path, 0)
+                                record.ingested_at = timestamp
+                                record.error = None
+                                self.catalog.update_record(record)
+                        
+                        self.progress.emit("Indexing complete!")
+                    else:
+                        self.progress.emit("Warning: No chunks generated from documents")
+                except Exception as e:
+                    import traceback
+                    tb = traceback.format_exc()
+                    print(f"[Indexing Error] {e}\n{tb}")
+                    self.error.emit(f"Indexing error: {str(e)}")
+                    return
 
             self.finished.emit(parsed_docs)
         except Exception as e:
@@ -181,6 +198,7 @@ class DocumentManagerWidget(QWidget):
         self.documents: dict[str, ParsedDocument] = {}  # file_path -> ParsedDocument
         self.ingestion_worker: Optional[IngestionWorker] = None
         self.hardware_env: Optional[IngestionEnvironment] = None
+        self._server_ready = False  # Track embedding server readiness
         
         # Initialize stores for management
         self.vector_store = VectorStore(settings=self.settings)
@@ -205,13 +223,17 @@ class DocumentManagerWidget(QWidget):
 
         # Buttons
         button_layout = QHBoxLayout()
-        ingest_files_btn = QPushButton("Add Files...")
-        ingest_files_btn.clicked.connect(self._ingest_files)
-        button_layout.addWidget(ingest_files_btn)
+        self.ingest_files_btn = QPushButton("Add Files...")
+        self.ingest_files_btn.clicked.connect(self._ingest_files)
+        self.ingest_files_btn.setEnabled(False)  # Disabled until server ready
+        self.ingest_files_btn.setToolTip("Waiting for server to be ready...")
+        button_layout.addWidget(self.ingest_files_btn)
 
-        ingest_folder_btn = QPushButton("Add Folder...")
-        ingest_folder_btn.clicked.connect(self._ingest_folder)
-        button_layout.addWidget(ingest_folder_btn)
+        self.ingest_folder_btn = QPushButton("Add Folder...")
+        self.ingest_folder_btn.clicked.connect(self._ingest_folder)
+        self.ingest_folder_btn.setEnabled(False)  # Disabled until server ready
+        self.ingest_folder_btn.setToolTip("Waiting for server to be ready...")
+        button_layout.addWidget(self.ingest_folder_btn)
 
         review_graph_btn = QPushButton("Review Case Graph")
         review_graph_btn.clicked.connect(self._review_graph)
@@ -367,9 +389,33 @@ class DocumentManagerWidget(QWidget):
         layout.addLayout(action_layout)
 
         # Status label
-        self.status_label = QLabel("Ready")
-        self.status_label.setStyleSheet("color: gray;")
+        self.status_label = QLabel("Waiting for server...")
+        self.status_label.setStyleSheet("color: #fbbf24;")  # Amber for waiting
         layout.addWidget(self.status_label)
+
+    def set_server_ready(self, ready: bool):
+        """Enable or disable ingestion based on server readiness.
+        
+        Args:
+            ready: True if server is ready for embedding operations
+        """
+        self._server_ready = ready
+        self.ingest_files_btn.setEnabled(ready)
+        self.ingest_folder_btn.setEnabled(ready)
+        
+        if ready:
+            self.ingest_files_btn.setToolTip("Add files to ingest")
+            self.ingest_folder_btn.setToolTip("Add folder to ingest")
+            if not self.status_label.text().startswith("Ingesting"):
+                total = len(list(self.catalog.all_records()))
+                self.status_label.setText(f"Ready - {total} document(s) in catalog")
+                self.status_label.setStyleSheet("color: #4ade80;")  # Green for ready
+        else:
+            self.ingest_files_btn.setToolTip("Waiting for server to be ready...")
+            self.ingest_folder_btn.setToolTip("Waiting for server to be ready...")
+            self.status_label.setText("Waiting for server...")
+            self.status_label.setStyleSheet("color: #fbbf24;")  # Amber for waiting
+
 
     def _ingest_files(self):
         """Open file dialog and ingest selected files."""
@@ -404,6 +450,15 @@ class DocumentManagerWidget(QWidget):
         Args:
             paths: List of file or folder paths
         """
+        # Safety check: ensure server is ready
+        if not self._server_ready:
+            QMessageBox.warning(
+                self,
+                "Server Not Ready",
+                "The embedding server is still loading. Please wait until the model is ready before ingesting documents.",
+            )
+            return
+            
         if self.ingestion_worker and self.ingestion_worker.isRunning():
             self.status_label.setText("Ingestion already in progress...")
             return
@@ -820,17 +875,11 @@ class DocumentManagerWidget(QWidget):
         
         self.preview_meta.setText(" • ".join(meta_parts))
         
-        # #region agent log
-        open(r'c:\Users\James\Desktop\SC Gen 6\.cursor\debug.log','a').write('{"location":"document_manager.py:_on_document_selected","message":"about to call _load_document_summary","data":{"file_name":"'+str(record.file_name)[:30].replace('"','\\"')+'"},"timestamp":'+str(int(__import__('time').time()*1000))+',"sessionId":"debug-session","hypothesisId":"H1-E"}\n')
-        # #endregion
         # Try to load summary
         self._load_document_summary(file_path, record)
     
     def _load_document_summary(self, file_path: str, record: DocumentRecord):
         """Load and display document summary if available."""
-        # #region agent log
-        open(r'c:\Users\James\Desktop\SC Gen 6\.cursor\debug.log','a').write('{"location":"document_manager.py:_load_document_summary","message":"ENTRY","data":{"file_path_tail":"'+str(file_path)[-30:].replace('\\','\\\\').replace('"','\\"')+'"},"timestamp":'+str(int(__import__('time').time()*1000))+',"sessionId":"debug-session","hypothesisId":"H1-F"}\n')
-        # #endregion
         try:
             from src.retrieval.summary_store import SummaryStore
             
@@ -838,18 +887,12 @@ class DocumentManagerWidget(QWidget):
             
             # Get document ID (same logic as chunker)
             doc_id = self._get_document_id(file_path)
-            # #region agent log
-            open(r'c:\Users\James\Desktop\SC Gen 6\.cursor\debug.log','a').write('{"location":"document_manager.py:_load_document_summary","message":"looking up summary","data":{"doc_id":"'+str(doc_id)[:50]+'","file_path":"'+str(file_path)[-40:].replace('\\','\\\\').replace('"','\\"')+'"},"timestamp":'+str(int(__import__('time').time()*1000))+',"sessionId":"debug-session","hypothesisId":"H1-C"}\n')
-            # #endregion
             
             # Get summaries for this document
             summaries = summary_store.get_document_summaries(
                 document_id=doc_id,
                 summary_level="document",
             )
-            # #region agent log
-            open(r'c:\Users\James\Desktop\SC Gen 6\.cursor\debug.log','a').write('{"location":"document_manager.py:_load_document_summary","message":"summaries result","data":{"count":'+str(len(summaries) if summaries else 0)+',"doc_id":"'+str(doc_id)[:50]+'"},"timestamp":'+str(int(__import__('time').time()*1000))+',"sessionId":"debug-session","hypothesisId":"H1-D"}\n')
-            # #endregion
             
             if summaries:
                 # Show the first summary (usually "overview")

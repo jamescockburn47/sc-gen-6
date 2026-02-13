@@ -49,6 +49,8 @@ from src.generation.citation import verify_citations
 from src.guardrails.service import GuardrailService
 from src.guardrails.service import GuardrailService
 from src.ui.components.llm_status_bar import LLMStatusBar
+from src.ui.components.model_loading_widget import ModelLoadingWidget, DualServerStatusWidget
+from src.servers.status_monitor import ServerStatusMonitor, ServerStatus, get_status_monitor
 from src.ui.components.suggestions_viewer import SuggestionsViewer
 from src.assessment.assessment_collector import AssessmentCollector
 from src.assessment.assessment_worker import AssessmentWorker
@@ -320,6 +322,7 @@ class ModernMainWindow(QMainWindow):
         self.readiness_worker = None
         self.auto_started_llama = False
         self.server_ready = False  # Track server readiness
+        self.status_monitor = None  # Dual-server status monitor
         self._last_logged_batch_progress = (-1, -1)
         self.preview_dialog = None
         self.chat_history = ChatHistory()
@@ -344,6 +347,7 @@ class ModernMainWindow(QMainWindow):
         self._setup_llama_console_monitor()
         self._setup_gpu_monitor()
         self._auto_start_llama_if_needed()
+        self._setup_status_monitor()
 
     def _setup_window(self):
         """Set up window properties."""
@@ -400,7 +404,13 @@ class ModernMainWindow(QMainWindow):
         subtitle_label.setAlignment(Qt.AlignCenter)
         sidebar_layout.addWidget(subtitle_label)
         
-        sidebar_layout.addSpacing(20)
+        sidebar_layout.addSpacing(12)
+        
+        # Model Loading Status Widget
+        self.model_loading_widget = ModelLoadingWidget(self)
+        sidebar_layout.addWidget(self.model_loading_widget)
+        
+        sidebar_layout.addSpacing(12)
 
         # Navigation Buttons - Clean text-based
         self.btn_chat = QPushButton("Query")
@@ -1068,17 +1078,21 @@ class ModernMainWindow(QMainWindow):
             self.readiness_worker.start()
             
             self.llm_status_bar.set_status("Loading Model...", True)
+            self.model_loading_widget.set_status(
+                self.model_loading_widget.STATUS_LOADING, 
+                "Loading model..."
+            )
 
         except Exception as exc:
             self.detail_panel.append_log(f"llama.cpp auto-start failed: {exc}")
 
     def _on_server_ready(self):
-        """Handle server ready state."""
-        self.detail_panel.append_log("llama.cpp server is ready and listening.")
+        """Handle server ready state (legacy - generation server only)."""
+        self.detail_panel.append_log("Generation server startup detected.")
         self.llm_status_bar.finish(True)
-        self.server_ready = True
+        # NOTE: Ingestion is enabled by _on_all_servers_ready() which checks BOTH servers
         
-        # Process queued query if any
+        # Process queued query if any (for generation - doesn't need embedding)
         if hasattr(self, "_queued_query") and self._queued_query:
             self.detail_panel.append_log("Processing queued query...")
             query = self._queued_query
@@ -1089,6 +1103,77 @@ class ModernMainWindow(QMainWindow):
         """Handle server startup failure."""
         self.detail_panel.append_log(f"llama.cpp startup failed: {error}")
         self.llm_status_bar.set_error("Server Timeout")
+        
+        # Update model loading widget
+        self.model_loading_widget.set_status(
+            self.model_loading_widget.STATUS_ERROR,
+            f"Failed: {error[:30]}"
+        )
+        
+        # Keep document manager disabled
+        self.document_manager.set_server_ready(False)
+
+    def _setup_status_monitor(self):
+        """Set up dual-server status monitor for Gen/Embed servers.
+        
+        Generation: checks Ollama at localhost:11434
+        Embeddings: sentence-transformers (CPU, always ready)
+        """
+        from pathlib import Path
+        from src.config.llm_config import load_llm_config
+        
+        llm_cfg = load_llm_config()
+        
+        # Determine generation server URL based on provider
+        if llm_cfg.provider == "ollama":
+            gen_url = llm_cfg.base_url.replace("/v1", "").rstrip("/")
+        else:
+            gen_url = llm_cfg.base_url.replace("/v1", "").rstrip("/")
+        
+        # Embeddings are local (sentence-transformers on CPU), no server needed
+        # Point embed_url to same as gen to avoid "down" status for non-existent server
+        embed_url = gen_url
+        
+        # Get log paths for progress parsing
+        gen_log = Path("logs/llama-swap-gen.log")
+        embed_log = Path("logs/llama-embed.log")
+        
+        # Create status monitor
+        self.status_monitor = get_status_monitor(
+            gen_url=gen_url,
+            embed_url=embed_url,
+        )
+        self.status_monitor.gen_log_path = gen_log
+        self.status_monitor.embed_log_path = embed_log
+        
+        # Wire signals to widget
+        self.status_monitor.gen_status_changed.connect(self._on_gen_status_changed)
+        self.status_monitor.embed_status_changed.connect(self._on_embed_status_changed)
+        self.status_monitor.all_ready.connect(self._on_all_servers_ready)
+        
+        # Start polling (5 second interval to not overwhelm servers)
+        self.status_monitor.start(interval_ms=5000)
+        
+    def _on_gen_status_changed(self, status: str, model: str, progress: int):
+        """Handle generation server status change."""
+        self.model_loading_widget.set_gen_status(status, model, progress)
+        self.detail_panel.append_log(f"Gen server: {status} {model}")
+        
+    def _on_embed_status_changed(self, status: str, model: str, progress: int):
+        """Handle embedding server status change."""
+        self.model_loading_widget.set_embed_status(status, model, progress)
+        self.detail_panel.append_log(f"Embed server: {status} {model}")
+        
+        # Enable ingestion when embedding is ready (ingestion only needs embeddings, not gen)
+        from src.servers.status_monitor import ServerStatus
+        if status == ServerStatus.READY:
+            self.document_manager.set_server_ready(True)
+            self.detail_panel.append_log("Embedding ready - ingestion enabled")
+        
+    def _on_all_servers_ready(self):
+        """Handle both servers ready."""
+        self.server_ready = True
+        self.detail_panel.append_log("Both servers ready")
 
     def closeEvent(self, event):
         """Ensure auto-started server is stopped."""

@@ -22,15 +22,19 @@ class EmbeddingConfig(BaseSettings):
     """Embedding model configuration."""
 
     default: str = "BAAI/bge-large-en-v1.5"
-    use_onnx_gpu: bool = True  # Use ONNX Runtime + DirectML for GPU acceleration
+    embedding_model: str = "BAAI/bge-large-en-v1.5"  # Primary embedding model
+    use_onnx_gpu: bool = False  # Disabled - ROCm has corruption on gfx1151
+    use_llamacpp: bool = False  # Disabled - using sentence-transformers instead
+    llamacpp_url: str = "http://127.0.0.1:8001"  # Dedicated embedding server (port 8001)
     alternatives: list[str] = Field(default_factory=lambda: ["bge-m3", "Qwen/Qwen3-Embedding-8B"])
+
 
 
 class RerankerConfig(BaseSettings):
     """Reranker model configuration."""
 
-    default: str = "mixedbread-ai/mxbai-rerank-large-v2"
-    use_onnx_gpu: bool = True  # Use ONNX Runtime + DirectML for GPU acceleration
+    default: str = "mixedbread-ai/mxbai-rerank-base-v2"
+    use_onnx_gpu: bool = False  # Disabled - ROCm has corruption on gfx1151
     alternatives: list[str] = Field(
         default_factory=lambda: ["mixedbread-ai/mxbai-rerank-base-v2"]
     )
@@ -47,7 +51,7 @@ class LLMConfig(BaseSettings):
     """LLM model configuration."""
 
     backend: Literal["ollama", "llama_cpp"] = "ollama"  # Backend selector
-    default: str = "qwen3:32b-instruct"
+    default: str = "glm-4.7-flash"
     temperature: float = 0.7  # Default temperature
     available: list[str] = Field(
         default_factory=lambda: [
@@ -242,7 +246,7 @@ class UIConfig(BaseSettings):
 
     show_confidence_scores: bool = True
     theme: Literal["system", "light", "dark"] = "system"
-    default_model: str = "qwen3:32b-instruct"
+    default_model: str = "glm-4.7-flash"
 
 
 class GenerationConfig(BaseSettings):

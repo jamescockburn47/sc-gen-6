@@ -121,15 +121,9 @@ class ChunkBatchGenerator:
         """Return True if chunk batching should be applied."""
         cfg = getattr(self.settings, "generation", None)
         if not cfg or not cfg.enable_batching:
-            # #region agent log
-            open(r'c:\Users\James\Desktop\SC Gen 6\.cursor\debug.log','a').write('{"location":"chunk_batcher.py:should_batch","message":"batching disabled","data":{"chunk_count":'+str(chunk_count)+',"has_cfg":'+str(bool(cfg)).lower()+'},"timestamp":'+str(int(__import__('time').time()*1000))+',"sessionId":"debug-session","hypothesisId":"H3-A"}\n')
-            # #endregion
             return False
         threshold = max(cfg.min_chunks_for_batching, cfg.chunk_batch_size)
         result = chunk_count >= threshold
-        # #region agent log
-        open(r'c:\Users\James\Desktop\SC Gen 6\.cursor\debug.log','a').write('{"location":"chunk_batcher.py:should_batch","message":"batch decision","data":{"chunk_count":'+str(chunk_count)+',"threshold":'+str(threshold)+',"will_batch":'+str(result).lower()+'},"timestamp":'+str(int(__import__('time').time()*1000))+',"sessionId":"debug-session","hypothesisId":"H3-A"}\n')
-        # #endregion
         return result
 
     def generate(
@@ -387,14 +381,8 @@ class ChunkBatchGenerator:
                 cancel_event=cancel_event,
                 max_tokens=max_tokens,
             )
-            # #region agent log
-            open(r'c:\Users\James\Desktop\SC Gen 6\.cursor\debug.log','a').write('{"location":"chunk_batcher.py:_run_single_batch","message":"raw response","data":{"raw_len":'+str(len(response) if response else 0)+',"chunk_count":'+str(len(batch_chunks))+'},"timestamp":'+str(int(__import__('time').time()*1000))+',"sessionId":"debug-session","hypothesisId":"H3-B"}\n')
-            # #endregion
 
             clean_response = batch_service._post_process_output(response) if response else ""
-            # #region agent log
-            open(r'c:\Users\James\Desktop\SC Gen 6\.cursor\debug.log','a').write('{"location":"chunk_batcher.py:_run_single_batch","message":"clean response","data":{"clean_len":'+str(len(clean_response))+',"raw_len":'+str(len(response) if response else 0)+'},"timestamp":'+str(int(__import__('time').time()*1000))+',"sessionId":"debug-session","hypothesisId":"H3-C"}\n')
-            # #endregion
             print(
                 f"[BATCH DEBUG] [{thread_id}] Generation completed, response length: {len(clean_response)} chars"
             )

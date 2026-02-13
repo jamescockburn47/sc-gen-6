@@ -1,25 +1,13 @@
 {
-  "provider": "llama_cpp",
-  "base_url": "http://127.0.0.1:8000/v1",
-  "api_key": "local-llama",
-  "model_name": "gpt-oss-20b",
-  "llama_server": {
-    "executable": "C:/Users/James/Desktop/SC Gen 6/llama-cpp/llama-server.exe",
-    "model_path": "C:/Users/James/.lmstudio/models/lmstudio-community/gpt-oss-20b-GGUF/gpt-oss-20b-MXFP4.gguf",
-    "context": 131072,
-    "gpu_layers": 80,
-    "parallel": 8,
-    "batch": 512,
-    "timeout": 1800,
-    "host": "127.0.0.1",
-    "port": 8000,
-    "flash_attn": true,
-    "extra_args": ""
-  },
+  "provider": "ollama",
+  "base_url": "http://localhost:11434/v1",
+  "api_key": "ollama",
+  "model_name": "glm-4.7-flash",
   "_comments": {
-    "provider": "Using llama.cpp with gpt-oss-20b for parallel chunk processing",
-    "context": "MASSIVELY increased to 131072 tokens (128K) to handle multiple chunks + system prompt",
-    "model_note": "gpt-oss-20b MXFP4 quantization for speed and quality",
-    "parallel": "Set to 8 for efficient batch parallelization during generation"
+    "provider": "Ollama with Vulkan backend on AMD Radeon 8060S (gfx1151)",
+    "context": "GLM 4.7 Flash supports 198K context, using 32K for RAG",
+    "model_note": "GLM 4.7 Flash 30B-A3B MoE - strongest 30B class model",
+    "backend": "Ollama with OLLAMA_VULKAN=1 for AMD GPU acceleration",
+    "embedding_model": "BAAI/bge-large-en-v1.5 via sentence-transformers (CPU)"
   }
 }
