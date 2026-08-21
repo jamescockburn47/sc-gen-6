@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SC Gen 6
+Comment=Litigation Support RAG with Nemotron
+Exec=/home/james/SCGen6/run_linux.sh
+Icon=utilities-terminal
+Terminal=true
+Path=/home/james/SCGen6
+Categories=Development;
+StartupNotify=true

@@ -1,5 +1,5 @@
 python:
-  version: '3.11'
+  version: "3.11"
 models:
   embedding:
     default: BAAI/bge-large-en-v1.5
@@ -8,44 +8,47 @@ models:
     use_llamacpp: false
     llamacpp_url: http://127.0.0.1:8001
     alternatives:
-    - Alibaba-NLP/gte-large-en-v1.5
+      - Alibaba-NLP/gte-large-en-v1.5
   reranker:
     default: mixedbread-ai/mxbai-rerank-base-v2
     use_onnx_gpu: false
     alternatives:
-    - mixedbread-ai/mxbai-rerank-large-v2
+      - mixedbread-ai/mxbai-rerank-large-v2
   llm:
     backend: ollama
     default: glm-4.7-flash
     available:
-    - glm-4.7-flash
-    - qwen3:32b-instruct
-    - qwen3:14b-instruct
+      - glm-4.7-flash
+      - qwen3:32b-instruct
+      - qwen3:14b-instruct
     enable_thinking: true
     thinking_budget: 8192
     thinking_models:
-    - qwen3
-    - deepseek-r1
-    - o1
-    - claude-3.5
-    - gemini-2.0
+      - qwen3
+      - deepseek-r1
+      - nemotron
+      - nemotron-3-nano
+      - glm
+      - o1
+      - claude-3.5
+      - gemini-2.0
   ollama:
     host: http://localhost:11434
     keep_alive_ms: 86400000
 retrieval:
-  semantic_top_n: 50
-  keyword_top_n: 50
+  semantic_top_n: 60
+  keyword_top_n: 60
   skip_reranking: false
-  rerank_top_k: 25
-  rerank_max_chars: 512
-  context_to_llm: 15
-  confidence_threshold: 0.15
+  rerank_top_k: 30
+  rerank_max_chars: 768
+  context_to_llm: 20
+  confidence_threshold: 0.20
   rrf_k: 60
   use_query_expansion: false
   use_graph_context: false
   date_filter_mode: document
   use_summaries: true
-  search_summaries: false
+  search_summaries: true
 graph:
   enabled: true
   auto_extract: true
@@ -56,16 +59,16 @@ summary:
   enabled: true
   auto_generate: false
   summary_types:
-  - overview
-  max_summary_length: 300
+    - overview
+  max_summary_length: 600
   include_in_search: true
   summarization_model: qwen2.5:7b
   summarization_model_alternatives:
-  - qwen2.5:7b
-  - qwen2.5:3b
-  - llama3.2:3b
-  - mistral:7b
-  - phi3:mini
+    - qwen2.5:7b
+    - qwen2.5:3b
+    - llama3.2:3b
+    - mistral:7b
+    - phi3:mini
   parallel_summaries: 8
   batch_size: 16
 generation:
@@ -78,12 +81,21 @@ generation:
   enable_synthesis: true
   synthesis_max_tokens: 8192
   show_batch_headers: false
-  header_template: '### Batch {index}/{total} - chunks {start}-{end}'
-  join_separator: '
+  header_template: "### Batch {index}/{total} - chunks {start}-{end}"
+  join_separator: "
 
 
-    '
+    "
+advanced_retrieval:
+  enabled: true
+  enable_mmr: true
+  mmr_lambda: 0.5
+  enable_llm_grading: false
 chunking:
+  strategy: semantic
+  enable_contextual_header: true
+  semantic_threshold: 0.3
+  min_chunk_size: 128
   sizes:
     witness_statement: 1024
     court_filing: 512
@@ -101,15 +113,15 @@ chunking:
     disclosure: 256
     email: 256
   separators:
-  - '
+    - "
 
 
-    '
-  - '
+      "
+    - "
 
-    '
-  - '. '
-  - ' '
+      "
+    - ". "
+    - " "
 paths:
   documents: data/documents
   vector_db: data/chroma_db
@@ -128,14 +140,52 @@ background_tasks:
   model_selection: largest_available
   specific_model: qwen2.5:32b-instruct
   model_priority:
-  - gpt-oss:120b
-  - qwen2.5:32b-instruct
-  - qwen2.5:14b-instruct
+    - gpt-oss:120b
+    - qwen2.5:32b-instruct
+    - qwen2.5:14b-instruct
   enabled_for:
-  - case_graph_generation
-  - timeline_generation
-  - case_overview_generation
-  - document_renaming
+    - case_graph_generation
+    - timeline_generation
+    - case_overview_generation
+    - document_renaming
 quality:
   provider: openai
   model: gpt-5.1-instant
+anonymisation:
+  enabled: true
+  detection:
+    use_presidio: true
+    use_spacy_ner: true
+    spacy_model: en_core_web_trf
+    use_rule_patterns: true
+    use_contextual_llm: true
+    confidence_threshold: 0.5
+  behaviour:
+    method: consistent_tokenisation
+    preserve_relationships: true
+    preserve_temporal_order: true
+    date_handling: offset
+    location_granularity: region
+    age_handling: band
+  review:
+    require_for_special_category: true
+    require_for_first_export: true
+    require_below_confidence: 0.85
+    auto_approve_above_confidence: 0.95
+  security:
+    encryption: fernet
+    pbkdf2_iterations: 600000
+    double_pass_validation: true
+    audit_logging: true
+  privilege:
+    detect_privilege: true
+    privilege_mode: anonymise # "anonymise" or "principles_only"
+  sovereignty:
+    target_provider: openai
+    enable_kanon_enricher: false
+  export:
+    allowed_providers:
+      - openai
+      - anthropic
+    block_on_validation_failure: true
+    block_on_pending_review: true

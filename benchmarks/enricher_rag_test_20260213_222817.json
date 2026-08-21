@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-02-13T22:26:24.061432",
+  "model": "glm-4.7-flash",
+  "enron_ingestion": {
+    "status": "complete",
+    "emails_loaded": 460,
+    "chunks_created": 460,
+    "enrichment": {
+      "sample_size": 50,
+      "time_s": 7.5,
+      "persons_found": 473,
+      "orgs_found": 76,
+      "locations_found": 42
+    },
+    "embedding": {
+      "time_s": 96.2,
+      "chunks_per_s": 5.0
+    },
+    "collection_count": 460,
+    "api_usage": {
+      "total_tokens": 20047,
+      "total_requests": 7
+    }
+  }
+}

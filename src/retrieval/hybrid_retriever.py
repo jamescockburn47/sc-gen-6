@@ -457,7 +457,8 @@ class HybridRetriever:
                     query=query,
                     results=results,
                     top_k=self.settings.retrieval.context_to_llm,
-                    lambda_mult=self.settings.advanced_retrieval.mmr_lambda
+                    lambda_mult=self.settings.advanced_retrieval.mmr_lambda,
+                    query_embedding=query_embedding,  # Reuse cached embedding
                 )
             
             # B. LLM Relevance Grading
@@ -731,11 +732,15 @@ class HybridRetriever:
         query: str,
         results: list[dict[str, Any]],
         top_k: int,
-        lambda_mult: float = 0.5
+        lambda_mult: float = 0.5,
+        query_embedding: Optional[list[float]] = None,
     ) -> list[dict[str, Any]]:
         """Apply Maximal Marginal Relevance (MMR) to diversify results.
         
         MMR = argmax [ lambda * Sim(D, Q) - (1-lambda) * max(Sim(D, Di)) ]
+        
+        Args:
+            query_embedding: Pre-computed query embedding (avoids redundant embed call).
         """
         try:
             if not results:
@@ -756,8 +761,8 @@ class HybridRetriever:
             if not valid_results:
                 return results[:top_k]
                 
-            # Need query embedding
-            query_emb = self.embedding_service.embed_query(query)
+            # Need query embedding — reuse cached if provided, else embed now
+            query_emb = query_embedding if query_embedding is not None else self.embedding_service.embed_query(query)
             
             # Compute similarities
             import numpy as np

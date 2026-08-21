@@ -21,8 +21,10 @@ def get_embedding_service(
 ) -> EmbeddingService | ONNXEmbeddingService:
     """Factory function to get the best available embedding service.
     
-    Automatically selects ONNX+DirectML for GPU acceleration when available,
-    falling back to sentence-transformers on CPU otherwise.
+    Automatically selects:
+    1. llama.cpp via llama-swap if use_llamacpp is True
+    2. ONNX+DirectML for GPU acceleration when available
+    3. sentence-transformers on CPU as fallback
     
     Args:
         model_name: HuggingFace model name. If None, uses default from config.
@@ -30,11 +32,32 @@ def get_embedding_service(
         force_cpu: Force CPU-only mode (uses sentence-transformers).
         
     Returns:
-        Either ONNXEmbeddingService (GPU) or EmbeddingService (CPU)
+        Either LlamaCppEmbeddingService, ONNXEmbeddingService (GPU), or EmbeddingService (CPU)
     """
     from src.config_loader import get_settings
     
     settings = settings or get_settings()
+    
+    # Check if llama.cpp mode is enabled (via llama-swap)
+    if settings.models.embedding.use_llamacpp and not force_cpu:
+        try:
+            from src.retrieval.embedding_service_llamacpp import LlamaCppEmbeddingService
+            
+            # Parse host/port from llamacpp_url
+            url = settings.models.embedding.llamacpp_url
+            if url.startswith("http://"):
+                url_parts = url[7:].split(":")
+                host = f"http://{url_parts[0]}"
+                port = int(url_parts[1]) if len(url_parts) > 1 else 8000
+            else:
+                host = "http://localhost"
+                port = 8000
+            
+            embed_model = getattr(settings.models.embedding, 'embedding_model', settings.models.embedding.default)
+            print(f"[Embeddings] Using llama.cpp via llama-swap ({embed_model})")
+            return LlamaCppEmbeddingService(host=host, port=port, settings=settings)
+        except Exception as e:
+            print(f"[Embeddings] Failed to use llama.cpp: {e}, falling back to ONNX")
     
     # Check if ONNX GPU mode is enabled and not forced to CPU
     use_onnx = settings.models.embedding.use_onnx_gpu and not force_cpu
@@ -56,6 +79,8 @@ def get_embedding_service(
     # Fallback to sentence-transformers (CPU)
     print("[Embeddings] Using sentence-transformers (CPU)")
     return EmbeddingService(model_name=model_name, settings=settings)
+
+
 
 
 __all__ = [

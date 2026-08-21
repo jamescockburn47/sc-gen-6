@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 import threading
 import time
 import math
@@ -10,6 +11,8 @@ from typing import Any, Callable, Optional
 
 from src.generation.llm_service import LLMService, estimate_token_count
 import re
+
+logger = logging.getLogger(__name__)
 
 
 SYNTHESIS_SYSTEM_PROMPT = """You are a litigation analyst. Synthesize the provided batched notes into a comprehensive, client-ready answer.
@@ -166,7 +169,8 @@ class ChunkBatchGenerator:
         next_to_emit = 0
         completed_batches = 0
 
-        print(f"[BATCH DEBUG] Starting parallel generation with {cfg.parallel_workers} workers for {total_batches} batches")
+        logger.debug("[BATCH] Starting parallel generation with %d workers for %d batches",
+                     cfg.parallel_workers, total_batches)
 
         with ThreadPoolExecutor(max_workers=max(1, int(cfg.parallel_workers))) as executor:
             future_map = {
@@ -180,21 +184,23 @@ class ChunkBatchGenerator:
                 for idx, batch in enumerate(batches)
             }
 
-            print(f"[BATCH DEBUG] Submitted {len(future_map)} batch tasks to executor")
+            logger.debug("[BATCH] Submitted %d batch tasks to executor", len(future_map))
 
             for future in as_completed(future_map):
                 if cancel_event and cancel_event.is_set():
                     raise RuntimeError("Generation cancelled")
 
                 batch_index = future_map[future]
-                print(f"[BATCH DEBUG] Batch {batch_index + 1}/{total_batches} completed, retrieving result...")
+                logger.debug("[BATCH] Batch %d/%d completed, retrieving result...",
+                             batch_index + 1, total_batches)
 
                 try:
                     # Add timeout to prevent indefinite hanging
                     batch_text, batch_stats = future.result(timeout=600)  # 10 minute timeout
-                    print(f"[BATCH DEBUG] Batch {batch_index + 1} result: {len(batch_text)} chars, {batch_stats.get('token_count', 0)} tokens")
+                    logger.debug("[BATCH] Batch %d result: %d chars, %d tokens",
+                                 batch_index + 1, len(batch_text), batch_stats.get('token_count', 0))
                 except Exception as e:
-                    print(f"[BATCH DEBUG] ERROR in batch {batch_index + 1}: {str(e)}")
+                    logger.error("[BATCH] ERROR in batch %d: %s", batch_index + 1, str(e))
                     raise RuntimeError(f"Batch {batch_index + 1} failed: {str(e)}") from e
 
                 pending_results[batch_index] = (batch_text, batch_stats)
@@ -255,11 +261,10 @@ class ChunkBatchGenerator:
                 if extracted_answer and reasoning:
                     stats["synthesis_extracted"] = extracted_answer
                     stats["synthesis_reasoning"] = reasoning
-                    print(f"[BATCH DEBUG] Synthesis: {len(synthesized)} chars total")
-                    print(f"[BATCH DEBUG] Extracted answer: {len(extracted_answer)} chars")
-                    print(f"[BATCH DEBUG] Reasoning: {len(reasoning)} chars")
+                    logger.debug("[BATCH] Synthesis: %d chars total, extracted: %d chars, reasoning: %d chars",
+                                 len(synthesized), len(extracted_answer), len(reasoning))
                 else:
-                    print(f"[BATCH DEBUG] Extraction failed, using full synthesis: {len(synthesized)} chars")
+                    logger.debug("[BATCH] Extraction failed, using full synthesis: %d chars", len(synthesized))
 
         if progress:
             progress.stage_changed.emit("Assembly")
@@ -360,14 +365,14 @@ class ChunkBatchGenerator:
         to serve requests sequentially instead of causing thread pool starvation.
         """
         thread_id = threading.current_thread().name
-        print(f"[BATCH DEBUG] [{thread_id}] Starting batch generation for {len(batch_chunks)} chunks")
+        logger.debug("[BATCH] [%s] Starting batch generation for %d chunks", thread_id, len(batch_chunks))
 
         if cancel_event and cancel_event.is_set():
             raise RuntimeError("Generation cancelled")
 
         try:
             batch_service = LLMService(settings=self.base_service.settings)
-            print(f"[BATCH DEBUG] [{thread_id}] LLMService created, calling generate_with_context...")
+            logger.debug("[BATCH] [%s] LLMService created, calling generate_with_context...", thread_id)
 
             max_tokens = getattr(self.settings.generation, "batch_max_tokens", None)
             system_prompt = getattr(self, "_current_system_prompt", None)
@@ -383,19 +388,18 @@ class ChunkBatchGenerator:
             )
 
             clean_response = batch_service._post_process_output(response) if response else ""
-            print(
-                f"[BATCH DEBUG] [{thread_id}] Generation completed, response length: {len(clean_response)} chars"
-            )
+            logger.debug("[BATCH] [%s] Generation completed, response length: %d chars",
+                         thread_id, len(clean_response))
 
             stats = getattr(batch_service, "last_generation_stats", {}) or {}
             if not stats.get("token_count") and clean_response:
                 stats = {**stats, "token_count": estimate_token_count(clean_response)}
 
-            print(f"[BATCH DEBUG] [{thread_id}] Batch finished successfully")
+            logger.debug("[BATCH] [%s] Batch finished successfully", thread_id)
             return clean_response.strip(), stats
 
         except Exception as e:
-            print(f"[BATCH DEBUG] [{thread_id}] ERROR during batch generation: {str(e)}")
+            logger.error("[BATCH] [%s] ERROR during batch generation: %s", thread_id, str(e))
             import traceback
             traceback.print_exc()
             raise
@@ -489,9 +493,8 @@ class ChunkBatchGenerator:
             # Use configured max tokens or default to 8192 for comprehensive answers
             synthesis_limit = max_tokens if max_tokens is not None else getattr(self.settings.generation, "synthesis_max_tokens", 8192)
             
-            print(f"[SYNTHESIS DEBUG] Starting synthesis...")
-            print(f"[SYNTHESIS DEBUG] Combined notes: {len(combined_notes)} chars")
-            print(f"[SYNTHESIS DEBUG] Max tokens: {synthesis_limit}")
+            logger.debug("[SYNTHESIS] Starting synthesis...")
+            logger.debug("[SYNTHESIS] Combined notes: %d chars, max_tokens: %s", len(combined_notes), synthesis_limit)
             
             synthesized = self.base_service.generate(
                 prompt=user_prompt,
@@ -502,20 +505,18 @@ class ChunkBatchGenerator:
                 max_tokens=synthesis_limit,
             )
             
-            print(f"[SYNTHESIS DEBUG] Raw generation returned: {len(synthesized) if synthesized else 0} chars")
-            print(f"[SYNTHESIS DEBUG] Type: {type(synthesized)}, Is None: {synthesized is None}, Is Empty: {not synthesized}")
+            logger.debug("[SYNTHESIS] Raw generation returned: %d chars", len(synthesized) if synthesized else 0)
             
             if not synthesized or len(synthesized.strip()) == 0:
-                print(f"[SYNTHESIS DEBUG] WARNING: Synthesis returned empty!")
-                print(f"[SYNTHESIS DEBUG] Query was: {query[:100]}...")
-                print(f"[SYNTHESIS DEBUG] FALLBACK: Returning combined batch notes instead")
+                logger.warning("[SYNTHESIS] Synthesis returned empty! Query: %s...", query[:100])
+                logger.debug("[SYNTHESIS] FALLBACK: Returning combined batch notes instead")
                 return combined_notes
             
-            print(f"[SYNTHESIS DEBUG] Synthesis successful: {len(synthesized)} chars")
+            logger.debug("[SYNTHESIS] Synthesis successful: %d chars", len(synthesized))
             return synthesized
         except Exception as exc:
-            print(f"[BATCH DEBUG] Synthesis failed with exception: {exc}")
-            print(f"[SYNTHESIS DEBUG] FALLBACK: Returning combined notes")
+            logger.error("[BATCH] Synthesis failed: %s", exc)
+            logger.debug("[SYNTHESIS] FALLBACK: Returning combined notes")
             return combined_notes
 
 

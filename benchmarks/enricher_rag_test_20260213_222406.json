@@ -1,0 +1,127 @@
+{
+  "timestamp": "2026-02-13T22:23:38.042898",
+  "model": "glm-4.7-flash",
+  "rag_accuracy": {
+    "status": "complete",
+    "total_score": 10,
+    "total_max": 26,
+    "accuracy_pct": 38.5,
+    "test_results": [
+      {
+        "query": "Who was the CFO of Enron involved in the SPE fraud?",
+        "category": "entity_identification",
+        "score": 2,
+        "max_score": 6,
+        "pct": 33.3,
+        "found_facts": [],
+        "missing_facts": [
+          "Fastow",
+          "Andrew",
+          "CFO",
+          "LJM"
+        ],
+        "hallucinations": [],
+        "answer_preview": "insufficient evidence",
+        "chunks_retrieved": 5,
+        "gen_tokens": 4,
+        "gen_time_s": 0.06,
+        "gen_tps": 63.9
+      },
+      {
+        "query": "What was Jeffrey Skilling's role at Enron and when did he resign?",
+        "category": "timeline",
+        "score": 2,
+        "max_score": 6,
+        "pct": 33.3,
+        "found_facts": [],
+        "missing_facts": [
+          "CEO",
+          "Skilling",
+          "August 2001",
+          "resign"
+        ],
+        "hallucinations": [],
+        "answer_preview": "insufficient evidence",
+        "chunks_retrieved": 5,
+        "gen_tokens": 4,
+        "gen_time_s": 0.06,
+        "gen_tps": 68.5
+      },
+      {
+        "query": "What were the Raptor SPE transactions at Enron?",
+        "category": "financial_structure",
+        "score": 0,
+        "max_score": 3,
+        "pct": 0.0,
+        "found_facts": [],
+        "missing_facts": [
+          "Raptor",
+          "SPE",
+          "special purpose"
+        ],
+        "hallucinations": [],
+        "answer_preview": "insufficient evidence",
+        "chunks_retrieved": 5,
+        "gen_tokens": 4,
+        "gen_time_s": 0.06,
+        "gen_tps": 63.0
+      },
+      {
+        "query": "Who was Enron's external auditor?",
+        "category": "entity_identification",
+        "score": 4,
+        "max_score": 6,
+        "pct": 66.7,
+        "found_facts": [],
+        "missing_facts": [
+          "Arthur Andersen",
+          "audit"
+        ],
+        "hallucinations": [],
+        "answer_preview": "insufficient evidence",
+        "chunks_retrieved": 5,
+        "gen_tokens": 4,
+        "gen_time_s": 0.07,
+        "gen_tps": 60.1
+      },
+      {
+        "query": "What energy trading activities was Enron involved in?",
+        "category": "business_activity",
+        "score": 2,
+        "max_score": 3,
+        "pct": 66.7,
+        "found_facts": [
+          "energy",
+          "trading"
+        ],
+        "missing_facts": [
+          "California"
+        ],
+        "hallucinations": [],
+        "answer_preview": "Based on the email evidence provided, Enron was involved in the following energy trading activities:\n\n*   **San Juan Gas:** Phillip Allen expressed concern about a potential attempt to manipulate the El Paso San Juan monthly index, noting that a single buyer paid above market prices ($4.70-$4.80) to",
+        "chunks_retrieved": 5,
+        "gen_tokens": 162,
+        "gen_time_s": 3.23,
+        "gen_tps": 50.2
+      },
+      {
+        "query": "What communications existed about Enron's financial concerns?",
+        "category": "communication",
+        "score": 0,
+        "max_score": 2,
+        "pct": 0.0,
+        "found_facts": [],
+        "missing_facts": [
+          "concern",
+          "account"
+        ],
+        "hallucinations": [],
+        "answer_preview": "insufficient evidence",
+        "chunks_retrieved": 5,
+        "gen_tokens": 4,
+        "gen_time_s": 0.06,
+        "gen_tps": 65.3
+      }
+    ]
+  }
+}

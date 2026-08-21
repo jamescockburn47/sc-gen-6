@@ -1,0 +1,4558 @@
+[
+  {
+    "id": "c07c7589-1925-44a4-b4cd-ad44d9ad82d8",
+    "type": "organization",
+    "canonical_name": "The 7th Respondent, Harbour Fund II L.P.",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:0",
+      "role": "applicant",
+      "person_type": "corporate",
+      "jurisdiction": null,
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "c63030836b439189"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:34.722241",
+    "updated_at": "2026-02-13T23:55:34.722243"
+  },
+  {
+    "id": "cb84916f-184e-4ac0-b86c-41009e76a62c",
+    "type": "person",
+    "canonical_name": "High Court of Justice",
+    "aliases": [
+      "High Court of Justice",
+      "IN THE HIGH COURT OF JUSTICE"
+    ],
+    "metadata": {
+      "ilgs_id": "per:1",
+      "role": "enacting_authority",
+      "person_type": "politic",
+      "jurisdiction": "ZA",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "8bd175b18c249ba9",
+      "93ad0e2d212bbcba",
+      "b1d6187b5ac86564",
+      "afd6f3575a83e18f"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:34.722260",
+    "updated_at": "2026-02-14T00:32:14.960098"
+  },
+  {
+    "id": "0c98eaab-9c75-4ea6-8771-97ea9d08676b",
+    "type": "person",
+    "canonical_name": "Commercial Court",
+    "aliases": [
+      "Commercial Court"
+    ],
+    "metadata": {
+      "ilgs_id": "per:0",
+      "role": "other",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "8bd175b18c249ba9",
+      "93ad0e2d212bbcba",
+      "424ff00a73867010",
+      "6d1916f9b7aed04b"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:34.722266",
+    "updated_at": "2026-02-14T00:32:14.954467"
+  },
+  {
+    "id": "bd4fff6f-1c4e-4c68-8b4f-64cbc8b79e8a",
+    "type": "person",
+    "canonical_name": "The Serious Fraud Office",
+    "aliases": [
+      "THE SERIOUS FRAUD OFFICE",
+      "Serious Fraud Office"
+    ],
+    "metadata": {
+      "ilgs_id": "per:5",
+      "role": "other",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "8bd175b18c249ba9",
+      "f666693a5f5137de",
+      "93ad0e2d212bbcba",
+      "d6d6168d483c8f08",
+      "aa77eeebd707c0ae",
+      "91f1188cefca8ff0",
+      "963dd73a3a062386",
+      "d6454109ae7a55a3",
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35",
+      "4cc2af4fc6d6d09b",
+      "9c4c8bb715ce35e4",
+      "eb68bdeac0f9b803",
+      "eb4ce712614ea93d",
+      "ef9cdd3c9796973d",
+      "3c4e66a8aed8bd4d",
+      "269315e99986b032",
+      "4dfa990a48cab738",
+      "6f73671b1807a2b2"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:34.722270",
+    "updated_at": "2026-02-14T00:32:14.964211"
+  },
+  {
+    "id": "45b35dc3-89a8-4c9f-a668-740196144d48",
+    "type": "person",
+    "canonical_name": "John Milsom",
+    "aliases": [
+      "John Milsom",
+      "MR JOHN MILSOM"
+    ],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "applicant",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "8bd175b18c249ba9",
+      "93ad0e2d212bbcba",
+      "f666693a5f5137de",
+      "d6d6168d483c8f08",
+      "aa77eeebd707c0ae",
+      "91f1188cefca8ff0",
+      "963dd73a3a062386",
+      "d6454109ae7a55a3",
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35",
+      "4cc2af4fc6d6d09b",
+      "9c4c8bb715ce35e4",
+      "eb68bdeac0f9b803",
+      "eb4ce712614ea93d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:34.722275",
+    "updated_at": "2026-02-14T00:32:14.965736"
+  },
+  {
+    "id": "8c31cd7b-0813-4e3e-a340-870039c692aa",
+    "type": "person",
+    "canonical_name": "David \nStandish",
+    "aliases": [
+      "MR DAVID STANDISH",
+      "David Standish"
+    ],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "8bd175b18c249ba9",
+      "f666693a5f5137de",
+      "d6d6168d483c8f08",
+      "aa77eeebd707c0ae",
+      "91f1188cefca8ff0",
+      "963dd73a3a062386",
+      "d6454109ae7a55a3",
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35",
+      "4cc2af4fc6d6d09b",
+      "9c4c8bb715ce35e4",
+      "eb68bdeac0f9b803",
+      "eb4ce712614ea93d",
+      "93ad0e2d212bbcba",
+      "ba6e420e3570fba9"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:34.722279",
+    "updated_at": "2026-02-14T00:32:14.967483"
+  },
+  {
+    "id": "692aab1f-25a3-4b90-9a04-06adf45adfdb",
+    "type": "organization",
+    "canonical_name": "Litigation Capital Limited",
+    "aliases": [
+      "LITIGATION CAPITAL LIMITED"
+    ],
+    "metadata": {
+      "ilgs_id": "per:6",
+      "role": "respondent",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "8bd175b18c249ba9",
+      "f666693a5f5137de",
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4",
+      "93ad0e2d212bbcba",
+      "d6d6168d483c8f08",
+      "aa77eeebd707c0ae",
+      "91f1188cefca8ff0",
+      "963dd73a3a062386",
+      "d6454109ae7a55a3",
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35",
+      "4cc2af4fc6d6d09b",
+      "9c4c8bb715ce35e4",
+      "eb68bdeac0f9b803",
+      "eb4ce712614ea93d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:34.722283",
+    "updated_at": "2026-02-14T00:32:14.954657"
+  },
+  {
+    "id": "bdc9d94c-df6e-4f9c-81fb-4cf1788bd09c",
+    "type": "person",
+    "canonical_name": "Foxton J",
+    "aliases": [
+      "Foxton J",
+      "Foxton J."
+    ],
+    "metadata": {
+      "ilgs_id": "per:1",
+      "role": "prior_authority",
+      "person_type": "natural",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "8bd175b18c249ba9",
+      "e77ad669893fda21",
+      "f1ede5e506fb0ff1",
+      "ff49aad83ee547be",
+      "95aa45fe45af17a9",
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35",
+      "adf8e7fffe323117",
+      "7f012bb76dec0e90",
+      "8a5bfbae9c303551",
+      "d169b7abfe24330e",
+      "ba6e420e3570fba9",
+      "bf38873051b4be01",
+      "54fb045652dad1c7",
+      "9cacf1555cee61c8"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:34.722287",
+    "updated_at": "2026-02-14T00:32:14.970636"
+  },
+  {
+    "id": "e96ed001-a6f6-44e9-a0c2-d178a9d76dea",
+    "type": "person",
+    "canonical_name": "Adam Karim Zoubir",
+    "aliases": [
+      "ADAM KARIM ZOUBIR"
+    ],
+    "metadata": {
+      "ilgs_id": "per:0",
+      "role": "other",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "8bd175b18c249ba9",
+      "963dd73a3a062386",
+      "d6454109ae7a55a3",
+      "aadb1268484170fa",
+      "4cc2af4fc6d6d09b",
+      "eb4ce712614ea93d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:34.722291",
+    "updated_at": "2026-02-14T00:32:14.954752"
+  },
+  {
+    "id": "e8722045-7753-4d35-971c-4a54e538d909",
+    "type": "organization",
+    "canonical_name": "Harcus Parker Limited",
+    "aliases": [
+      "Harcus Parker Limited"
+    ],
+    "metadata": {
+      "ilgs_id": "per:0",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "8bd175b18c249ba9",
+      "963dd73a3a062386",
+      "d6454109ae7a55a3",
+      "4cc2af4fc6d6d09b",
+      "269315e99986b032",
+      "c8baec6caa8f9a00",
+      "eb4ce712614ea93d",
+      "6f73671b1807a2b2"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:34.722302",
+    "updated_at": "2026-02-14T00:32:14.954786"
+  },
+  {
+    "id": "cf696479-fd47-4806-8d3e-245ea87fd2b9",
+    "type": "location",
+    "canonical_name": "Royal Courts of Justice, 7 Rolls Building, Fetter Lane, EC4A 1NL",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "loc:0",
+      "location_type": "address",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "8bd175b18c249ba9"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:34.722308",
+    "updated_at": "2026-02-13T23:55:34.722308"
+  },
+  {
+    "id": "200b4117-20e4-466c-a6ec-eefda114dcb0",
+    "type": "person",
+    "canonical_name": "HM Courts and Tribunals Service",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:0",
+      "role": "enacting_authority",
+      "person_type": "politic",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "89be00b88a0da3f3"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:34.722345",
+    "updated_at": "2026-02-13T23:55:34.722345"
+  },
+  {
+    "id": "defeee5f-fc59-4d49-8d9d-2b7758a01e02",
+    "type": "person",
+    "canonical_name": "GERALD MARTIN SMITH",
+    "aliases": [
+      "Gerald Martin Smith",
+      "Gerald Martin\n\nSmith",
+      "Gerald \nMartin Smith",
+      "Gerald Martin \nSmith"
+    ],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "794b453139a54120",
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4",
+      "d6d6168d483c8f08",
+      "fe827addc92b8c26",
+      "91f1188cefca8ff0",
+      "963dd73a3a062386",
+      "d6454109ae7a55a3",
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35",
+      "4cc2af4fc6d6d09b",
+      "eb4ce712614ea93d",
+      "f666693a5f5137de",
+      "aa77eeebd707c0ae",
+      "9c4c8bb715ce35e4",
+      "eb68bdeac0f9b803"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.333991",
+    "updated_at": "2026-02-14T00:32:14.979456"
+  },
+  {
+    "id": "9057e1a7-638c-420c-9436-b4b73cfc8497",
+    "type": "person",
+    "canonical_name": "Mr Justice Foxton",
+    "aliases": [
+      "Mr Justice Foxton"
+    ],
+    "metadata": {
+      "ilgs_id": "per:2",
+      "role": "prior_authority",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "794b453139a54120",
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4",
+      "8ff9996393c87c9a",
+      "3682e9e3a36298c3",
+      "ef9cdd3c9796973d",
+      "ed4cfdd4a0983e52",
+      "963dd73a3a062386",
+      "48148a73930d42d8",
+      "424ff00a73867010",
+      "269315e99986b032",
+      "6d1916f9b7aed04b",
+      "d67ee489e91e9933",
+      "59fcd3a3eb291809",
+      "525e30ac6545e9b8",
+      "7a201e6ae53a89b7",
+      "6f73671b1807a2b2"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.333999",
+    "updated_at": "2026-02-14T00:32:14.954953"
+  },
+  {
+    "id": "5ebaf2fc-2751-4f9a-96eb-c0068593cdfc",
+    "type": "organization",
+    "canonical_name": "HARBOUR FUND II LP",
+    "aliases": [
+      "HARBOUR FUND II LP",
+      "Harbour Fund II L.P",
+      "Harbour Fund II, LP",
+      "Harbour Fund II, L.P.",
+      "Harbour Fund II, L.P"
+    ],
+    "metadata": {
+      "ilgs_id": "per:10",
+      "role": "other",
+      "person_type": "corporate",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "f666693a5f5137de",
+      "d6d6168d483c8f08",
+      "cd8de9778415a544",
+      "f5425283440ca7ef",
+      "9f82450bc3e40940",
+      "ed4cfdd4a0983e52",
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4",
+      "8ff9996393c87c9a",
+      "48148a73930d42d8",
+      "525e30ac6545e9b8",
+      "61cddfa7d69d0dd8",
+      "963dd73a3a062386",
+      "269315e99986b032",
+      "6f73671b1807a2b2",
+      "d6454109ae7a55a3",
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334031",
+    "updated_at": "2026-02-14T00:32:14.982063"
+  },
+  {
+    "id": "ea70e2f9-77d9-45d7-b2f2-a35ecf0efe82",
+    "type": "location",
+    "canonical_name": "Marshall Islands",
+    "aliases": [
+      "Marshall Islands"
+    ],
+    "metadata": {
+      "ilgs_id": "loc:0",
+      "location_type": "country",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "f666693a5f5137de",
+      "d6d6168d483c8f08",
+      "aa77eeebd707c0ae",
+      "3aae09914f934185",
+      "91f1188cefca8ff0",
+      "963dd73a3a062386",
+      "d6454109ae7a55a3",
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35",
+      "4cc2af4fc6d6d09b",
+      "9c4c8bb715ce35e4",
+      "eb68bdeac0f9b803",
+      "eb4ce712614ea93d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334036",
+    "updated_at": "2026-02-14T00:32:14.955170"
+  },
+  {
+    "id": "292d665b-e123-4d77-9a23-610be97af041",
+    "type": "organization",
+    "canonical_name": "Messrs Thomas & Taylor",
+    "aliases": [
+      "Messrs Thomas & Taylor",
+      "Messrs Thomas \n& Taylor"
+    ],
+    "metadata": {
+      "ilgs_id": "per:5",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4",
+      "dfc6cfc122d6c4d0",
+      "ff49aad83ee547be",
+      "a9977639c9fb54f3",
+      "b0fa65c007bda02c",
+      "c22345bb4f9d137e",
+      "686f2b67c1930709"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334058",
+    "updated_at": "2026-02-14T00:32:14.983821"
+  },
+  {
+    "id": "c2f9259e-1b13-43c8-954c-516e81827d81",
+    "type": "organization",
+    "canonical_name": "Orb A.R.L",
+    "aliases": [
+      "Orb A.R.L",
+      "Orb ARL"
+    ],
+    "metadata": {
+      "ilgs_id": "per:5",
+      "role": "other",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4",
+      "4945c1c08c6d64d1",
+      "ef9cdd3c9796973d",
+      "97d4a83668581659",
+      "e77ad669893fda21",
+      "48148a73930d42d8",
+      "52bf811adc843662",
+      "8e970cb076180123",
+      "26df93454a72547c",
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35",
+      "d67ee489e91e9933"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334063",
+    "updated_at": "2026-02-14T00:32:14.983940"
+  },
+  {
+    "id": "41cf8196-c407-4333-af4c-9b62ad5417a5",
+    "type": "person",
+    "canonical_name": "Gail\n\nAlison Cochrane",
+    "aliases": [
+      "Gail\n\nAlison Cochrane"
+    ],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "defendant",
+      "person_type": "natural",
+      "jurisdiction": "JE",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334067",
+    "updated_at": "2026-02-14T00:32:14.955297"
+  },
+  {
+    "id": "c8166f24-3277-4417-bf2e-65293d995d7e",
+    "type": "organization",
+    "canonical_name": "Stewarts",
+    "aliases": [
+      "Stewarts"
+    ],
+    "metadata": {
+      "ilgs_id": "per:9",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "JE",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4",
+      "bfa4ff2b9ff608a5",
+      "fcf616c4ca93a86d",
+      "963dd73a3a062386",
+      "97d4a83668581659",
+      "e87796a2acb55695"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334071",
+    "updated_at": "2026-02-14T00:32:14.955341"
+  },
+  {
+    "id": "dfc37b94-e8ea-4664-adf7-5adf1226ed12",
+    "type": "person",
+    "canonical_name": "Anthony Paul Smith",
+    "aliases": [
+      "Anthony Paul Smith"
+    ],
+    "metadata": {
+      "ilgs_id": "per:6",
+      "role": "other",
+      "person_type": "natural",
+      "jurisdiction": "JE",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334079",
+    "updated_at": "2026-02-14T00:32:14.955361"
+  },
+  {
+    "id": "bc0f3890-a5f5-4b8c-89f1-0d98fc431aa2",
+    "type": "person",
+    "canonical_name": "Dawna Marie Stickler",
+    "aliases": [
+      "Dawna Marie Stickler"
+    ],
+    "metadata": {
+      "ilgs_id": "per:7",
+      "role": "other",
+      "person_type": "natural",
+      "jurisdiction": "JE",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334082",
+    "updated_at": "2026-02-14T00:32:14.955381"
+  },
+  {
+    "id": "2289993f-83d3-4cff-84e6-9213818fb65d",
+    "type": "person",
+    "canonical_name": "Imogen Laura\n\nSmith",
+    "aliases": [
+      "Imogen Laura\n\nSmith"
+    ],
+    "metadata": {
+      "ilgs_id": "per:9",
+      "role": "other",
+      "person_type": "natural",
+      "jurisdiction": "JE",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334090",
+    "updated_at": "2026-02-14T00:32:14.955400"
+  },
+  {
+    "id": "f8a258cf-4db1-447b-931b-2cfef42918a6",
+    "type": "person",
+    "canonical_name": "Iona Cara Smith",
+    "aliases": [
+      "Iona Cara Smith"
+    ],
+    "metadata": {
+      "ilgs_id": "per:10",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "JE",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334094",
+    "updated_at": "2026-02-14T00:32:14.955419"
+  },
+  {
+    "id": "f3242b5b-d69a-451d-b40c-eed41dd66ff6",
+    "type": "person",
+    "canonical_name": "Sinead Catherine Irving",
+    "aliases": [
+      "Sinead Catherine Irving"
+    ],
+    "metadata": {
+      "ilgs_id": "per:11",
+      "role": "other",
+      "person_type": "natural",
+      "jurisdiction": "JE",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334098",
+    "updated_at": "2026-02-14T00:32:14.955438"
+  },
+  {
+    "id": "df8c07db-a018-4cdc-8b9b-ec8822af44a6",
+    "type": "person",
+    "canonical_name": "Alison Hollis",
+    "aliases": [
+      "Alison Hollis"
+    ],
+    "metadata": {
+      "ilgs_id": "per:12",
+      "role": "other",
+      "person_type": "natural",
+      "jurisdiction": "JE",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334102",
+    "updated_at": "2026-02-14T00:32:14.955457"
+  },
+  {
+    "id": "bd333f00-4ec8-402c-9b49-fe82cf3032f9",
+    "type": "person",
+    "canonical_name": "David Anthony Greenstone",
+    "aliases": [
+      "David Anthony Greenstone"
+    ],
+    "metadata": {
+      "ilgs_id": "per:13",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "JE",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334106",
+    "updated_at": "2026-02-14T00:32:14.955476"
+  },
+  {
+    "id": "766b436f-3983-4cc2-8422-a92351eb6b19",
+    "type": "person",
+    "canonical_name": "Patricia Greenstone",
+    "aliases": [
+      "Patricia Greenstone"
+    ],
+    "metadata": {
+      "ilgs_id": "per:14",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "JE",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334110",
+    "updated_at": "2026-02-14T00:32:14.955495"
+  },
+  {
+    "id": "8bce8cbb-1257-43f7-8155-bf394996a3ca",
+    "type": "person",
+    "canonical_name": "Robert John Morris",
+    "aliases": [
+      "Robert John Morris"
+    ],
+    "metadata": {
+      "ilgs_id": "per:15",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "JE",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334114",
+    "updated_at": "2026-02-14T00:32:14.955514"
+  },
+  {
+    "id": "8db62c4f-e0dc-4bcc-97e3-9d14aed21fc2",
+    "type": "person",
+    "canonical_name": "Supreme Court",
+    "aliases": [
+      "Supreme Court"
+    ],
+    "metadata": {
+      "ilgs_id": "per:4",
+      "role": "non_party",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4",
+      "cd8de9778415a544",
+      "bfa4ff2b9ff608a5",
+      "fcf616c4ca93a86d",
+      "8ff9996393c87c9a",
+      "a719f8828c55cb79",
+      "ed4cfdd4a0983e52",
+      "963dd73a3a062386",
+      "97d4a83668581659",
+      "6d1916f9b7aed04b",
+      "92e256e79583b0b9",
+      "1414394e42f259fa",
+      "525e30ac6545e9b8",
+      "61cddfa7d69d0dd8"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334120",
+    "updated_at": "2026-02-14T00:32:14.955591"
+  },
+  {
+    "id": "41484e3e-b06c-4c98-93b0-af4c9be6d63f",
+    "type": "person",
+    "canonical_name": "Jersey\n\nCourts",
+    "aliases": [
+      "Jersey\n\nCourts",
+      "Jersey Courts"
+    ],
+    "metadata": {
+      "ilgs_id": "per:8",
+      "role": "non_party",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4",
+      "1414394e42f259fa"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334124",
+    "updated_at": "2026-02-14T00:32:15.003575"
+  },
+  {
+    "id": "31f6300f-9601-41d2-9b88-a829063ac79b",
+    "type": "organization",
+    "canonical_name": "Marriot Harrison LLP",
+    "aliases": [
+      "Marriot Harrison LLP",
+      "Marriott Harrison LLP",
+      "Marriott Harrison"
+    ],
+    "metadata": {
+      "ilgs_id": "per:7",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4",
+      "e77ad669893fda21",
+      "f1ede5e506fb0ff1",
+      "6d1916f9b7aed04b",
+      "93ad0e2d212bbcba",
+      "8ff9996393c87c9a",
+      "4d4c7ebab82b69b4",
+      "4c7f9c54f2aca174",
+      "e87796a2acb55695",
+      "54fb045652dad1c7",
+      "9cacf1555cee61c8",
+      "19289be19c2d86f2",
+      "d8f0c0a6e1219df0",
+      "767a01c299610e70",
+      "91ac49566ef6dda7",
+      "e06090e5516d74ce"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334127",
+    "updated_at": "2026-02-14T00:32:15.003930"
+  },
+  {
+    "id": "3877ec54-9347-4521-b649-1e6cb2f59135",
+    "type": "person",
+    "canonical_name": "Mr Thomas",
+    "aliases": [
+      "Mr Thomas"
+    ],
+    "metadata": {
+      "ilgs_id": "per:0",
+      "role": "defendant",
+      "person_type": "natural",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4",
+      "8e970cb076180123",
+      "963dd73a3a062386",
+      "e77ad669893fda21",
+      "f1ede5e506fb0ff1",
+      "e87796a2acb55695",
+      "1d6714babc5dba7d",
+      "54fb045652dad1c7",
+      "9cacf1555cee61c8",
+      "dfc6cfc122d6c4d0",
+      "3c4e66a8aed8bd4d",
+      "424ff00a73867010",
+      "a9977639c9fb54f3",
+      "6d1916f9b7aed04b",
+      "52bf811adc843662",
+      "92e256e79583b0b9",
+      "1414394e42f259fa",
+      "adf8e7fffe323117",
+      "7f012bb76dec0e90",
+      "4dfa990a48cab738",
+      "525e30ac6545e9b8",
+      "61cddfa7d69d0dd8",
+      "c8baec6caa8f9a00",
+      "dba91a756e51d3c0",
+      "592060c3ba1a3613",
+      "968ba68a5f39937b",
+      "686f2b67c1930709",
+      "b0fa65c007bda02c",
+      "c22345bb4f9d137e",
+      "ab75257646e65fd8",
+      "85f2f91e12dc1432",
+      "4843e566db8d2c32",
+      "91ac49566ef6dda7",
+      "d169b7abfe24330e",
+      "66158613b20b62ef",
+      "e06090e5516d74ce",
+      "64214a1ab05bdbca",
+      "2139d9748bc854ca",
+      "ba6e420e3570fba9",
+      "bf38873051b4be01"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334131",
+    "updated_at": "2026-02-14T00:32:14.955840"
+  },
+  {
+    "id": "b3ff464f-e79f-433a-b3a9-3f01505ccf11",
+    "type": "location",
+    "canonical_name": "Jersey",
+    "aliases": [
+      "Jersey"
+    ],
+    "metadata": {
+      "ilgs_id": "loc:0",
+      "location_type": "country",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d2e8290ceb29740c",
+      "2c3a0b4fe7890af1",
+      "0d0d86f4c6066541",
+      "a893d0dcf47a7c7e",
+      "b4594b7e7a63e2e4",
+      "ef9cdd3c9796973d",
+      "f1ede5e506fb0ff1",
+      "52bf811adc843662",
+      "92e256e79583b0b9",
+      "adf8e7fffe323117",
+      "4dfa990a48cab738",
+      "d67ee489e91e9933"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.334134",
+    "updated_at": "2026-02-14T00:32:14.955892"
+  },
+  {
+    "id": "3dc3fb83-79ca-43e1-b672-8fc1d40c0294",
+    "type": "person",
+    "canonical_name": "Dr Cochrane",
+    "aliases": [
+      "Dr Cochrane"
+    ],
+    "metadata": {
+      "ilgs_id": "per:2",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": null,
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "8e970cb076180123",
+      "cd8de9778415a544",
+      "a719f8828c55cb79",
+      "3aae09914f934185",
+      "963dd73a3a062386",
+      "e77ad669893fda21",
+      "f1ede5e506fb0ff1",
+      "e87796a2acb55695",
+      "1d6714babc5dba7d",
+      "54fb045652dad1c7",
+      "9cacf1555cee61c8",
+      "269315e99986b032",
+      "6d1916f9b7aed04b",
+      "52bf811adc843662",
+      "92e256e79583b0b9",
+      "1414394e42f259fa",
+      "adf8e7fffe323117",
+      "7f012bb76dec0e90",
+      "4dfa990a48cab738",
+      "91ac49566ef6dda7",
+      "d169b7abfe24330e",
+      "66158613b20b62ef",
+      "2139d9748bc854ca"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.335476",
+    "updated_at": "2026-02-14T00:32:14.955994"
+  },
+  {
+    "id": "0d48b32e-e17b-4630-bdc5-cfcff7d0eb0e",
+    "type": "organization",
+    "canonical_name": "Harbour",
+    "aliases": [
+      "Harbour"
+    ],
+    "metadata": {
+      "ilgs_id": "per:4",
+      "role": "claimant",
+      "person_type": "corporate",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "8e970cb076180123",
+      "bfa4ff2b9ff608a5",
+      "fcf616c4ca93a86d",
+      "89794737b6cdfe41",
+      "33cc6bddb6ee2723",
+      "6fe0cb8eda27dac6",
+      "3682e9e3a36298c3",
+      "a719f8828c55cb79",
+      "4945c1c08c6d64d1",
+      "3aae09914f934185",
+      "1f42a85961e5491d",
+      "1d93c9c10a13f116",
+      "26df93454a72547c",
+      "97d4a83668581659",
+      "e77ad669893fda21",
+      "f1ede5e506fb0ff1",
+      "e87796a2acb55695",
+      "1d6714babc5dba7d",
+      "54fb045652dad1c7",
+      "9cacf1555cee61c8",
+      "a9977639c9fb54f3",
+      "6d1916f9b7aed04b",
+      "52bf811adc843662",
+      "92e256e79583b0b9",
+      "1414394e42f259fa",
+      "adf8e7fffe323117",
+      "7f012bb76dec0e90",
+      "4dfa990a48cab738",
+      "d67ee489e91e9933",
+      "8a5bfbae9c303551",
+      "04fb11097583804d",
+      "22fc2cbd90e417d1",
+      "9b9df3e06b448185",
+      "b587169dd123dd14",
+      "767a01c299610e70",
+      "4d4c7ebab82b69b4",
+      "153dc1033843b2c7",
+      "de81c0077ce40289",
+      "4e8edca7a315ca12",
+      "4d0f9c3e9f9c9bbe",
+      "686f2b67c1930709",
+      "b0fa65c007bda02c",
+      "c22345bb4f9d137e",
+      "ab75257646e65fd8",
+      "85f2f91e12dc1432",
+      "91ac49566ef6dda7",
+      "d169b7abfe24330e",
+      "e06090e5516d74ce",
+      "64214a1ab05bdbca",
+      "2139d9748bc854ca",
+      "ba6e420e3570fba9",
+      "bf38873051b4be01"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:39.335486",
+    "updated_at": "2026-02-14T00:32:14.956259"
+  },
+  {
+    "id": "1c486085-a156-4c3c-8acf-e4453c6d4cb2",
+    "type": "person",
+    "canonical_name": "Mr Nicholas Thomas",
+    "aliases": [
+      "MR NICHOLAS THOMAS",
+      "Nicholas Thomas"
+    ],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "other",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "8f22711c1c2fab23",
+      "d6d6168d483c8f08",
+      "8ff9996393c87c9a",
+      "6fe0cb8eda27dac6",
+      "3682e9e3a36298c3",
+      "a719f8828c55cb79",
+      "4945c1c08c6d64d1",
+      "ef9cdd3c9796973d",
+      "3aae09914f934185",
+      "e4e7ba0da3d70158",
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35",
+      "93ad0e2d212bbcba",
+      "b1d6187b5ac86564",
+      "97d4a83668581659",
+      "ff49aad83ee547be",
+      "95aa45fe45af17a9",
+      "48148a73930d42d8",
+      "269315e99986b032",
+      "9c4c8bb715ce35e4",
+      "59fcd3a3eb291809",
+      "8a5bfbae9c303551",
+      "19289be19c2d86f2",
+      "d8f0c0a6e1219df0",
+      "04fb11097583804d",
+      "22fc2cbd90e417d1",
+      "9b9df3e06b448185",
+      "6b50ae28c6fe9fc5",
+      "b587169dd123dd14",
+      "6f73671b1807a2b2"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:43.500109",
+    "updated_at": "2026-02-14T00:32:15.007708"
+  },
+  {
+    "id": "c3787488-e7bb-4e14-8f4a-27e890f422ba",
+    "type": "person",
+    "canonical_name": "Tamar Halevy",
+    "aliases": [
+      "Tamar Halevy",
+      "Ms Tamar \nHalevy"
+    ],
+    "metadata": {
+      "ilgs_id": "per:11",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "93ad0e2d212bbcba",
+      "4c7f9c54f2aca174",
+      "afd6f3575a83e18f",
+      "8ff9996393c87c9a",
+      "6d1916f9b7aed04b"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:43.500121",
+    "updated_at": "2026-02-14T00:32:15.009945"
+  },
+  {
+    "id": "b98868ce-4b50-49c0-a548-68be500e5856",
+    "type": "location",
+    "canonical_name": "England and Wales",
+    "aliases": [
+      "England and Wales",
+      "England \nand Wales",
+      "ENGLAND & WALES"
+    ],
+    "metadata": {
+      "ilgs_id": "loc:0",
+      "location_type": "state",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "93ad0e2d212bbcba",
+      "e77ad669893fda21",
+      "c8baec6caa8f9a00",
+      "3aae09914f934185",
+      "e411f6858ea9783d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:43.500155",
+    "updated_at": "2026-02-14T00:32:15.010407"
+  },
+  {
+    "id": "f8c51854-70a3-457b-ac57-4d07fe214159",
+    "type": "location",
+    "canonical_name": "6 Cranbrook Road, London, W4 2LH",
+    "aliases": [
+      "6 Cranbrook Road, London, W4 2LH"
+    ],
+    "metadata": {
+      "ilgs_id": "loc:0",
+      "location_type": "address",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d6d6168d483c8f08",
+      "59fcd3a3eb291809",
+      "b587169dd123dd14"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:48.929365",
+    "updated_at": "2026-02-14T00:32:14.956497"
+  },
+  {
+    "id": "7c94dfff-cb7c-4959-acbf-58ed21ff8fe3",
+    "type": "person",
+    "canonical_name": "Ms Tamar\n\nHalevy",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:1",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "cd8de9778415a544"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:48.929388",
+    "updated_at": "2026-02-13T23:55:48.929389"
+  },
+  {
+    "id": "20438da2-396d-4144-b41e-9b98aeac4f2f",
+    "type": "person",
+    "canonical_name": "Mr Adam Zoubir",
+    "aliases": [
+      "Mr Adam Zoubir",
+      "Adam Zoubir",
+      "Mr Adam \nZoubir"
+    ],
+    "metadata": {
+      "ilgs_id": "per:1",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "cd8de9778415a544",
+      "8ff9996393c87c9a",
+      "b00ba484119c7a52",
+      "b587169dd123dd14"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:48.929392",
+    "updated_at": "2026-02-14T00:32:15.013887"
+  },
+  {
+    "id": "fae7bc32-a859-49b3-9746-b92aded9b7f2",
+    "type": "person",
+    "canonical_name": "Dr\n\nSmith",
+    "aliases": [
+      "Dr \nSmith"
+    ],
+    "metadata": {
+      "ilgs_id": "per:2",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "AU",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "cd8de9778415a544",
+      "de81c0077ce40289"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:48.929399",
+    "updated_at": "2026-02-14T00:32:15.014814"
+  },
+  {
+    "id": "3b630e90-fd20-4d47-a1c0-f1ecb9f69d27",
+    "type": "person",
+    "canonical_name": "Mr Zoubir",
+    "aliases": [
+      "Mr Zoubir"
+    ],
+    "metadata": {
+      "ilgs_id": "per:4",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "bfa4ff2b9ff608a5",
+      "fcf616c4ca93a86d",
+      "89794737b6cdfe41",
+      "33cc6bddb6ee2723",
+      "3682e9e3a36298c3",
+      "a719f8828c55cb79",
+      "4945c1c08c6d64d1",
+      "3aae09914f934185",
+      "424ff00a73867010",
+      "6d1916f9b7aed04b",
+      "525e30ac6545e9b8",
+      "8a5bfbae9c303551",
+      "19289be19c2d86f2",
+      "767a01c299610e70",
+      "4843e566db8d2c32"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:48.929414",
+    "updated_at": "2026-02-14T00:32:14.956565"
+  },
+  {
+    "id": "f4d6b465-93a6-4e49-9a24-212a67396d85",
+    "type": "person",
+    "canonical_name": "Orb Claimants",
+    "aliases": [
+      "Orb Claimants"
+    ],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "claimant",
+      "person_type": "corporate",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "bfa4ff2b9ff608a5",
+      "3aae09914f934185",
+      "f1ede5e506fb0ff1",
+      "e87796a2acb55695",
+      "9cacf1555cee61c8",
+      "92e256e79583b0b9"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:48.929421",
+    "updated_at": "2026-02-14T00:32:14.956588"
+  },
+  {
+    "id": "a8602253-3b7b-4da7-881a-35f9884639b0",
+    "type": "person",
+    "canonical_name": "Government",
+    "aliases": [
+      "Government"
+    ],
+    "metadata": {
+      "ilgs_id": "per:4",
+      "role": "non_party",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "bfa4ff2b9ff608a5",
+      "fcf616c4ca93a86d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:48.929424",
+    "updated_at": "2026-02-14T00:32:14.956594"
+  },
+  {
+    "id": "d77821cd-f140-454e-a97b-9ee5f4a7ee5b",
+    "type": "person",
+    "canonical_name": "Professor Mulheron",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:2",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "fcf616c4ca93a86d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:48.929444",
+    "updated_at": "2026-02-13T23:55:48.929445"
+  },
+  {
+    "id": "8dab2b9d-1d13-4799-8f54-1887c62d8da3",
+    "type": "person",
+    "canonical_name": "Lord Chancellor",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "non_party",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "fcf616c4ca93a86d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:48.929448",
+    "updated_at": "2026-02-13T23:55:48.929448"
+  },
+  {
+    "id": "8f35807e-10ad-4d63-a8a8-ac104a111316",
+    "type": "person",
+    "canonical_name": "Competition Appeal Tribunal",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:6",
+      "role": "non_party",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "fcf616c4ca93a86d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:48.929457",
+    "updated_at": "2026-02-13T23:55:48.929458"
+  },
+  {
+    "id": "fc6c1948-7b58-474d-b2dc-fe41ca7b212a",
+    "type": "person",
+    "canonical_name": "Court\n\nof Appeal",
+    "aliases": [
+      "Court of Appeal"
+    ],
+    "metadata": {
+      "ilgs_id": "per:5",
+      "role": "non_party",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "fcf616c4ca93a86d",
+      "54fb045652dad1c7",
+      "9cacf1555cee61c8",
+      "dfc6cfc122d6c4d0",
+      "3c4e66a8aed8bd4d",
+      "c22345bb4f9d137e",
+      "d169b7abfe24330e"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:48.929461",
+    "updated_at": "2026-02-14T00:32:15.022165"
+  },
+  {
+    "id": "b521116d-7ad5-4dc0-8ae6-2e7f7d064c22",
+    "type": "person",
+    "canonical_name": "Mr Andrew Ruhan",
+    "aliases": [
+      "Mr Andrew Ruhan"
+    ],
+    "metadata": {
+      "ilgs_id": "per:9",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "fcf616c4ca93a86d",
+      "89794737b6cdfe41",
+      "4945c1c08c6d64d1",
+      "4dfa990a48cab738"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:48.929467",
+    "updated_at": "2026-02-14T00:32:14.956609"
+  },
+  {
+    "id": "e6eb654e-5d92-46c3-805d-df1056ddb158",
+    "type": "location",
+    "canonical_name": "England",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "loc:0",
+      "location_type": "state",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "fcf616c4ca93a86d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:48.929470",
+    "updated_at": "2026-02-13T23:55:48.929470"
+  },
+  {
+    "id": "3af42192-86bd-4551-ab58-20d35f2269b5",
+    "type": "organization",
+    "canonical_name": "Stewarts Law",
+    "aliases": [
+      "Stewarts Law",
+      "Stewarts Law LLP"
+    ],
+    "metadata": {
+      "ilgs_id": "per:9",
+      "role": "other",
+      "person_type": "corporate",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "89794737b6cdfe41",
+      "1d6714babc5dba7d",
+      "bf38873051b4be01",
+      "d6454109ae7a55a3",
+      "48148a73930d42d8",
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:48.929481",
+    "updated_at": "2026-02-14T00:32:15.024437"
+  },
+  {
+    "id": "e88083fc-efa2-4544-9705-802ad41cf5c7",
+    "type": "organization",
+    "canonical_name": "MHS Sprecher Grier",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "89794737b6cdfe41"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:55:48.929487",
+    "updated_at": "2026-02-13T23:55:48.929488"
+  },
+  {
+    "id": "245d0329-ec72-4867-a425-e16d45adbff9",
+    "type": "location",
+    "canonical_name": "80 Cheapside, London EC2V 6EE",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "loc:0",
+      "location_type": "address",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "8ff9996393c87c9a"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414665",
+    "updated_at": "2026-02-13T23:56:12.414665"
+  },
+  {
+    "id": "7ffba58d-433c-4275-914b-8b7a4e32c157",
+    "type": "organization",
+    "canonical_name": "MH",
+    "aliases": [
+      "MH"
+    ],
+    "metadata": {
+      "ilgs_id": "per:6",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "AU",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "6fe0cb8eda27dac6",
+      "a719f8828c55cb79"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414681",
+    "updated_at": "2026-02-14T00:32:14.956640"
+  },
+  {
+    "id": "3a06cf50-34c2-4949-81ee-e340c37ba6a3",
+    "type": "organization",
+    "canonical_name": "Harcus Parker LLP",
+    "aliases": [
+      "Harcus Parker"
+    ],
+    "metadata": {
+      "ilgs_id": "per:2",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": null,
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "6fe0cb8eda27dac6",
+      "a719f8828c55cb79",
+      "4d4c7ebab82b69b4"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414684",
+    "updated_at": "2026-02-14T00:32:15.026294"
+  },
+  {
+    "id": "6c0c4dc5-708d-4a7d-91c9-c7e97cf9359e",
+    "type": "person",
+    "canonical_name": "Mr Taylor",
+    "aliases": [
+      "Mr Taylor"
+    ],
+    "metadata": {
+      "ilgs_id": "per:13",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "a719f8828c55cb79",
+      "e77ad669893fda21",
+      "9cacf1555cee61c8",
+      "424ff00a73867010",
+      "59fcd3a3eb291809",
+      "525e30ac6545e9b8",
+      "d8f0c0a6e1219df0",
+      "de81c0077ce40289",
+      "4e8edca7a315ca12",
+      "4d0f9c3e9f9c9bbe",
+      "7a201e6ae53a89b7",
+      "dba91a756e51d3c0",
+      "592060c3ba1a3613",
+      "968ba68a5f39937b",
+      "686f2b67c1930709",
+      "bf38873051b4be01"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414724",
+    "updated_at": "2026-02-14T00:32:14.956706"
+  },
+  {
+    "id": "ab66ee7a-7084-48f9-8f74-0e1bf4864cf8",
+    "type": "organization",
+    "canonical_name": "Harbour Trust",
+    "aliases": [
+      "Harbour Trust"
+    ],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "a719f8828c55cb79",
+      "f1ede5e506fb0ff1",
+      "e87796a2acb55695",
+      "c8baec6caa8f9a00",
+      "dba91a756e51d3c0",
+      "592060c3ba1a3613",
+      "686f2b67c1930709",
+      "b0fa65c007bda02c",
+      "ab75257646e65fd8",
+      "85f2f91e12dc1432",
+      "d169b7abfe24330e",
+      "66158613b20b62ef",
+      "ba6e420e3570fba9",
+      "bf38873051b4be01"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414728",
+    "updated_at": "2026-02-14T00:32:14.956765"
+  },
+  {
+    "id": "c705d472-f866-46e4-a39a-33236c260fa6",
+    "type": "person",
+    "canonical_name": "Dr Gerald Smith",
+    "aliases": [
+      "Dr Gerald Smith",
+      "Gerald Smith"
+    ],
+    "metadata": {
+      "ilgs_id": "per:0",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "4945c1c08c6d64d1",
+      "ef9cdd3c9796973d",
+      "97d4a83668581659",
+      "d169b7abfe24330e"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414755",
+    "updated_at": "2026-02-14T00:32:15.029144"
+  },
+  {
+    "id": "3414492b-dbcd-440d-961e-cc2a8b8a8535",
+    "type": "organization",
+    "canonical_name": "Cochrane",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:4",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "4945c1c08c6d64d1"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414758",
+    "updated_at": "2026-02-13T23:56:12.414758"
+  },
+  {
+    "id": "11d80b7f-9367-46f0-9863-5bdc337f63c9",
+    "type": "organization",
+    "canonical_name": "Izodia PLC",
+    "aliases": [
+      "Izodia PLC"
+    ],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "4945c1c08c6d64d1",
+      "ef9cdd3c9796973d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414765",
+    "updated_at": "2026-02-14T00:32:14.956787"
+  },
+  {
+    "id": "8cd1e38d-6d01-454d-bad6-253754c2304c",
+    "type": "person",
+    "canonical_name": "Mr Roger Taylor",
+    "aliases": [
+      "Mr Roger Taylor",
+      "Roger Taylor"
+    ],
+    "metadata": {
+      "ilgs_id": "per:4",
+      "role": "other",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "4945c1c08c6d64d1",
+      "ef9cdd3c9796973d",
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35",
+      "adf8e7fffe323117",
+      "97d4a83668581659",
+      "ff49aad83ee547be",
+      "95aa45fe45af17a9",
+      "269315e99986b032",
+      "6f73671b1807a2b2"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414771",
+    "updated_at": "2026-02-14T00:32:15.030300"
+  },
+  {
+    "id": "a7b8fe25-3855-4897-a1fd-42bb7f1b5411",
+    "type": "person",
+    "canonical_name": "Mr Ruhan",
+    "aliases": [
+      "Mr Ruhan"
+    ],
+    "metadata": {
+      "ilgs_id": "per:2",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "ef9cdd3c9796973d",
+      "3aae09914f934185",
+      "d67ee489e91e9933"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414783",
+    "updated_at": "2026-02-14T00:32:14.956830"
+  },
+  {
+    "id": "c68241a4-c6a5-4e16-9eb7-f71c1bdff8cc",
+    "type": "person",
+    "canonical_name": "Mr Justice \nPopplewell",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:6",
+      "role": "prior_authority",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "ef9cdd3c9796973d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414796",
+    "updated_at": "2026-02-13T23:56:12.414796"
+  },
+  {
+    "id": "f995c73f-65ff-4a9a-b896-47bc332b7f4e",
+    "type": "person",
+    "canonical_name": "Dr Gail Cochrane",
+    "aliases": [
+      "Dr Gail Cochrane"
+    ],
+    "metadata": {
+      "ilgs_id": "per:1",
+      "role": "defendant",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "ef9cdd3c9796973d",
+      "97d4a83668581659"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414802",
+    "updated_at": "2026-02-14T00:32:14.956836"
+  },
+  {
+    "id": "f1ae3372-b31b-45a3-ba34-3e0a62c3432c",
+    "type": "person",
+    "canonical_name": "Mr Campbell",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:10",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "ef9cdd3c9796973d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414809",
+    "updated_at": "2026-02-13T23:56:12.414809"
+  },
+  {
+    "id": "a1374c2a-87a1-4785-86c2-2ae40d80c434",
+    "type": "organization",
+    "canonical_name": "SMA Investment Holdings Limited",
+    "aliases": [
+      "SMA INVESTMENTS HOLDINGS LIMITED"
+    ],
+    "metadata": {
+      "ilgs_id": "per:0",
+      "role": "defendant",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "ef9cdd3c9796973d",
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35",
+      "424ff00a73867010",
+      "a9977639c9fb54f3"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414812",
+    "updated_at": "2026-02-14T00:32:15.035434"
+  },
+  {
+    "id": "b68655bb-c0f2-45f7-8a1c-6af660793e64",
+    "type": "organization",
+    "canonical_name": "Glen Moar Properties Ltd",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:12",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "ef9cdd3c9796973d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414815",
+    "updated_at": "2026-02-13T23:56:12.414815"
+  },
+  {
+    "id": "120e483a-1183-4675-8fbf-5861e902f45d",
+    "type": "organization",
+    "canonical_name": "Sulby \nInvestment Holdings Ltd",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:13",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "ef9cdd3c9796973d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414818",
+    "updated_at": "2026-02-13T23:56:12.414818"
+  },
+  {
+    "id": "bb0eb5a1-c86a-4c9c-a0a4-f6f44902b49d",
+    "type": "organization",
+    "canonical_name": "Ballaugh Holdings Ltd",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:14",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "ef9cdd3c9796973d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414821",
+    "updated_at": "2026-02-13T23:56:12.414821"
+  },
+  {
+    "id": "a8c8f267-0526-4027-a38e-0950d95bb8d5",
+    "type": "organization",
+    "canonical_name": "Unicorn Worldwide Holdings Ltd",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:15",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "ef9cdd3c9796973d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414824",
+    "updated_at": "2026-02-13T23:56:12.414824"
+  },
+  {
+    "id": "75921fc5-b724-4353-81ae-30bc9d9a18fd",
+    "type": "organization",
+    "canonical_name": "Quantuma LLP",
+    "aliases": [
+      "Quantuma LLP"
+    ],
+    "metadata": {
+      "ilgs_id": "per:5",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "ef9cdd3c9796973d",
+      "3aae09914f934185"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414827",
+    "updated_at": "2026-02-14T00:32:14.956861"
+  },
+  {
+    "id": "d47a7df7-d382-4271-8919-16c1ecaf7fcc",
+    "type": "person",
+    "canonical_name": "Mr Simon Cooper",
+    "aliases": [
+      "Mr Simon Cooper"
+    ],
+    "metadata": {
+      "ilgs_id": "per:9",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "ef9cdd3c9796973d",
+      "3aae09914f934185",
+      "adf8e7fffe323117"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414830",
+    "updated_at": "2026-02-14T00:32:14.956872"
+  },
+  {
+    "id": "943689ac-03ac-4c09-ab7d-bfe85711e020",
+    "type": "person",
+    "canonical_name": "Mr Simon McNally",
+    "aliases": [
+      "Mr Simon McNally",
+      "Mr Simon \nMcNally"
+    ],
+    "metadata": {
+      "ilgs_id": "per:1",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "ef9cdd3c9796973d",
+      "3aae09914f934185",
+      "adf8e7fffe323117",
+      "22fc2cbd90e417d1",
+      "9b9df3e06b448185",
+      "91ac49566ef6dda7",
+      "424ff00a73867010",
+      "a9977639c9fb54f3",
+      "6d1916f9b7aed04b",
+      "525e30ac6545e9b8",
+      "61cddfa7d69d0dd8"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414833",
+    "updated_at": "2026-02-14T00:32:15.040443"
+  },
+  {
+    "id": "03b12ea2-9253-4a8f-9ab6-6818ab314e31",
+    "type": "location",
+    "canonical_name": "Isle of Man",
+    "aliases": [
+      "Isle of Man"
+    ],
+    "metadata": {
+      "ilgs_id": "loc:0",
+      "location_type": "country",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "ef9cdd3c9796973d",
+      "1414394e42f259fa",
+      "adf8e7fffe323117",
+      "e06090e5516d74ce",
+      "bf38873051b4be01"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414840",
+    "updated_at": "2026-02-14T00:32:14.956914"
+  },
+  {
+    "id": "89f648a5-b754-4c18-ab72-9317dacfd251",
+    "type": "location",
+    "canonical_name": "British \nVirgin Islands",
+    "aliases": [
+      "British \nVirgin Islands",
+      "British Virgin Islands"
+    ],
+    "metadata": {
+      "ilgs_id": "loc:3",
+      "location_type": "country",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "ef9cdd3c9796973d",
+      "3aae09914f934185",
+      "adf8e7fffe323117"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414842",
+    "updated_at": "2026-02-14T00:32:15.041273"
+  },
+  {
+    "id": "1e418fb7-44b1-4724-bb53-aa4dd56a338a",
+    "type": "organization",
+    "canonical_name": "Glen Moar",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:1",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "3aae09914f934185"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414857",
+    "updated_at": "2026-02-13T23:56:12.414857"
+  },
+  {
+    "id": "ad8c8004-72d8-4f6e-a438-4d6ffedafa9b",
+    "type": "organization",
+    "canonical_name": "Sulby",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:2",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "3aae09914f934185"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414860",
+    "updated_at": "2026-02-13T23:56:12.414860"
+  },
+  {
+    "id": "d6ad58e4-57ce-43aa-b7e3-b3587ce94535",
+    "type": "organization",
+    "canonical_name": "Ballaugh",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "3aae09914f934185"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414863",
+    "updated_at": "2026-02-13T23:56:12.414863"
+  },
+  {
+    "id": "e8cc5d6e-ffff-4edf-a918-5eff1d0ed38f",
+    "type": "organization",
+    "canonical_name": "Unicorn",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:4",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "3aae09914f934185"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414866",
+    "updated_at": "2026-02-13T23:56:12.414866"
+  },
+  {
+    "id": "aad99074-ad08-49bf-bf76-8da036e18e4b",
+    "type": "person",
+    "canonical_name": "Dr Smith",
+    "aliases": [
+      "Dr Smith"
+    ],
+    "metadata": {
+      "ilgs_id": "per:10",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "3aae09914f934185",
+      "f1ede5e506fb0ff1",
+      "e87796a2acb55695",
+      "1d6714babc5dba7d",
+      "54fb045652dad1c7",
+      "dfc6cfc122d6c4d0",
+      "3c4e66a8aed8bd4d",
+      "ff49aad83ee547be",
+      "95aa45fe45af17a9",
+      "424ff00a73867010",
+      "a9977639c9fb54f3",
+      "269315e99986b032",
+      "6d1916f9b7aed04b",
+      "52bf811adc843662",
+      "92e256e79583b0b9",
+      "1414394e42f259fa",
+      "adf8e7fffe323117",
+      "7f012bb76dec0e90",
+      "4dfa990a48cab738",
+      "d67ee489e91e9933",
+      "525e30ac6545e9b8",
+      "61cddfa7d69d0dd8",
+      "22fc2cbd90e417d1",
+      "9b9df3e06b448185",
+      "153dc1033843b2c7",
+      "4e8edca7a315ca12",
+      "4d0f9c3e9f9c9bbe",
+      "7a201e6ae53a89b7",
+      "c8baec6caa8f9a00",
+      "dba91a756e51d3c0",
+      "c22345bb4f9d137e",
+      "ab75257646e65fd8",
+      "85f2f91e12dc1432",
+      "4843e566db8d2c32",
+      "6f73671b1807a2b2",
+      "91ac49566ef6dda7",
+      "66158613b20b62ef",
+      "64214a1ab05bdbca",
+      "2139d9748bc854ca",
+      "bf38873051b4be01"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414882",
+    "updated_at": "2026-02-14T00:32:14.957097"
+  },
+  {
+    "id": "cf6ae171-3143-466a-adbf-8dab65931757",
+    "type": "organization",
+    "canonical_name": "SMA",
+    "aliases": [
+      "SMA"
+    ],
+    "metadata": {
+      "ilgs_id": "per:5",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "3aae09914f934185",
+      "dfc6cfc122d6c4d0",
+      "3c4e66a8aed8bd4d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414897",
+    "updated_at": "2026-02-14T00:32:14.957107"
+  },
+  {
+    "id": "a3a3d50e-4966-47f0-92df-dde4b190c085",
+    "type": "person",
+    "canonical_name": "Popplewell J",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:15",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "3aae09914f934185"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414900",
+    "updated_at": "2026-02-13T23:56:12.414900"
+  },
+  {
+    "id": "4b364045-01bd-439e-9555-11559625f203",
+    "type": "organization",
+    "canonical_name": "AS Managers Ltd",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:16",
+      "role": "trustee",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "3aae09914f934185"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:12.414903",
+    "updated_at": "2026-02-13T23:56:12.414903"
+  },
+  {
+    "id": "cc2c7afd-9a49-4d98-8d60-c82f5b03fbd3",
+    "type": "person",
+    "canonical_name": "Messrs Thomas",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:1",
+      "role": "other",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "ed4cfdd4a0983e52"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:32.089765",
+    "updated_at": "2026-02-13T23:56:32.089765"
+  },
+  {
+    "id": "7f64399c-e006-464b-b5e9-8cec7d24c699",
+    "type": "organization",
+    "canonical_name": "Taylor and Orb A.R.L",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:2",
+      "role": "other",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "ed4cfdd4a0983e52"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:32.089768",
+    "updated_at": "2026-02-13T23:56:32.089768"
+  },
+  {
+    "id": "6cf26c41-1029-49a5-bc12-d304b5eac074",
+    "type": "person",
+    "canonical_name": "Messrs Thomas and Taylor",
+    "aliases": [
+      "Messrs Thomas and Taylor"
+    ],
+    "metadata": {
+      "ilgs_id": "per:11",
+      "role": "other",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "26df93454a72547c",
+      "d6454109ae7a55a3"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:32.089796",
+    "updated_at": "2026-02-14T00:32:14.957113"
+  },
+  {
+    "id": "ac5a0b0c-2a9b-406c-9598-85b9036c1bcf",
+    "type": "person",
+    "canonical_name": "COMMERCIAL COURT (QBD)",
+    "aliases": [
+      "COMMERCIAL COURT (QBD)",
+      "COMMERCIAL COURT (KBD)"
+    ],
+    "metadata": {
+      "ilgs_id": "per:1",
+      "role": "enacting_authority",
+      "person_type": "politic",
+      "jurisdiction": "ZA",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "e411f6858ea9783d",
+      "4cc2af4fc6d6d09b",
+      "eb4ce712614ea93d",
+      "d6454109ae7a55a3",
+      "9c4c8bb715ce35e4",
+      "6b50ae28c6fe9fc5"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:54.077190",
+    "updated_at": "2026-02-14T00:32:15.047191"
+  },
+  {
+    "id": "5c1a5319-16c1-4ac0-9df7-68345cb23163",
+    "type": "location",
+    "canonical_name": "7th Floor, Melbourne House, 44-46 \nAldwych, London, WC2B 4LL",
+    "aliases": [
+      "7th Floor, Melbourne House, 44-46 \nAldwych, London, WC2B 4LL",
+      "7th Floor, Melbourne House, 44-46 Aldwych, WC2B 4LL"
+    ],
+    "metadata": {
+      "ilgs_id": "loc:0",
+      "location_type": "address",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "963dd73a3a062386",
+      "d6454109ae7a55a3",
+      "c8baec6caa8f9a00"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:54.077253",
+    "updated_at": "2026-02-14T00:32:15.048450"
+  },
+  {
+    "id": "28698fbb-804a-4e78-bc3f-85c3d5a8d9d4",
+    "type": "person",
+    "canonical_name": "Royal Court of Jersey",
+    "aliases": [
+      "Royal Court of Jersey"
+    ],
+    "metadata": {
+      "ilgs_id": "per:8",
+      "role": "non_party",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "97d4a83668581659",
+      "e77ad669893fda21",
+      "52bf811adc843662"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:54.077298",
+    "updated_at": "2026-02-14T00:32:14.957169"
+  },
+  {
+    "id": "7af8ba19-861b-44ac-90a1-c281b716c89f",
+    "type": "person",
+    "canonical_name": "English Court",
+    "aliases": [
+      "English Court",
+      "English Courts",
+      "English \nCourts"
+    ],
+    "metadata": {
+      "ilgs_id": "per:9",
+      "role": "non_party",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "e77ad669893fda21",
+      "1414394e42f259fa",
+      "adf8e7fffe323117",
+      "54fb045652dad1c7",
+      "92e256e79583b0b9",
+      "52bf811adc843662"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:54.077330",
+    "updated_at": "2026-02-14T00:32:15.050011"
+  },
+  {
+    "id": "cb65f711-8d79-4f98-8b7c-d199c8c55211",
+    "type": "person",
+    "canonical_name": "Parliament",
+    "aliases": [
+      "Parliament"
+    ],
+    "metadata": {
+      "ilgs_id": "per:7",
+      "role": "enacting_authority",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "e77ad669893fda21",
+      "f1ede5e506fb0ff1"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:54.077340",
+    "updated_at": "2026-02-14T00:32:14.957185"
+  },
+  {
+    "id": "017f56ac-4285-4be2-bee4-3fbd0d016caa",
+    "type": "person",
+    "canonical_name": "Jersey Court",
+    "aliases": [
+      "Jersey Court"
+    ],
+    "metadata": {
+      "ilgs_id": "per:7",
+      "role": "prior_authority",
+      "person_type": "politic",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "f1ede5e506fb0ff1",
+      "e87796a2acb55695",
+      "92e256e79583b0b9"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:54.077354",
+    "updated_at": "2026-02-14T00:32:14.957196"
+  },
+  {
+    "id": "8e33d3e8-3ac8-4026-a01d-52641a52e725",
+    "type": "person",
+    "canonical_name": "Taylor",
+    "aliases": [
+      "Taylor"
+    ],
+    "metadata": {
+      "ilgs_id": "per:8",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "f1ede5e506fb0ff1",
+      "e87796a2acb55695",
+      "1d6714babc5dba7d",
+      "52bf811adc843662",
+      "d67ee489e91e9933",
+      "85f2f91e12dc1432",
+      "4843e566db8d2c32",
+      "66158613b20b62ef"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:54.077370",
+    "updated_at": "2026-02-14T00:32:14.957228"
+  },
+  {
+    "id": "b2e19a4a-6135-485c-b588-2effbcfea8a8",
+    "type": "organization",
+    "canonical_name": "Bedell Cristin",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:9",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "f1ede5e506fb0ff1"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:54.077383",
+    "updated_at": "2026-02-13T23:56:54.077383"
+  },
+  {
+    "id": "537709c6-f1f5-4be0-8a49-bf6b4d79d492",
+    "type": "person",
+    "canonical_name": "Mr McNally",
+    "aliases": [
+      "Mr McNally"
+    ],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "e87796a2acb55695",
+      "1d6714babc5dba7d",
+      "64214a1ab05bdbca"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:54.077433",
+    "updated_at": "2026-02-14T00:32:14.957238"
+  },
+  {
+    "id": "3cd3892f-4916-4dbe-a66a-6a2131f74f34",
+    "type": "organization",
+    "canonical_name": "St Paul\u2019s Solicitors (in \nliquidation)",
+    "aliases": [
+      "St Paul\u2019s Solicitors (in \nliquidation)"
+    ],
+    "metadata": {
+      "ilgs_id": "per:6",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "e87796a2acb55695",
+      "1d6714babc5dba7d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:54.077443",
+    "updated_at": "2026-02-14T00:32:14.957244"
+  },
+  {
+    "id": "68a02e70-8983-4dca-bceb-157fdc499f22",
+    "type": "person",
+    "canonical_name": "Mr Andrew Crossley",
+    "aliases": [
+      "Mr Andrew Crossley"
+    ],
+    "metadata": {
+      "ilgs_id": "per:7",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "e87796a2acb55695",
+      "1d6714babc5dba7d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:54.077446",
+    "updated_at": "2026-02-14T00:32:14.957250"
+  },
+  {
+    "id": "434be396-a07e-4b03-a3eb-565da0312456",
+    "type": "organization",
+    "canonical_name": "Taylor Rose",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:8",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "1d6714babc5dba7d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:54.077479",
+    "updated_at": "2026-02-13T23:56:54.077479"
+  },
+  {
+    "id": "eb2d64ea-edde-4752-8707-c761dc0fd6f5",
+    "type": "person",
+    "canonical_name": "Ms Dawna Stickler",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:9",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "1d6714babc5dba7d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:54.077482",
+    "updated_at": "2026-02-13T23:56:54.077482"
+  },
+  {
+    "id": "c4d23f26-f045-43d5-807f-b991be77dfe0",
+    "type": "person",
+    "canonical_name": "Smith Parties",
+    "aliases": [
+      "Smith Parties"
+    ],
+    "metadata": {
+      "ilgs_id": "per:5",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "54fb045652dad1c7",
+      "7f012bb76dec0e90",
+      "4dfa990a48cab738",
+      "2139d9748bc854ca",
+      "bf38873051b4be01"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:54.077502",
+    "updated_at": "2026-02-14T00:32:14.957269"
+  },
+  {
+    "id": "90d2a91e-294f-4177-b36d-90c4a76ac81a",
+    "type": "person",
+    "canonical_name": "this \nCourt",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:6",
+      "role": "enacting_authority",
+      "person_type": "politic",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "9cacf1555cee61c8"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-13T23:56:54.077546",
+    "updated_at": "2026-02-13T23:56:54.077546"
+  },
+  {
+    "id": "105797a7-16c7-4fce-96cc-988af273c44c",
+    "type": "person",
+    "canonical_name": "the Viscount of the Royal Court of Jersey (qua Orb)",
+    "aliases": [
+      "the \nViscount of the Royal Court of Jersey (qua Orb)"
+    ],
+    "metadata": {
+      "ilgs_id": "per:8",
+      "role": "other",
+      "person_type": "natural",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d6454109ae7a55a3",
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:09.817627",
+    "updated_at": "2026-02-14T00:32:15.056987"
+  },
+  {
+    "id": "1ff08e44-1a44-4753-9377-82d2312260a5",
+    "type": "person",
+    "canonical_name": "Mr Ticehurst",
+    "aliases": [
+      "Mr Ticehurst"
+    ],
+    "metadata": {
+      "ilgs_id": "per:9",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d6454109ae7a55a3",
+      "dfc6cfc122d6c4d0",
+      "66158613b20b62ef"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:09.817637",
+    "updated_at": "2026-02-14T00:32:14.957381"
+  },
+  {
+    "id": "9cfc3ca6-bb4a-40e8-869a-4ccc43feaf1b",
+    "type": "person",
+    "canonical_name": "Court",
+    "aliases": [
+      "Court"
+    ],
+    "metadata": {
+      "ilgs_id": "per:1",
+      "role": "enacting_authority",
+      "person_type": "politic",
+      "jurisdiction": null,
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "dfc6cfc122d6c4d0",
+      "3c4e66a8aed8bd4d",
+      "de81c0077ce40289",
+      "968ba68a5f39937b"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:09.817677",
+    "updated_at": "2026-02-14T00:32:14.957395"
+  },
+  {
+    "id": "17e12d7f-79f4-47c4-afac-30571f7d992d",
+    "type": "person",
+    "canonical_name": "Anthony McNally",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:6",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "dfc6cfc122d6c4d0"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:09.817690",
+    "updated_at": "2026-02-14T00:15:09.817690"
+  },
+  {
+    "id": "cd579b4f-d6b0-4582-934e-df9823492d6c",
+    "type": "organization",
+    "canonical_name": "Wyndell Property \nManagement Limited (Wyndell),",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:7",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "dfc6cfc122d6c4d0"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:09.817693",
+    "updated_at": "2026-02-14T00:15:09.817693"
+  },
+  {
+    "id": "2bd5a16f-e160-4dd6-b3b7-cdc0958d7759",
+    "type": "person",
+    "canonical_name": "Anthony Smith",
+    "aliases": [
+      "Mr Anthony Smith"
+    ],
+    "metadata": {
+      "ilgs_id": "per:1",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "dfc6cfc122d6c4d0",
+      "d169b7abfe24330e",
+      "66158613b20b62ef"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:09.817696",
+    "updated_at": "2026-02-14T00:32:15.060236"
+  },
+  {
+    "id": "780f2a4a-0a77-43a0-9375-3ddbc3fc6218",
+    "type": "organization",
+    "canonical_name": "Shoreline",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:9",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "dfc6cfc122d6c4d0"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:09.817699",
+    "updated_at": "2026-02-14T00:15:09.817700"
+  },
+  {
+    "id": "dbd4b027-8b6b-4abf-8718-e43c925c8284",
+    "type": "person",
+    "canonical_name": "Minardi",
+    "aliases": [
+      "Minardi"
+    ],
+    "metadata": {
+      "ilgs_id": "per:7",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "dfc6cfc122d6c4d0",
+      "3c4e66a8aed8bd4d",
+      "1414394e42f259fa"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:09.817703",
+    "updated_at": "2026-02-14T00:32:14.957406"
+  },
+  {
+    "id": "d28dc2a9-a4f3-42d4-be4e-778afc8a13fb",
+    "type": "organization",
+    "canonical_name": "MDL",
+    "aliases": [
+      "MDL"
+    ],
+    "metadata": {
+      "ilgs_id": "per:6",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "dfc6cfc122d6c4d0",
+      "3c4e66a8aed8bd4d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:09.817709",
+    "updated_at": "2026-02-14T00:32:14.957411"
+  },
+  {
+    "id": "0bf4f525-20dd-4f01-b81a-eaa3ee809c0d",
+    "type": "person",
+    "canonical_name": "Enforcement Receivers",
+    "aliases": [
+      "Enforcement Receivers",
+      "Enforcement \nReceivers"
+    ],
+    "metadata": {
+      "ilgs_id": "per:1",
+      "role": "non_party",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "3c4e66a8aed8bd4d",
+      "a9977639c9fb54f3",
+      "52bf811adc843662",
+      "7f012bb76dec0e90",
+      "4dfa990a48cab738",
+      "19289be19c2d86f2",
+      "b0fa65c007bda02c",
+      "c22345bb4f9d137e",
+      "92e256e79583b0b9",
+      "04fb11097583804d",
+      "22fc2cbd90e417d1"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:09.817752",
+    "updated_at": "2026-02-14T00:32:15.061282"
+  },
+  {
+    "id": "ca2ab09e-ff7f-4db0-8432-f41bac8944f8",
+    "type": "person",
+    "canonical_name": "High Court",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:8",
+      "role": "non_party",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "3c4e66a8aed8bd4d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:09.817755",
+    "updated_at": "2026-02-14T00:15:09.817756"
+  },
+  {
+    "id": "6aa0662f-02e4-4cb7-8f17-5b1a7234ea58",
+    "type": "person",
+    "canonical_name": "Administrative Court",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:10",
+      "role": "non_party",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "3c4e66a8aed8bd4d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:09.817762",
+    "updated_at": "2026-02-14T00:15:09.817762"
+  },
+  {
+    "id": "fc08198e-38e8-4935-9006-2bbf4c18086c",
+    "type": "person",
+    "canonical_name": "KING\u2019S BENCH DIVISION",
+    "aliases": [
+      "King's Bench Division"
+    ],
+    "metadata": {
+      "ilgs_id": "per:2",
+      "role": "non_party",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "48148a73930d42d8",
+      "424ff00a73867010",
+      "6d1916f9b7aed04b"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:15.730849",
+    "updated_at": "2026-02-14T00:32:15.062681"
+  },
+  {
+    "id": "3b352166-798e-478b-a70a-f5ee6b0669b2",
+    "type": "person",
+    "canonical_name": "RUPERT CHARLES BRADSHAW TICEHURST",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:2",
+      "role": "applicant",
+      "person_type": "natural",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "48148a73930d42d8"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:15.730860",
+    "updated_at": "2026-02-14T00:15:15.730860"
+  },
+  {
+    "id": "a3374124-d0ff-4b74-9256-3a9c6a954b7c",
+    "type": "person",
+    "canonical_name": "ROGER JAMES TAYLOR",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "applicant",
+      "person_type": "natural",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "48148a73930d42d8"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:15.730864",
+    "updated_at": "2026-02-14T00:15:15.730864"
+  },
+  {
+    "id": "ebf698a3-b38d-4afb-86ed-267c8a2f6b4f",
+    "type": "organization",
+    "canonical_name": "Joint Liquidators",
+    "aliases": [
+      "Joint Liquidators"
+    ],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35",
+      "7f012bb76dec0e90",
+      "4dfa990a48cab738",
+      "e06090e5516d74ce"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:15.730932",
+    "updated_at": "2026-02-14T00:32:14.957524"
+  },
+  {
+    "id": "8599ee96-02dd-406b-8de3-645cc62324a2",
+    "type": "person",
+    "canonical_name": "David Pike",
+    "aliases": [
+      "David Pike"
+    ],
+    "metadata": {
+      "ilgs_id": "per:13",
+      "role": "other",
+      "person_type": "natural",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:15.730938",
+    "updated_at": "2026-02-14T00:32:14.957543"
+  },
+  {
+    "id": "52585a0d-5efc-4034-a7e7-3dcc0eb348c7",
+    "type": "person",
+    "canonical_name": "Ms Jordan",
+    "aliases": [
+      "Ms Jordan"
+    ],
+    "metadata": {
+      "ilgs_id": "per:14",
+      "role": "trustee",
+      "person_type": "natural",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:15.730941",
+    "updated_at": "2026-02-14T00:32:14.957562"
+  },
+  {
+    "id": "bb0552fa-0415-42bd-be2a-0507a6c0f4b7",
+    "type": "person",
+    "canonical_name": "Mr Graham",
+    "aliases": [
+      "Mr Graham"
+    ],
+    "metadata": {
+      "ilgs_id": "per:15",
+      "role": "trustee",
+      "person_type": "natural",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:15.730945",
+    "updated_at": "2026-02-14T00:32:14.957580"
+  },
+  {
+    "id": "da599134-2cc1-4ae2-9231-905239955975",
+    "type": "organization",
+    "canonical_name": "KPMG-Interpath",
+    "aliases": [
+      "KPMG-Interpath",
+      "KPMG Interpath"
+    ],
+    "metadata": {
+      "ilgs_id": "per:0",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "c2565d58cba1a24e",
+      "657909048efc8469",
+      "8ea83b018762928c",
+      "42d69cba02d7f007",
+      "82bf721666da4b35",
+      "592060c3ba1a3613",
+      "686f2b67c1930709",
+      "b0fa65c007bda02c"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:15.730951",
+    "updated_at": "2026-02-14T00:32:15.065597"
+  },
+  {
+    "id": "67506d1d-0269-417c-917d-2e1b7b40904f",
+    "type": "person",
+    "canonical_name": "Chancery Division",
+    "aliases": [
+      "Chancery Division"
+    ],
+    "metadata": {
+      "ilgs_id": "per:0",
+      "role": "non_party",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "424ff00a73867010",
+      "6d1916f9b7aed04b",
+      "59fcd3a3eb291809",
+      "4e8edca7a315ca12",
+      "4d0f9c3e9f9c9bbe",
+      "7a201e6ae53a89b7"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:15.731259",
+    "updated_at": "2026-02-14T00:32:14.957623"
+  },
+  {
+    "id": "c51f4547-0f3e-43fa-8c44-2bd28f65f278",
+    "type": "person",
+    "canonical_name": "Trust Receivers",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:7",
+      "role": "non_party",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "a9977639c9fb54f3"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:15.731311",
+    "updated_at": "2026-02-14T00:15:15.731311"
+  },
+  {
+    "id": "5f333168-67ef-489d-b4a1-cdad6b4d88e2",
+    "type": "person",
+    "canonical_name": "Messrs Milsom and Standish",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:8",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "a9977639c9fb54f3"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:15.731314",
+    "updated_at": "2026-02-14T00:15:15.731314"
+  },
+  {
+    "id": "7e40d38b-b6a7-4b0a-bbff-9331f58dc072",
+    "type": "location",
+    "canonical_name": "80 Strand, London, WC2R 0DT,",
+    "aliases": [
+      "80 Strand, London, WC2R 0DT,"
+    ],
+    "metadata": {
+      "ilgs_id": "loc:1",
+      "location_type": "address",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "4cc2af4fc6d6d09b",
+      "eb4ce712614ea93d"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253559",
+    "updated_at": "2026-02-14T00:32:14.957654"
+  },
+  {
+    "id": "ee7631eb-e246-4d3b-b1b5-25fb386f411e",
+    "type": "organization",
+    "canonical_name": "Stewarts \nLaw LLP",
+    "aliases": [
+      "Stewarts Law \nLLP"
+    ],
+    "metadata": {
+      "ilgs_id": "per:6",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "269315e99986b032",
+      "6f73671b1807a2b2"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253604",
+    "updated_at": "2026-02-14T00:32:15.067420"
+  },
+  {
+    "id": "1a54b291-0c90-49c6-9f97-e89eb63ed0af",
+    "type": "organization",
+    "canonical_name": "liquidators of a group of BVI and Manx companies",
+    "aliases": [
+      "liquidators of a group of BVI and Manx companies"
+    ],
+    "metadata": {
+      "ilgs_id": "per:7",
+      "role": "other",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "269315e99986b032",
+      "6f73671b1807a2b2"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253608",
+    "updated_at": "2026-02-14T00:32:14.957660"
+  },
+  {
+    "id": "6100d6c4-3c2f-4d3f-899d-45db943f911b",
+    "type": "person",
+    "canonical_name": "Mr Franek Sodzawiczny",
+    "aliases": [
+      "Mr Franek Sodzawiczny"
+    ],
+    "metadata": {
+      "ilgs_id": "per:9",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "269315e99986b032",
+      "6f73671b1807a2b2"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253617",
+    "updated_at": "2026-02-14T00:32:14.957666"
+  },
+  {
+    "id": "654a22b8-45a7-42f4-ae95-85446a9f4cc4",
+    "type": "location",
+    "canonical_name": "BVI",
+    "aliases": [
+      "BVI"
+    ],
+    "metadata": {
+      "ilgs_id": "loc:0",
+      "location_type": "country",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "269315e99986b032",
+      "6f73671b1807a2b2"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253621",
+    "updated_at": "2026-02-14T00:32:14.957672"
+  },
+  {
+    "id": "b7bd059d-3547-423a-ad26-8b5646406bc2",
+    "type": "location",
+    "canonical_name": "Manx",
+    "aliases": [
+      "Manx"
+    ],
+    "metadata": {
+      "ilgs_id": "loc:1",
+      "location_type": "country",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "269315e99986b032",
+      "6f73671b1807a2b2"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253624",
+    "updated_at": "2026-02-14T00:32:14.957678"
+  },
+  {
+    "id": "19d099a2-949e-4846-99d9-4a97c603fcdf",
+    "type": "person",
+    "canonical_name": "SFO",
+    "aliases": [
+      "SFO"
+    ],
+    "metadata": {
+      "ilgs_id": "per:9",
+      "role": "non_party",
+      "person_type": "politic",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "6d1916f9b7aed04b",
+      "52bf811adc843662",
+      "bf38873051b4be01"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253674",
+    "updated_at": "2026-02-14T00:32:14.957688"
+  },
+  {
+    "id": "5f1d4235-adc3-4348-b8d9-c53c1621e575",
+    "type": "person",
+    "canonical_name": "Mr Garrood",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:8",
+      "role": "defense_counsel",
+      "person_type": "natural",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "92e256e79583b0b9"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253758",
+    "updated_at": "2026-02-14T00:15:39.253758"
+  },
+  {
+    "id": "a0610610-3be1-44bc-b9a3-ce444700e7c7",
+    "type": "organization",
+    "canonical_name": "Orb",
+    "aliases": [
+      "Orb"
+    ],
+    "metadata": {
+      "ilgs_id": "per:1",
+      "role": "claimant",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "92e256e79583b0b9",
+      "ab75257646e65fd8",
+      "85f2f91e12dc1432"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253761",
+    "updated_at": "2026-02-14T00:32:14.957709"
+  },
+  {
+    "id": "c1330e22-95f5-486d-9014-98bcd2638665",
+    "type": "person",
+    "canonical_name": "Mr James Cockburn",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:5",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "1414394e42f259fa"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253793",
+    "updated_at": "2026-02-14T00:15:39.253793"
+  },
+  {
+    "id": "fad4c9a1-6c56-4549-92ab-e796afa9b60a",
+    "type": "person",
+    "canonical_name": "Bryan J",
+    "aliases": [
+      "Bryan J"
+    ],
+    "metadata": {
+      "ilgs_id": "per:5",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "1414394e42f259fa",
+      "7f012bb76dec0e90"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253796",
+    "updated_at": "2026-02-14T00:32:14.957715"
+  },
+  {
+    "id": "8ae27963-b405-4c53-bcb5-dc99291c7909",
+    "type": "person",
+    "canonical_name": "Isle of Man court",
+    "aliases": [
+      "Isle of Man court"
+    ],
+    "metadata": {
+      "ilgs_id": "per:2",
+      "role": "prior_authority",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "1414394e42f259fa",
+      "adf8e7fffe323117"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253805",
+    "updated_at": "2026-02-14T00:32:14.957722"
+  },
+  {
+    "id": "d93b8170-e2cc-45b1-a9b1-d40a547bc44f",
+    "type": "organization",
+    "canonical_name": "LitFin",
+    "aliases": [
+      "LitFin"
+    ],
+    "metadata": {
+      "ilgs_id": "per:2",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "adf8e7fffe323117",
+      "4d4c7ebab82b69b4",
+      "153dc1033843b2c7",
+      "66158613b20b62ef",
+      "e06090e5516d74ce"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253845",
+    "updated_at": "2026-02-14T00:32:14.957742"
+  },
+  {
+    "id": "a1056488-eff7-4098-b9dd-bb7f16ffa243",
+    "type": "location",
+    "canonical_name": "Czech Republic",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "loc:1",
+      "location_type": "country",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "adf8e7fffe323117"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253863",
+    "updated_at": "2026-02-14T00:15:39.253863"
+  },
+  {
+    "id": "72483884-5e45-4f5a-a9de-944b11974d21",
+    "type": "location",
+    "canonical_name": "Republic \nof the Marshall Islands",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "loc:4",
+      "location_type": "country",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "adf8e7fffe323117"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253871",
+    "updated_at": "2026-02-14T00:15:39.253872"
+  },
+  {
+    "id": "81280af2-c098-4eec-be98-adc517965dce",
+    "type": "person",
+    "canonical_name": "Viscount",
+    "aliases": [
+      "Viscount"
+    ],
+    "metadata": {
+      "ilgs_id": "per:7",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "7f012bb76dec0e90",
+      "4dfa990a48cab738"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253915",
+    "updated_at": "2026-02-14T00:32:14.957748"
+  },
+  {
+    "id": "da194fe0-e30d-47be-870a-97faa2c5b2dd",
+    "type": "organization",
+    "canonical_name": "Arena Companies",
+    "aliases": [
+      "Arena Companies",
+      "Non-Arena Companies"
+    ],
+    "metadata": {
+      "ilgs_id": "per:10",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d67ee489e91e9933",
+      "bf38873051b4be01",
+      "d169b7abfe24330e"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253978",
+    "updated_at": "2026-02-14T00:32:15.070552"
+  },
+  {
+    "id": "4a07c4f9-53dc-4267-b3aa-7e6f74b71a43",
+    "type": "organization",
+    "canonical_name": "Bodega",
+    "aliases": [
+      "Bodega"
+    ],
+    "metadata": {
+      "ilgs_id": "per:11",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d67ee489e91e9933",
+      "bf38873051b4be01"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253982",
+    "updated_at": "2026-02-14T00:32:14.957760"
+  },
+  {
+    "id": "b8d9ac89-0e30-4bc3-b67a-864899b7ec2e",
+    "type": "organization",
+    "canonical_name": "Candey LLP",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:8",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d67ee489e91e9933"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253985",
+    "updated_at": "2026-02-14T00:15:39.253985"
+  },
+  {
+    "id": "1f144300-592c-4e0c-9c37-a72f243d6028",
+    "type": "person",
+    "canonical_name": "Mr Pelz",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:9",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d67ee489e91e9933"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253988",
+    "updated_at": "2026-02-14T00:15:39.253988"
+  },
+  {
+    "id": "4f4f82c3-32cb-4dd9-a3a5-b6772ddb83b9",
+    "type": "location",
+    "canonical_name": "Flat 24 Hamilton House",
+    "aliases": [
+      "Flat 2 Hamilton House",
+      "Flat 22 Hamilton House",
+      "Flat 17 Hamilton House",
+      "Flat 12 Hamilton House"
+    ],
+    "metadata": {
+      "ilgs_id": "loc:7",
+      "location_type": "address",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d67ee489e91e9933"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.253994",
+    "updated_at": "2026-02-14T00:32:15.070959"
+  },
+  {
+    "id": "daaaff50-5054-432b-8673-c29af043fbc6",
+    "type": "location",
+    "canonical_name": "Hamilton House",
+    "aliases": [
+      "Hamilton House"
+    ],
+    "metadata": {
+      "ilgs_id": "loc:0",
+      "location_type": "other",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d67ee489e91e9933",
+      "66158613b20b62ef"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.254002",
+    "updated_at": "2026-02-14T00:32:14.957766"
+  },
+  {
+    "id": "ba2f1ceb-7d51-4cc8-b91f-295735ff8ab3",
+    "type": "location",
+    "canonical_name": "Flats 11, 21 and 23 Hamilton House",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "loc:5",
+      "location_type": "address",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d67ee489e91e9933"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.254005",
+    "updated_at": "2026-02-14T00:15:39.254006"
+  },
+  {
+    "id": "595a12e1-2485-40bf-b008-a39c8c67d381",
+    "type": "location",
+    "canonical_name": "Montagu Square",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "loc:8",
+      "location_type": "address",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d67ee489e91e9933"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:39.254014",
+    "updated_at": "2026-02-14T00:15:39.254014"
+  },
+  {
+    "id": "d636dd15-54d5-4489-a4de-d274b2b319a6",
+    "type": "person",
+    "canonical_name": "Commercial Court Listing Office",
+    "aliases": [
+      "Commercial Court Listing Office"
+    ],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "non_party",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "59fcd3a3eb291809",
+      "525e30ac6545e9b8"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:56.737446",
+    "updated_at": "2026-02-14T00:32:14.957778"
+  },
+  {
+    "id": "445c7e49-dfcc-4307-b125-d153d650a187",
+    "type": "organization",
+    "canonical_name": "Stephenson Harwood",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "19289be19c2d86f2"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:56.737533",
+    "updated_at": "2026-02-14T00:15:56.737534"
+  },
+  {
+    "id": "eba7b3c5-a882-4931-81f5-55bebb972882",
+    "type": "organization",
+    "canonical_name": "LitFin Justice s.r.o.",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:4",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": null,
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "9b9df3e06b448185"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:56.737594",
+    "updated_at": "2026-02-14T00:15:56.737594"
+  },
+  {
+    "id": "51a55320-3f86-4800-8c04-cbf9918db518",
+    "type": "person",
+    "canonical_name": "Tom\u00e1\u0161 V\u00edt",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:5",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": null,
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "9b9df3e06b448185"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:56.737597",
+    "updated_at": "2026-02-14T00:15:56.737597"
+  },
+  {
+    "id": "68bed4e2-dc71-43fd-b27f-b2273e25447f",
+    "type": "organization",
+    "canonical_name": "LitFin group",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:6",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": null,
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "9b9df3e06b448185"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:15:56.737600",
+    "updated_at": "2026-02-14T00:15:56.737601"
+  },
+  {
+    "id": "6641a347-b733-4aa5-b82d-c68db3071461",
+    "type": "organization",
+    "canonical_name": "Harcus \nParker",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "767a01c299610e70"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:05.994907",
+    "updated_at": "2026-02-14T00:16:05.994907"
+  },
+  {
+    "id": "5d76d41a-a3f6-4325-bb15-24d64a6a1a41",
+    "type": "person",
+    "canonical_name": "Solicitors \nRegulation Authority",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:1",
+      "role": "non_party",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "c8baec6caa8f9a00"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:23.685967",
+    "updated_at": "2026-02-14T00:16:23.685967"
+  },
+  {
+    "id": "da5105da-a993-4ac6-ad49-a5ddcac1cb9a",
+    "type": "person",
+    "canonical_name": "Royal Courts of Justice",
+    "aliases": [
+      "Royal Courts of Justice"
+    ],
+    "metadata": {
+      "ilgs_id": "loc:0",
+      "role": "non_party",
+      "person_type": "politic",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher",
+      "location_type": "address"
+    },
+    "source_chunks": [
+      "c8baec6caa8f9a00",
+      "dba91a756e51d3c0"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:23.685970",
+    "updated_at": "2026-02-14T00:32:14.957784"
+  },
+  {
+    "id": "b9c833fc-56c0-4bd0-945c-01291f10aef1",
+    "type": "person",
+    "canonical_name": "Judge",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "other",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "c8baec6caa8f9a00"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:23.685974",
+    "updated_at": "2026-02-14T00:16:23.685974"
+  },
+  {
+    "id": "787c5f7f-d9ca-4899-96ad-dd65e98482c3",
+    "type": "person",
+    "canonical_name": "Mr Cockburn",
+    "aliases": [
+      "Mr Cockburn"
+    ],
+    "metadata": {
+      "ilgs_id": "per:2",
+      "role": "other",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "c8baec6caa8f9a00",
+      "dba91a756e51d3c0",
+      "592060c3ba1a3613"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:23.685983",
+    "updated_at": "2026-02-14T00:32:14.957795"
+  },
+  {
+    "id": "9a847fdf-6fc1-45bf-a842-dae95397a069",
+    "type": "location",
+    "canonical_name": "Royal Courts of Justice \nCommercial Court \n7 Rolls Building \nFetter Lane \nLondon  \nEC4A 1NL",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "loc:2",
+      "location_type": "address",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "c8baec6caa8f9a00"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:23.685997",
+    "updated_at": "2026-02-14T00:16:23.685997"
+  },
+  {
+    "id": "abbbfb45-07fb-4ec9-b7be-b1760942f20c",
+    "type": "organization",
+    "canonical_name": "Trust \nReceivers",
+    "aliases": [
+      "Trust \nReceivers"
+    ],
+    "metadata": {
+      "ilgs_id": "per:1",
+      "role": "other",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "b0fa65c007bda02c",
+      "c22345bb4f9d137e"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:23.686116",
+    "updated_at": "2026-02-14T00:32:14.957811"
+  },
+  {
+    "id": "a695c1af-16d1-4cd2-ba4e-f5df5777dbf2",
+    "type": "person",
+    "canonical_name": "Mr Crossley",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:6",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "c22345bb4f9d137e"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:23.686142",
+    "updated_at": "2026-02-14T00:16:23.686142"
+  },
+  {
+    "id": "0d203e1d-547a-4165-be19-8c99536a9d02",
+    "type": "location",
+    "canonical_name": "Hamilton House properties",
+    "aliases": [
+      "Hamilton House properties"
+    ],
+    "metadata": {
+      "ilgs_id": "loc:0",
+      "location_type": "other",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "c22345bb4f9d137e",
+      "ab75257646e65fd8"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:23.686148",
+    "updated_at": "2026-02-14T00:32:14.957816"
+  },
+  {
+    "id": "26047307-242f-4c6f-9343-8447cd3637dd",
+    "type": "organization",
+    "canonical_name": "Trustees",
+    "aliases": [
+      "Trustees"
+    ],
+    "metadata": {
+      "ilgs_id": "per:3",
+      "role": "trustee",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "ab75257646e65fd8",
+      "85f2f91e12dc1432"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:23.686172",
+    "updated_at": "2026-02-14T00:32:14.957822"
+  },
+  {
+    "id": "e6bcc6e5-304d-4e33-881c-b25f84f43674",
+    "type": "person",
+    "canonical_name": "Settlement Parties",
+    "aliases": [
+      "Settlement Parties"
+    ],
+    "metadata": {
+      "ilgs_id": "per:1",
+      "role": "other",
+      "person_type": "corporate",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "4843e566db8d2c32",
+      "ba6e420e3570fba9",
+      "bf38873051b4be01"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:23.686216",
+    "updated_at": "2026-02-14T00:32:14.957832"
+  },
+  {
+    "id": "c4abde16-f568-46b3-86d9-509379b75696",
+    "type": "organization",
+    "canonical_name": "Conduit",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:7",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d169b7abfe24330e"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:37.891331",
+    "updated_at": "2026-02-14T00:16:37.891331"
+  },
+  {
+    "id": "e5c453d7-09d5-4dd2-8b1e-82c5ba649c32",
+    "type": "organization",
+    "canonical_name": "LCL",
+    "aliases": [
+      "LCL"
+    ],
+    "metadata": {
+      "ilgs_id": "per:0",
+      "role": "non_party",
+      "person_type": "corporate",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d169b7abfe24330e",
+      "66158613b20b62ef"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:37.891334",
+    "updated_at": "2026-02-14T00:32:14.957844"
+  },
+  {
+    "id": "098e11e5-7ff7-4bd5-b3bd-3892a39e5bed",
+    "type": "person",
+    "canonical_name": "Ms Stickler",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:9",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d169b7abfe24330e"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:37.891337",
+    "updated_at": "2026-02-14T00:16:37.891338"
+  },
+  {
+    "id": "84c92bbe-ebce-413c-8777-3bb46fdc8305",
+    "type": "location",
+    "canonical_name": "Hamilton House development",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "loc:0",
+      "location_type": "other",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "d169b7abfe24330e"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:37.891348",
+    "updated_at": "2026-02-14T00:16:37.891348"
+  },
+  {
+    "id": "e6c064b9-55cf-4b88-8846-35979a6f2875",
+    "type": "person",
+    "canonical_name": "Gerald",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:2",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "66158613b20b62ef"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:37.891363",
+    "updated_at": "2026-02-14T00:16:37.891363"
+  },
+  {
+    "id": "2d9e2d31-5966-4a8c-8015-2955b924cb2b",
+    "type": "person",
+    "canonical_name": "Dr Imogen Smith",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:6",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "66158613b20b62ef"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:37.891377",
+    "updated_at": "2026-02-14T00:16:37.891377"
+  },
+  {
+    "id": "6fa8b49b-0fa9-4058-8a3e-6f3040b1f486",
+    "type": "person",
+    "canonical_name": "Ms Iona Smith",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:7",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "66158613b20b62ef"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:37.891380",
+    "updated_at": "2026-02-14T00:16:37.891380"
+  },
+  {
+    "id": "2dc37a7d-b109-426a-8b69-ce68d9b12315",
+    "type": "person",
+    "canonical_name": "HHJ Pelling KC",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:4",
+      "role": "prior_authority",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "e06090e5516d74ce"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:37.891419",
+    "updated_at": "2026-02-14T00:16:37.891419"
+  },
+  {
+    "id": "abdc1566-f654-40cc-9c73-26467e4d92fa",
+    "type": "person",
+    "canonical_name": "ERs",
+    "aliases": [
+      "ERs"
+    ],
+    "metadata": {
+      "ilgs_id": "per:5",
+      "role": "respondent",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "e06090e5516d74ce",
+      "ba6e420e3570fba9"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:37.891423",
+    "updated_at": "2026-02-14T00:32:14.957850"
+  },
+  {
+    "id": "3515f85a-b058-47d0-883d-26f49d991fe9",
+    "type": "person",
+    "canonical_name": "Mr Sodzawiczny",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:6",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB-ENG",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "e06090e5516d74ce"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:37.891426",
+    "updated_at": "2026-02-14T00:16:37.891426"
+  },
+  {
+    "id": "710e11e4-7834-4d65-bae9-ec9e7d166e15",
+    "type": "person",
+    "canonical_name": "Mr Standish",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:7",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "bf38873051b4be01"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:37.891525",
+    "updated_at": "2026-02-14T00:16:37.891526"
+  },
+  {
+    "id": "10a29e82-31f1-45d8-be88-8dc43aea3ba0",
+    "type": "person",
+    "canonical_name": "Stacey Barnes",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "per:8",
+      "role": "non_party",
+      "person_type": "natural",
+      "jurisdiction": "GB",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "bf38873051b4be01"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:37.891528",
+    "updated_at": "2026-02-14T00:16:37.891529"
+  },
+  {
+    "id": "3687c281-78bc-4814-8f40-641289056d04",
+    "type": "location",
+    "canonical_name": "Hamilton House \nflats",
+    "aliases": [],
+    "metadata": {
+      "ilgs_id": "loc:1",
+      "location_type": "other",
+      "source": "kanon-2-enricher"
+    },
+    "source_chunks": [
+      "bf38873051b4be01"
+    ],
+    "confidence": 1.0,
+    "user_verified": false,
+    "created_at": "2026-02-14T00:16:37.891550",
+    "updated_at": "2026-02-14T00:16:37.891550"
+  }
+]

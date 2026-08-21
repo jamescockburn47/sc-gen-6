@@ -27,7 +27,7 @@ class MainWindow(QMainWindow):
         """Initialize main window."""
         super().__init__()
         self.settings = get_settings()
-        self.setWindowTitle("SC Gen 6 - Litigation Support RAG")
+        self.setWindowTitle("Project XX — Litigation Support RAG")
         self.setGeometry(100, 100, 1400, 900)
 
         # Create menu bar

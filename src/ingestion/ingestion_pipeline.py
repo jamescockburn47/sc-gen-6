@@ -215,7 +215,8 @@ class IngestionPipeline:
         4. Store in ChromaDB vector store
         5. Store in BM25/FTS5 keyword index
         6. Update document catalog
-        7. Generate summaries (optional, parallel, GPU model)
+        7. Kanon 2 Enrichment → knowledge graph entities (optional)
+        8. Generate summaries (optional, parallel, GPU model)
         
         Args:
             file_path: Path to document file
@@ -241,7 +242,7 @@ class IngestionPipeline:
         
         try:
             # Step 1: Parse document
-            logger.info(f"[1/7] Parsing {file_path.name}...")
+            logger.info(f"[1/8] Parsing {file_path.name}...")
             parsed_doc = self.parse_document(file_path, document_type)
             if not parsed_doc:
                 logger.error(f"Failed to parse {file_path}")
@@ -252,9 +253,11 @@ class IngestionPipeline:
                 f"{parsed_doc.file_path}:{parsed_doc.file_name}".encode()
             ).hexdigest()[:16]
             
-            # Step 2: Chunk text
-            logger.info(f"[2/7] Chunking text for {file_path.name}...")
-            chunks = self._chunk_document(parsed_doc, document_id, settings)
+            # Step 2: Chunk text (uses strategy from config: semantic → robust fallback)
+            logger.info(f"[2/8] Chunking text for {file_path.name} (strategy: {settings.chunking.strategy})...")
+            from src.ingestion.chunkers import get_chunker
+            chunker = get_chunker(settings)
+            chunks = chunker.chunk_document(parsed_doc)
             if not chunks:
                 logger.warning(f"No chunks generated for {file_path.name}")
                 return False
@@ -262,9 +265,9 @@ class IngestionPipeline:
             logger.info(f"Generated {len(chunks)} chunks")
             
             # Step 3: Generate embeddings (GPU-accelerated)
-            logger.info(f"[3/7] Generating embeddings (GPU) for {len(chunks)} chunks...")
-            from src.retrieval.embedding_service_onnx import ONNXEmbeddingService
-            embedding_service = ONNXEmbeddingService(settings=settings)
+            logger.info(f"[3/8] Generating embeddings for {len(chunks)} chunks...")
+            from src.retrieval import get_embedding_service
+            embedding_service = get_embedding_service(settings=settings)
             chunk_texts = [chunk.text for chunk in chunks]
             embeddings = embedding_service.embed_batch(chunk_texts)
             
@@ -273,17 +276,17 @@ class IngestionPipeline:
                 return False
             
             # Step 4: Store in vector database
-            logger.info(f"[4/7] Storing {len(chunks)} chunks in ChromaDB...")
+            logger.info(f"[4/8] Storing {len(chunks)} chunks in ChromaDB...")
             vector_store = VectorStore(settings=settings)
             vector_store.add_chunks(chunks, embeddings)
             
             # Step 5: Store in keyword index (FTS5)
-            logger.info(f"[5/7] Indexing in FTS5...")
+            logger.info(f"[5/8] Indexing in FTS5...")
             fts5_index = FTS5Index(settings=settings)
             fts5_index.add_chunks(chunks)
             
             # Step 6: Update document catalog
-            logger.info(f"[6/7] Updating document catalog...")
+            logger.info(f"[6/8] Updating document catalog...")
             catalog = DocumentCatalog()
             record = catalog.ensure_record(parsed_doc)
             catalog.update_record(
@@ -292,10 +295,40 @@ class IngestionPipeline:
                 chunk_count=len(chunks),
                 ingested_at=datetime.now().isoformat(),
             )
-            
-            # Step 7: Generate summaries (optional)
+
+            # Step 7: Kanon 2 Enrichment (optional, non-blocking)
+            try:
+                from src.graph.enricher import KanonEnricher
+                enricher = KanonEnricher()
+                if enricher.is_available and record.include_in_graph:
+                    logger.info(f"[7/8] Enriching with Kanon 2...")
+                    sample_texts = [c.text for c in chunks[:10]]
+                    ilgs_results = enricher.enrich_batch(sample_texts)
+
+                    from src.graph.case_graph import CaseGraph
+                    graph = CaseGraph()
+                    entity_count = 0
+                    for j, ilgs_doc in enumerate(ilgs_results):
+                        if ilgs_doc:
+                            entities, rels = enricher.to_entities(
+                                ilgs_doc,
+                                chunk_id=chunks[j].chunk_id if j < len(chunks) else "",
+                            )
+                            for e in entities:
+                                graph.add_entity(e)
+                            for rel in rels:
+                                graph.add_relationship(rel)
+                            entity_count += len(entities)
+                    graph.save()
+                    logger.info(f"Enriched: {entity_count} entities extracted")
+                else:
+                    logger.info(f"[7/8] Kanon 2 enrichment skipped (not available or not graph-eligible)")
+            except Exception as enrich_err:
+                logger.warning(f"Kanon 2 enrichment failed (non-fatal): {enrich_err}")
+
+            # Step 8: Generate summaries (optional)
             if generate_summary and settings.summary.enabled:
-                logger.info(f"[7/7] Generating summaries...")
+                logger.info(f"[8/8] Generating summaries...")
                 summarizer = SummarizerService(settings=settings)
                 
                 # Prepare document for summarization
@@ -319,7 +352,7 @@ class IngestionPipeline:
                 )
                 logger.info(f"Generated {len(summaries)} summaries")
             else:
-                logger.info(f"[7/7] Skipping summary generation")
+                logger.info(f"[8/8] Skipping summary generation")
             
             logger.success(f"Successfully processed {file_path.name}")
             return True

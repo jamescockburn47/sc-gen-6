@@ -1,0 +1,28 @@
+{
+    "models_dir": "C:/Users/James/Desktop/SC Gen 6/models",
+    "active_model": "mistral-nemo-12b",
+    "models": [
+        {
+            "id": "mistral-nemo-12b",
+            "name": "Mistral Nemo 12B Instruct",
+            "file": "Mistral-Nemo-12B-Instruct.Q4_K_M.gguf",
+            "size_gb": 7.48,
+            "context": 131072,
+            "gpu_layers": 999,
+            "description": "Fast 12B reasoning model, excellent for general use"
+        },
+        {
+            "id": "llama-3.3-70b",
+            "name": "Llama 3.3 70B Instruct",
+            "file": "Llama-3.3-70B-Instruct-Q4_K_M.gguf",
+            "size_gb": 42.5,
+            "context": 131072,
+            "gpu_layers": 999,
+            "description": "Large 70B model for high-quality generation"
+        }
+    ],
+    "_notes": {
+        "vram": "User has 96GB VRAM - can run any model fully on GPU",
+        "to_add_model": "Place .gguf file in models_dir and add entry here"
+    }
+}

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SCGen7
+Comment=Litigation Support RAG - Knowledge Graph + Kanon 2
+Exec=/home/james/SCGen6/run_linux.sh
+Icon=utilities-terminal
+Terminal=false
+Path=/home/james/SCGen6
+Categories=Development;Office;
+StartupNotify=true

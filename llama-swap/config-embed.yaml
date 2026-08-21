@@ -1,0 +1,26 @@
+# llama-swap configuration for embedding server
+# Dedicated embedding model on port 8001
+
+listen: ":8001"
+
+# Macros for reuse
+macros:
+  llama_server: "/home/james/llama.cpp/build/bin/llama-server"
+
+models:
+  "nemotron-embed-8b":
+    cmd: |
+      ${llama_server}
+      --model /media/james/Windows/ModelStore/embeddings/llama-embed-nemotron-8b-Q4_K_M.gguf
+      --ctx-size 8192
+      --n-gpu-layers 99
+      --host 127.0.0.1
+      --port ${PORT}
+      --embedding
+      --pooling mean
+    ttl: 30
+    env:
+      - "GGML_VULKAN_DEVICE=0"
+    aliases:
+      - "text-embedding-ada-002"
+      - "embedding"

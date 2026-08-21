@@ -13,7 +13,7 @@ class ModernMainWindow(QMainWindow):
     
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("SC Gen 6")
+        self.setWindowTitle("Project XX")
         self.resize(1200, 800)
         
         # Apply Theme

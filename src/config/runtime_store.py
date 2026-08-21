@@ -10,17 +10,17 @@ from typing import Any, Dict
 RUNTIME_FILE = Path("config/llm_runtime.json")
 
 DEFAULT_STATE: Dict[str, Any] = {
-    "provider": "ollama",
-    "base_url": "http://localhost:11434/v1",
-    "api_key": "ollama",
-    "model_name": "qwen2.5:32b",
+    "provider": "llama_cpp",
+    "base_url": "http://127.0.0.1:8000/v1",
+    "api_key": "local-llama",
+    "model_name": "nemotron-3-nano",
     "llama_server": {
-        "executable": "C:/path/to/llama-server.exe",
-        "model_path": "C:/models/gpt-oss-20b.Q4_K_M.gguf",
+        "executable": "/home/james/llama.cpp/build/bin/llama-server",
+        "model_path": "/home/james/.cache/huggingface/gguf/Nemotron-3-Nano-30B-A3B-BF16-00001-of-00002.gguf",
         "context": 32768,
-        "gpu_layers": 999,
-        "parallel": 2,
-        "batch": 1024,
+        "gpu_layers": 99,
+        "parallel": 4,
+        "batch": 2048,
         "timeout": 1800,
         "host": "127.0.0.1",
         "port": 8000,

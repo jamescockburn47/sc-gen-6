@@ -1,0 +1,1 @@
+"""SCGen7 workspaces."""

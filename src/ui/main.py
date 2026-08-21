@@ -35,7 +35,7 @@ def main():
             first_run_flag.touch()
 
     app = QApplication(sys.argv)
-    app.setApplicationName("SC Gen 6 - Litigation Support RAG")
+    app.setApplicationName("Project XX — Litigation Support RAG")
 
     window = MainWindow()
     window.show()

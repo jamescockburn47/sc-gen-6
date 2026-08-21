@@ -1,13 +1,6 @@
 {
-  "provider": "ollama",
-  "base_url": "http://localhost:11434/v1",
-  "api_key": "ollama",
-  "model_name": "glm-4.7-flash",
-  "_comments": {
-    "provider": "Ollama with Vulkan backend on AMD Radeon 8060S (gfx1151)",
-    "context": "GLM 4.7 Flash supports 198K context, using 32K for RAG",
-    "model_note": "GLM 4.7 Flash 30B-A3B MoE - strongest 30B class model",
-    "backend": "Ollama with OLLAMA_VULKAN=1 for AMD GPU acceleration",
-    "embedding_model": "BAAI/bge-large-en-v1.5 via sentence-transformers (CPU)"
-  }
+  "provider": "llama_cpp",
+  "base_url": "http://127.0.0.1:8000/v1",
+  "api_key": "local-llama",
+  "model_name": "glm-4.7-flash"
 }

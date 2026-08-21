@@ -352,7 +352,7 @@ class ModernMainWindow(QMainWindow):
     def _setup_window(self):
         """Set up window properties."""
         # Windows-only deployment (Vulkan optimized)
-        self.setWindowTitle("SC Gen 6 - Litigation Support RAG")
+        self.setWindowTitle("Project XX — Litigation Support RAG")
         self.resize(1600, 900)
         self.setMinimumSize(1200, 800)
 
@@ -394,12 +394,12 @@ class ModernMainWindow(QMainWindow):
         sidebar_layout.setSpacing(12)
 
         # Title / Logo
-        title_label = QLabel("SC GEN 6")
+        title_label = QLabel("PROJECT XX")
         title_label.setProperty("styleClass", "title")
         title_label.setAlignment(Qt.AlignCenter)
         sidebar_layout.addWidget(title_label)
         
-        subtitle_label = QLabel("LITIGATION RAG")
+        subtitle_label = QLabel("LITIGATION SUPPORT RAG")
         subtitle_label.setProperty("styleClass", "section")
         subtitle_label.setAlignment(Qt.AlignCenter)
         sidebar_layout.addWidget(subtitle_label)
@@ -459,6 +459,11 @@ class ModernMainWindow(QMainWindow):
         self.btn_quality.setProperty("styleClass", "nav")
         self.btn_quality.clicked.connect(lambda: self._switch_view(8))
         
+        self.btn_explainer = QPushButton("Project XX")
+        self.btn_explainer.setCheckable(True)
+        self.btn_explainer.setProperty("styleClass", "nav")
+        self.btn_explainer.clicked.connect(lambda: self._switch_view(9))
+        
         self.btn_settings = QPushButton("Settings")
         self.btn_settings.setProperty("styleClass", "nav")
         self.btn_settings.clicked.connect(self._show_settings)
@@ -472,6 +477,7 @@ class ModernMainWindow(QMainWindow):
         sidebar_layout.addWidget(self.btn_specs)
         sidebar_layout.addWidget(self.btn_performance)
         sidebar_layout.addWidget(self.btn_quality)
+        sidebar_layout.addWidget(self.btn_explainer)
         sidebar_layout.addWidget(self.btn_settings)
         
         sidebar_layout.addSpacing(16)
@@ -605,6 +611,11 @@ class ModernMainWindow(QMainWindow):
         self.suggestions_viewer = SuggestionsViewer(self)
         self.view_stack.addWidget(self.suggestions_viewer)
 
+        # -- View 9: SC Gen 7 Technical Explainer --
+        from src.ui.technical_explainer import TechnicalExplainerPage
+        self.technical_explainer = TechnicalExplainerPage(self)
+        self.view_stack.addWidget(self.technical_explainer)
+
         # === 3. Details Panel (Right) ===
         self.detail_panel = ResultsDetailPanel(self)
         self.detail_panel.setMinimumWidth(300)
@@ -647,9 +658,9 @@ class ModernMainWindow(QMainWindow):
             (self.btn_summaries, 4),
             (self.btn_overview, 5),
             (self.btn_specs, 6),
-            (self.btn_specs, 6),
             (self.btn_performance, 7),
             (self.btn_quality, 8),
+            (self.btn_explainer, 9),
         ]
         
         for btn, btn_index in nav_buttons:

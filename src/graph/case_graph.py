@@ -31,11 +31,11 @@ class CaseGraph:
     - User corrections overlay
     """
     
-    def __init__(self, path: Path | str):
+    def __init__(self, path: Path | str = "data/case_graph"):
         """Initialize case graph.
         
         Args:
-            path: Directory path for graph storage
+            path: Directory path for graph storage (default: data/case_graph)
         """
         self.path = Path(path)
         self.path.mkdir(parents=True, exist_ok=True)
@@ -57,24 +57,103 @@ class CaseGraph:
     # ========== Entity Operations ==========
     
     def add_entity(self, entity: Entity) -> str:
-        """Add or update an entity.
-        
+        """Add an entity, merging into an existing one if a close match exists.
+
+        Uses case-insensitive name matching to prevent duplicates like
+        "Mr Thomas" / "MR THOMAS" / "Mr thomas" accumulating.
+
         Args:
             entity: Entity to add
-            
+
         Returns:
-            Entity ID
+            Entity ID (may be the ID of an existing entity if merged)
         """
+        # Check for existing entity with same name (case-insensitive)
+        match = self.find_similar_entity(entity.canonical_name, entity.type)
+        if match:
+            existing, score = match
+            if score >= 0.85:
+                # Merge into existing
+                existing.add_alias(entity.canonical_name)
+                for alias in entity.aliases:
+                    existing.add_alias(alias)
+                for chunk_id in entity.source_chunks:
+                    existing.add_chunk(chunk_id)
+                existing.metadata.update(entity.metadata)
+                if entity.confidence > existing.confidence:
+                    existing.confidence = entity.confidence
+                # Update chunk index for the existing entity
+                for chunk_id in entity.source_chunks:
+                    if chunk_id not in self.chunk_to_entities:
+                        self.chunk_to_entities[chunk_id] = []
+                    if existing.id not in self.chunk_to_entities[chunk_id]:
+                        self.chunk_to_entities[chunk_id].append(existing.id)
+                return existing.id
+
+        # No match — add as new entity
         self.entities[entity.id] = entity
-        
+
         # Update chunk index
         for chunk_id in entity.source_chunks:
             if chunk_id not in self.chunk_to_entities:
                 self.chunk_to_entities[chunk_id] = []
             if entity.id not in self.chunk_to_entities[chunk_id]:
                 self.chunk_to_entities[chunk_id].append(entity.id)
-        
+
         return entity.id
+
+    def deduplicate(self, threshold: float = 0.85) -> int:
+        """Bulk deduplicate entities by fuzzy name matching.
+
+        Groups entities by normalised name, merges each group into one
+        canonical entity, and removes the duplicates.
+
+        Args:
+            threshold: Minimum similarity ratio to consider a match.
+
+        Returns:
+            Number of duplicate entities removed.
+        """
+        from difflib import SequenceMatcher
+
+        # Group by normalised key (lowercase, stripped)
+        groups: dict[str, list[Entity]] = {}
+        for entity in list(self.entities.values()):
+            key = entity.canonical_name.strip().lower()
+            groups.setdefault(key, []).append(entity)
+
+        removed = 0
+        for key, group in groups.items():
+            if len(group) <= 1:
+                continue
+            # Keep the entity with the most source chunks (richest)
+            group.sort(key=lambda e: len(e.source_chunks), reverse=True)
+            keeper = group[0]
+            merge_ids = [e.id for e in group[1:]]
+            self.merge_entities(keeper.id, merge_ids)
+            removed += len(merge_ids)
+
+        # Second pass: fuzzy match across different keys
+        entities_list = list(self.entities.values())
+        merged_ids: set[str] = set()
+        for i, a in enumerate(entities_list):
+            if a.id in merged_ids:
+                continue
+            for b in entities_list[i + 1:]:
+                if b.id in merged_ids:
+                    continue
+                if a.type != b.type:
+                    continue
+                ratio = SequenceMatcher(
+                    None, a.canonical_name.lower(), b.canonical_name.lower()
+                ).ratio()
+                if ratio >= threshold:
+                    self.merge_entities(a.id, [b.id])
+                    merged_ids.add(b.id)
+                    removed += 1
+
+        self.save()
+        return removed
     
     def get_entity(self, entity_id: str) -> Optional[Entity]:
         """Get entity by ID."""

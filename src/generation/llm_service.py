@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 import queue
 import re
 import threading
@@ -13,19 +14,57 @@ from src.config_loader import Settings, get_settings
 from src.generation.prompts import REFUSAL_TEMPLATE, SYSTEM_LIT_RAG, build_user_prompt
 from src.llm.client import LLMClient, get_llm_client
 
+logger = logging.getLogger(__name__)
+
 
 def estimate_token_count(text: str) -> int:
-    """Estimate token count using a simple heuristic.
+    """Estimate token count using a conservative heuristic.
 
     Args:
         text: Text to estimate tokens for
 
     Returns:
-        Estimated token count (approximately 1 token per 4 characters for English)
+        Estimated token count (approximately 3.5 chars/token for legal/mixed content).
+        Using 3.5 rather than 4 to avoid underestimating and hitting context limits.
     """
-    # Simple heuristic: ~4 characters per token for English text
-    # This is conservative and works well for most use cases
-    return max(1, len(text) // 4)
+    # Conservative: 3.5 chars/token for legal documents (citations, numbers, short words)
+    return max(1, int(len(text) / 3.5))
+
+
+def _deduplicate_chunks(chunks: list[dict]) -> list[dict]:
+    """Remove duplicate/near-duplicate chunks by text fingerprint.
+
+    Hybrid retrieval (semantic + BM25) can return the same passage under
+    different chunk IDs — especially for short single-page documents where
+    every retrieval path surfaces the same content.  We deduplicate by
+    comparing the first 200 normalised characters of each chunk; if two
+    chunks share the same fingerprint, only the highest-scoring one survives.
+
+    Preserves original ordering (highest score wins within a fingerprint group).
+    """
+    seen: dict[str, dict] = {}
+    for chunk in chunks:
+        raw = chunk.get("text") or ""
+        # Normalise: collapse whitespace, lower-case, take first 200 chars
+        fingerprint = " ".join(raw.split())[:200].lower()
+        if not fingerprint:
+            continue
+        existing = seen.get(fingerprint)
+        if existing is None:
+            seen[fingerprint] = chunk
+        else:
+            # Keep whichever has the higher reranker/RRF score
+            if chunk.get("score", 0.0) > existing.get("score", 0.0):
+                seen[fingerprint] = chunk
+
+    # Restore original relative order (by position in input list)
+    order = {id(c): i for i, c in enumerate(chunks)}
+    deduped = sorted(seen.values(), key=lambda c: order.get(id(c), 0))
+    removed = len(chunks) - len(deduped)
+    if removed:
+        logger.info("[Dedup] Removed %d duplicate chunk(s) before prompt assembly", removed)
+    return deduped
+
 
 try:
     from PySide6.QtCore import QObject, Signal
@@ -123,9 +162,22 @@ class LLMService:
                 "enable_thinking": True,
             }
         
-        # For other models, no special handling needed
-        # They may use different mechanisms (prompting, etc.)
+        # Nemotron 3 Nano: Supports reasoning via thinking budget
+        elif "nemotron" in model_lower:
+            kwargs["extra_body"] = {
+                "thinking": {
+                    "type": "enabled",
+                    "budget_tokens": self.settings.models.llm.thinking_budget,
+                }
+            }
         
+        # GLM 4.7 Flash: Supports enable_thinking via Ollama extra_body
+        elif "glm" in model_lower:
+            kwargs["extra_body"] = {
+                "enable_thinking": True,
+            }
+        
+        # For other models, no special handling needed
         return kwargs
 
     # ------------------------------------------------------------------#
@@ -237,26 +289,17 @@ class LLMService:
         model: Optional[str] = None,
         temperature: float = 0.0,
         callback: Optional[Callable[[str], None]] = None,
+        thinking_callback: Optional[Callable[[str], None]] = None,
         cancel_event: Optional[threading.Event] = None,
         initial_stats: Optional[dict[str, Any]] = None,
         max_tokens: Optional[int] = None,
     ) -> str:
         """Generate text with streaming tokens.
 
-        Uses back-pressure safe buffers to handle token streaming.
-
         Args:
-            prompt: User prompt
-            system_prompt: Optional system prompt. If None, uses default.
-            model: Model name. If None, uses default from config.
-            temperature: Sampling temperature (0.0 = deterministic)
-            callback: Optional callback function(token) called for each token
-
-        Returns:
-            Complete generated text
-
-        Raises:
-            RuntimeError: If generation fails
+            callback: Called with each final-answer token.
+            thinking_callback: Called with each thinking/reasoning token (can be None).
+            max_tokens: Hard cap on total tokens (thinking + answer). None = unlimited.
         """
         model = model or self.get_default_model()
         system_prompt = system_prompt or SYSTEM_LIT_RAG
@@ -264,56 +307,50 @@ class LLMService:
         if cancel_event and cancel_event.is_set():
             raise RuntimeError("LLM generation cancelled")
 
-        # Emit generation started
         if self.progress_signals:
             self.progress_signals.generation_started.emit(model)
             self.progress_signals.stage_changed.emit("Streaming answer")
 
-        # Buffer for tokens with back-pressure handling
-        token_buffer = queue.Queue(maxsize=100)  # Max 100 tokens buffered
-        complete_text = []
+        # Separate buffers for answer content vs thinking
+        token_buffer = queue.Queue(maxsize=200)
+        complete_text = []  # final answer only
         error_occurred = threading.Event()
-        llama_stream_state: Optional[dict[str, Any]] = None
-        if self.llm_env_config.provider == "llama_cpp":
-            llama_stream_state = {"buffer": "", "final_started": False, "use_filter": False}
 
-        # Progress tracking
         start_time = time.time()
-        token_count = [0]  # Use list to allow modification in nested function
+        token_count = [0]
         last_progress_time = [start_time]
         self.last_generation_stats = initial_stats.copy() if initial_stats else {}
 
         def token_consumer():
-            """Consumer thread that processes tokens from buffer."""
-            nonlocal complete_text
             while True:
                 try:
-                    token = token_buffer.get(timeout=1.0)
-                    if token is None:  # Sentinel value
+                    item = token_buffer.get(timeout=1.0)
+                    if item is None:  # sentinel
                         break
-                    complete_text.append(token)
-                    token_count[0] += 1
-
-                    # Emit progress every 100ms or every 10 tokens
-                    current_time = time.time()
-                    if current_time - last_progress_time[0] > 0.1 or token_count[0] % 10 == 0:
-                        elapsed_ms = (current_time - start_time) * 1000
-                        tok_per_sec = token_count[0] / (current_time - start_time) if current_time > start_time else 0
-                        if self.progress_signals:
-                            self.progress_signals.generation_progress.emit(
-                                token_count[0], elapsed_ms, tok_per_sec
-                            )
-                        last_progress_time[0] = current_time
-
-                    if callback:
-                        callback(token)
+                    kind, token = item
+                    if kind == "content":
+                        complete_text.append(token)
+                        token_count[0] += 1
+                        current_time = time.time()
+                        if current_time - last_progress_time[0] > 0.1 or token_count[0] % 10 == 0:
+                            elapsed_ms = (current_time - start_time) * 1000
+                            tok_per_sec = token_count[0] / max(current_time - start_time, 0.001)
+                            if self.progress_signals:
+                                self.progress_signals.generation_progress.emit(
+                                    token_count[0], elapsed_ms, tok_per_sec
+                                )
+                            last_progress_time[0] = current_time
+                        if callback:
+                            callback(token)
+                    elif kind == "thinking":
+                        if thinking_callback:
+                            thinking_callback(token)
                     token_buffer.task_done()
                 except queue.Empty:
                     if error_occurred.is_set() or (cancel_event and cancel_event.is_set()):
                         break
                     continue
 
-        # Start consumer thread
         consumer_thread = threading.Thread(target=token_consumer, daemon=True)
         consumer_thread.start()
 
@@ -333,61 +370,55 @@ class LLMService:
                 kwargs["response_format"] = self.default_response_format
             if max_tokens is not None:
                 kwargs["max_tokens"] = max_tokens
-            
-            # Add thinking mode kwargs if model supports it
+
             thinking_kwargs = self._build_thinking_kwargs(model)
             kwargs.update(thinking_kwargs)
-            
+
             stream = self.llm_client.stream_chat_completion(**kwargs)
 
-            for token in stream:
+            for item in stream:
                 if cancel_event and cancel_event.is_set():
                     error_occurred.set()
                     token_buffer.put(None)
                     raise RuntimeError("LLM generation cancelled")
 
-                if llama_stream_state is not None:
-                    token = self._filter_llama_stream_token(token, llama_stream_state)
-                    if token is None:
-                        continue
+                # item is (kind, token) from _iter_stream
+                # Fallback: plain string from non-llama_cpp providers
+                if isinstance(item, tuple):
+                    kind, token = item
+                else:
+                    kind, token = "content", item
 
-                # Back-pressure: if buffer is full, wait a bit
                 try:
-                    token_buffer.put(token, timeout=0.1)
+                    token_buffer.put((kind, token), timeout=0.1)
                 except queue.Full:
-                    token_buffer.put(token, timeout=1.0)
+                    token_buffer.put((kind, token), timeout=1.0)
 
             if cancel_event and cancel_event.is_set():
                 raise RuntimeError("LLM generation cancelled")
 
-            # Signal completion
             token_buffer.put(None)
+            consumer_thread.join(timeout=10.0)
 
-            # Wait for consumer to finish
-            consumer_thread.join(timeout=5.0)
-
-            # Emit generation completed
             total_time_ms = (time.time() - start_time) * 1000
-            avg_tok_per_sec = token_count[0] / (time.time() - start_time) if token_count[0] > 0 and time.time() > start_time else 0
+            avg_tok_per_sec = token_count[0] / max(time.time() - start_time, 0.001) if token_count[0] > 0 else 0
             if self.progress_signals:
                 self.progress_signals.generation_completed.emit(
                     token_count[0], total_time_ms, avg_tok_per_sec
                 )
                 self.progress_signals.stage_changed.emit("Completed")
 
-            stats_update = {
+            self.last_generation_stats.update({
                 "token_count": token_count[0],
                 "duration_ms": total_time_ms,
                 "tokens_per_sec": avg_tok_per_sec,
-            }
-            self.last_generation_stats.update(stats_update)
+            })
 
-            result_text = self._post_process_output("".join(complete_text))
-            return result_text
+            return self._post_process_output("".join(complete_text))
 
         except Exception as e:
             error_occurred.set()
-            token_buffer.put(None)  # Signal consumer to stop
+            token_buffer.put(None)
             raise RuntimeError(f"LLM streaming failed: {str(e)}") from e
 
     def generate_with_context(
@@ -399,6 +430,7 @@ class LLMService:
         temperature: float = 0.0,
         stream: bool = False,
         callback: Optional[Callable[[str], None]] = None,
+        thinking_callback: Optional[Callable[[str], None]] = None,
         cancel_event: Optional[threading.Event] = None,
         max_tokens: Optional[int] = None,
     ) -> str:
@@ -429,8 +461,12 @@ class LLMService:
         if cancel_event and cancel_event.is_set():
             raise RuntimeError("Generation cancelled")
 
-        # Build user prompt with formatted chunks
+        # Deduplicate chunks by text content before prompt assembly.
+        # Hybrid retrieval (semantic + BM25 + reranker) can return the same
+        # passage under different chunk IDs, causing the LLM to see the same
+        # source text 2-3× and waste its thinking budget on repetition analysis.
         assembly_start = time.time()
+        chunks = _deduplicate_chunks(chunks)
         user_prompt = build_user_prompt(query, chunks)
         prompt_build_ms = (time.time() - assembly_start) * 1000
 
@@ -475,6 +511,7 @@ class LLMService:
                 model=model,
                 temperature=temperature,
                 callback=callback,
+                thinking_callback=thinking_callback,
                 cancel_event=cancel_event,
                 initial_stats=prompt_stats,
                 max_tokens=max_tokens,
@@ -509,16 +546,15 @@ class LLMService:
         For other providers: Return as-is
         """
         input_len = len(text) if text else 0
-        print(f"[POST_PROCESS DEBUG] Input: {input_len} chars, Provider: {self.llm_env_config.provider}")
+        logger.debug("[POST_PROCESS] Input: %d chars, Provider: %s", input_len, self.llm_env_config.provider)
         
         if self.llm_env_config.provider == "llama_cpp":
             result = self._extract_llama_final_channel(text)
-            output_len = len(result) if result else 0
-            print(f"[POST_PROCESS DEBUG] After channel extraction: {output_len} chars")
+            logger.debug("[POST_PROCESS] After channel extraction: %d chars", len(result) if result else 0)
             return result
         
-        # For other providers (gpt-oss-20b, etc), return raw output
-        print(f"[POST_PROCESS DEBUG] Non-llama provider, returning raw text: {input_len} chars")
+        # For other providers (ollama, etc), return raw output
+        logger.debug("[POST_PROCESS] Non-llama provider, returning raw text: %d chars", input_len)
         return text
 
     @staticmethod
@@ -528,7 +564,7 @@ class LLMService:
         If no final channel is found, extracts all channel content and combines it,
         falling back to raw text if no channels are present.
         """
-        print(f"[CHANNEL DEBUG] Input text length: {len(text)} chars")
+        logger.debug("[CHANNEL] Input text length: %d chars", len(text))
 
         # Try to extract from final channel first
         final_marker = "<|channel|>final<|message|>"
@@ -539,7 +575,7 @@ class LLMService:
             if end_idx != -1:
                 remainder = remainder[:end_idx]
             extracted = remainder.strip()
-            print(f"[CHANNEL DEBUG] Extracted from final channel: {len(extracted)} chars")
+            logger.debug("[CHANNEL] Extracted from final channel: %d chars", len(extracted))
             return extracted
 
         # No final channel found - try to extract from any channel
@@ -550,23 +586,23 @@ class LLMService:
 
         if matches:
             channel_names = [m[0] for m in matches]
-            print(f"[CHANNEL DEBUG] Found {len(matches)} channels: {channel_names}")
+            logger.debug("[CHANNEL] Found %d channels: %s", len(matches), channel_names)
 
             # Combine all channel contents (analysis, final, etc.)
             combined = []
             for channel_name, content in matches:
                 clean_content = content.strip()
                 if clean_content:
-                    print(f"[CHANNEL DEBUG] Channel '{channel_name}': {len(clean_content)} chars")
+                    logger.debug("[CHANNEL] Channel '%s': %d chars", channel_name, len(clean_content))
                     combined.append(clean_content)
 
             if combined:
                 result = "\n\n".join(combined)
-                print(f"[CHANNEL DEBUG] Combined all channels: {len(result)} chars total")
+                logger.debug("[CHANNEL] Combined all channels: %d chars total", len(result))
                 return result
 
         # No channels found at all - return raw text
-        print(f"[CHANNEL DEBUG] No channel markers found, returning raw text: {len(text)} chars")
+        logger.debug("[CHANNEL] No channel markers found, returning raw text: %d chars", len(text))
         return text.strip()
 
     def _filter_llama_stream_token(self, token: str, state: dict[str, Any]) -> Optional[str]:

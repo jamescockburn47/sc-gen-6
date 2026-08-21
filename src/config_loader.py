@@ -94,14 +94,14 @@ class ModelsConfig(BaseSettings):
 class AdvancedRetrievalConfig(BaseSettings):
     """Advanced retrieval configuration."""
     
-    enabled: bool = False               # Master toggle for advanced pipeline
+    enabled: bool = True                # Master toggle for advanced pipeline
     
     # MMR (Maximal Marginal Relevance)
     enable_mmr: bool = True
     mmr_lambda: float = 0.5             # 0.5 = balance between relevance and diversity
     
-    # LLM Grading
-    enable_llm_grading: bool = True
+    # LLM Grading (expensive — requires separate model call per batch)
+    enable_llm_grading: bool = False
     grading_model: str = "qwen2.5:7b"   # Fast model for grading
     grading_prompt: str = (
         "You are a strict judge. Is this text relevant to the query? "
@@ -116,13 +116,13 @@ class AdvancedRetrievalConfig(BaseSettings):
 class RetrievalConfig(BaseSettings):
     """Retrieval parameters configuration."""
 
-    semantic_top_n: int = 50
-    keyword_top_n: int = 50
+    semantic_top_n: int = 60              # Wider initial net (was 50)
+    keyword_top_n: int = 60              # Match semantic breadth (was 50)
     skip_reranking: bool = False
-    rerank_top_k: int = 25              # Reduced from 50 (20-25 is sufficient)
-    rerank_max_chars: int = 512         # Truncate chunks for reranking (speed optimization)
-    context_to_llm: int = 15
-    confidence_threshold: float = 0.15  # Lower default
+    rerank_top_k: int = 30              # Rerank more candidates (was 25)
+    rerank_max_chars: int = 768         # Give reranker more text to judge (was 512)
+    context_to_llm: int = 20            # GLM 4.7 Flash 128K can use more (was 15)
+    confidence_threshold: float = 0.12  # Slightly lower, let MMR handle diversity (was 0.15)
     rrf_k: int = 60
     
     # Graph-enhanced search (user-optional, OFF by default)
@@ -132,7 +132,7 @@ class RetrievalConfig(BaseSettings):
     
     # Summary-enhanced search
     use_summaries: bool = True         # Include doc summaries in LLM context
-    search_summaries: bool = False     # Also search summary text (experimental)
+    search_summaries: bool = True      # Pre-filter via summary search (summary-first strategy)
 
     @field_validator("confidence_threshold")
     @classmethod
@@ -188,11 +188,19 @@ class ChunkingOverlapsConfig(BaseSettings):
 class ChunkingConfig(BaseSettings):
     """Chunking configuration."""
 
+    # Strategy: "semantic" (LegalBERT-based), "robust" (character RCTS), "agentic" (LLM-guided)
+    strategy: str = "semantic"
+
     sizes: ChunkingSizesConfig = Field(default_factory=ChunkingSizesConfig)
     overlaps: ChunkingOverlapsConfig = Field(default_factory=ChunkingOverlapsConfig)
     separators: list[str] = Field(
         default_factory=lambda: ["\n\n", "\n", ". ", " "]
     )
+
+    # Semantic chunker settings
+    enable_contextual_header: bool = True   # Prepend doc/section context to each chunk
+    semantic_threshold: float = 0.3         # Cosine similarity drop threshold for splitting
+    min_chunk_size: int = 128               # Minimum tokens before allowing a semantic split
 
 
 class SummaryConfig(BaseSettings):
@@ -203,7 +211,7 @@ class SummaryConfig(BaseSettings):
     summary_types: list[str] = Field(
         default_factory=lambda: ["overview", "key_points"]
     )
-    max_summary_length: int = 300       # Target summary length in words
+    max_summary_length: int = 600       # Target summary length in words
     include_in_search: bool = True      # Include summaries in search results
     
     # Dedicated summarization model (faster than main generation model)
@@ -288,6 +296,92 @@ class BackgroundTasksConfig(BaseSettings):
     )
 
 
+class AnonymisationDetectionConfig(BaseSettings):
+    """Anonymisation detection layer configuration."""
+
+    use_presidio: bool = True
+    use_spacy_ner: bool = True
+    spacy_model: str = "en_core_web_trf"
+    use_rule_patterns: bool = True
+    use_contextual_llm: bool = True
+    confidence_threshold: float = 0.5
+
+
+class AnonymisationBehaviourConfig(BaseSettings):
+    """Anonymisation behaviour configuration."""
+
+    method: str = "consistent_tokenisation"
+    preserve_relationships: bool = True
+    preserve_temporal_order: bool = True
+    date_handling: Literal["offset", "generalise", "suppress"] = "offset"
+    location_granularity: Literal["region", "city", "suppress"] = "region"
+    age_handling: Literal["band", "suppress"] = "band"
+
+
+class AnonymisationReviewConfig(BaseSettings):
+    """Anonymisation human review configuration."""
+
+    require_for_special_category: bool = True
+    require_for_first_export: bool = True
+    require_below_confidence: float = 0.85
+    auto_approve_above_confidence: float = 0.95
+
+
+class AnonymisationSecurityConfig(BaseSettings):
+    """Anonymisation security configuration."""
+
+    encryption: str = "fernet"
+    pbkdf2_iterations: int = 600_000
+    double_pass_validation: bool = True
+    audit_logging: bool = True
+
+
+class AnonymisationPrivilegeConfig(BaseSettings):
+    """Anonymisation legal privilege protection configuration.
+
+    Privilege is handled by anonymisation, not blocking:
+      - "anonymise": privilege markers are tokenised, standard PII pipeline
+        removes all identifying entities. Legal reasoning is preserved.
+      - "principles_only": privileged sections are reduced to only their
+        legal analysis sentences before anonymisation. Most conservative.
+    """
+
+    detect_privilege: bool = True                                  # Scan for privileged content
+    privilege_mode: Literal["anonymise", "principles_only"] = "anonymise"
+
+
+class AnonymisationSovereigntyConfig(BaseSettings):
+    """Anonymisation data sovereignty configuration."""
+
+    target_provider: str = "openai"          # Default cloud provider
+    enable_kanon_enricher: bool = False      # Kanon API sends to external US servers
+
+
+class AnonymisationExportConfig(BaseSettings):
+    """Anonymisation export configuration."""
+
+    allowed_providers: list[str] = Field(
+        default_factory=lambda: ["openai", "anthropic"]
+    )
+    block_on_validation_failure: bool = True
+    block_on_pending_review: bool = True
+
+
+class AnonymisationConfig(BaseSettings):
+    """Anonymisation system configuration (ICO 2025 / UK GDPR compliant)."""
+
+    model_config = SettingsConfigDict(extra="ignore")
+
+    enabled: bool = True
+    detection: AnonymisationDetectionConfig = Field(default_factory=AnonymisationDetectionConfig)
+    behaviour: AnonymisationBehaviourConfig = Field(default_factory=AnonymisationBehaviourConfig)
+    review: AnonymisationReviewConfig = Field(default_factory=AnonymisationReviewConfig)
+    security: AnonymisationSecurityConfig = Field(default_factory=AnonymisationSecurityConfig)
+    privilege: AnonymisationPrivilegeConfig = Field(default_factory=AnonymisationPrivilegeConfig)
+    sovereignty: AnonymisationSovereigntyConfig = Field(default_factory=AnonymisationSovereigntyConfig)
+    export: AnonymisationExportConfig = Field(default_factory=AnonymisationExportConfig)
+
+
 class Settings(BaseSettings):
     """Main settings class with all configuration sections."""
 
@@ -305,6 +399,7 @@ class Settings(BaseSettings):
     graph: GraphConfig = Field(default_factory=GraphConfig)
     summary: SummaryConfig = Field(default_factory=SummaryConfig)
     background_tasks: BackgroundTasksConfig = Field(default_factory=BackgroundTasksConfig)
+    anonymisation: AnonymisationConfig = Field(default_factory=AnonymisationConfig)
 
     @classmethod
     def from_yaml(cls, config_path: str | Path) -> "Settings":

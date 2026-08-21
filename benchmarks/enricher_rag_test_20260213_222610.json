@@ -1,0 +1,8 @@
+{
+  "timestamp": "2026-02-13T22:26:07.816545",
+  "model": "glm-4.7-flash",
+  "enron_ingestion": {
+    "status": "failed",
+    "reason": "No emails loaded"
+  }
+}

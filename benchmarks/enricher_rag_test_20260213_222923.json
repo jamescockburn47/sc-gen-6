@@ -1,0 +1,149 @@
+{
+  "timestamp": "2026-02-13T22:28:26.468566",
+  "model": "glm-4.7-flash",
+  "rag_accuracy": {
+    "status": "complete",
+    "total_score": 11,
+    "total_max": 15,
+    "accuracy_pct": 73.3,
+    "test_results": [
+      {
+        "query": "What energy trading topics were discussed in Enron emails?",
+        "category": "business_activity",
+        "score": 2,
+        "max_score": 2,
+        "pct": 100.0,
+        "found_facts": [
+          "energy",
+          "gas"
+        ],
+        "missing_facts": [],
+        "hallucinations": [],
+        "answer_preview": "Based on the provided email evidence, the energy trading topics discussed are:\n\n*   **The New Power Company (adm08126):** The ability to transact all types (financial/physical) for gas and power, including master agreements and credit approval.\n*   **Energy Supplement:** ISDA comments and review sta",
+        "chunks_retrieved": 5,
+        "gen_tokens": 156,
+        "gen_time_s": 3.5,
+        "gen_tps": 44.6
+      },
+      {
+        "query": "What California energy issues were discussed at Enron?",
+        "category": "business_activity",
+        "score": 0,
+        "max_score": 1,
+        "pct": 0.0,
+        "found_facts": [],
+        "missing_facts": [
+          "California"
+        ],
+        "hallucinations": [],
+        "answer_preview": "insufficient evidence",
+        "chunks_retrieved": 5,
+        "gen_tokens": 4,
+        "gen_time_s": 0.07,
+        "gen_tps": 54.5
+      },
+      {
+        "query": "Who did Enron employees communicate with about natural gas trading?",
+        "category": "communication",
+        "score": 0,
+        "max_score": 1,
+        "pct": 0.0,
+        "found_facts": [],
+        "missing_facts": [
+          "gas"
+        ],
+        "hallucinations": [],
+        "answer_preview": "insufficient evidence",
+        "chunks_retrieved": 5,
+        "gen_tokens": 4,
+        "gen_time_s": 0.08,
+        "gen_tps": 51.4
+      },
+      {
+        "query": "What FERC regulatory issues were discussed in Enron emails?",
+        "category": "regulatory",
+        "score": 1,
+        "max_score": 1,
+        "pct": 100.0,
+        "found_facts": [
+          "FERC"
+        ],
+        "missing_facts": [],
+        "hallucinations": [],
+        "answer_preview": "Based on the provided email evidence, the following FERC regulatory issues were discussed:\n\n*   **Eastern Power Markets:** Reports from FERC Staff regarding the Midwest and Southeast markets were reviewed. There was discussion about the uncertainty regarding FERC's future direction, particularly in ",
+        "chunks_retrieved": 5,
+        "gen_tokens": 181,
+        "gen_time_s": 4.26,
+        "gen_tps": 42.5
+      },
+      {
+        "query": "What internal meetings or strategy sessions were scheduled at Enron?",
+        "category": "events",
+        "score": 1,
+        "max_score": 1,
+        "pct": 100.0,
+        "found_facts": [
+          "meeting"
+        ],
+        "missing_facts": [],
+        "hallucinations": [],
+        "answer_preview": "Based on the email evidence provided, the following internal meetings or strategy sessions were scheduled:\n\n*   **Strategy Meeting:** Scheduled for November 14, 2000, but cancelled.\n*   **Operational Risk Information Session:** Scheduled for Thursday, January 11, 2001, from 1:00 to 4:00 pm for Opera",
+        "chunks_retrieved": 5,
+        "gen_tokens": 151,
+        "gen_time_s": 3.02,
+        "gen_tps": 50.1
+      },
+      {
+        "query": "Who was the CFO of Enron involved in financial fraud?",
+        "category": "entity_identification",
+        "score": 2,
+        "max_score": 3,
+        "pct": 66.7,
+        "found_facts": [],
+        "missing_facts": [
+          "Fastow"
+        ],
+        "hallucinations": [],
+        "answer_preview": "insufficient evidence",
+        "chunks_retrieved": 5,
+        "gen_tokens": 4,
+        "gen_time_s": 0.06,
+        "gen_tps": 63.3
+      },
+      {
+        "query": "What was Jeffrey Skilling's role at Enron?",
+        "category": "entity_identification",
+        "score": 1,
+        "max_score": 1,
+        "pct": 100.0,
+        "found_facts": [
+          "Skilling"
+        ],
+        "missing_facts": [],
+        "hallucinations": [],
+        "answer_preview": "Based on the provided email evidence, the answer is:\n\n**Jeff Skilling was the Chief Executive Officer (CEO) of Enron.**\n\n**Evidence:**\n*   In the first email, Sherri Sera refers to him as \"Mr. Jeff Skilling\" and states she is responding on his behalf.\n*   In the third email, Sherri Sera refers to hi",
+        "chunks_retrieved": 5,
+        "gen_tokens": 200,
+        "gen_time_s": 4.5,
+        "gen_tps": 44.5
+      },
+      {
+        "query": "Who was Enron's external auditor?",
+        "category": "entity_identification",
+        "score": 4,
+        "max_score": 5,
+        "pct": 80.0,
+        "found_facts": [],
+        "missing_facts": [
+          "Arthur Andersen"
+        ],
+        "hallucinations": [],
+        "answer_preview": "insufficient evidence",
+        "chunks_retrieved": 5,
+        "gen_tokens": 4,
+        "gen_time_s": 0.07,
+        "gen_tps": 59.7
+      }
+    ]
+  }
+}

@@ -10,7 +10,7 @@ cd /d "%~dp0"
 
 echo.
 echo ============================================================
-echo    SC Gen 6 - Litigation Support RAG
+echo    Project XX - Litigation Support RAG
 echo    Windows Native (Vulkan GPU Acceleration)
 echo ============================================================
 echo.

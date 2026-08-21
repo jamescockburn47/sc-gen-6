@@ -1,0 +1,19 @@
+{
+  "provider": "llama_cpp",
+  "api_key": "local-llama",
+  "model_name": "nemotron3-nano-30b-q8",
+  "nemotron_notes": "Nemotron 3 Nano 30B Q8_0: High-quality 8-bit quantization. ~95-97% of BF16 quality, much faster to download (33.6GB vs 63GB). Full 128K context supported.",
+  "llama_server": {
+    "executable": "C:/Users/James/Desktop/SC Gen 6/llama-cpp/llama-server.exe",
+    "model_path": "C:/Users/James/Desktop/SC Gen 6/models/nemotron3-nano-30b-q8/Nemotron-3-Nano-30B-A3B-Q8_0.gguf",
+    "context": 131072,
+    "gpu_layers": 999,
+    "parallel": 1,
+    "batch": 2048,
+    "timeout": 600,
+    "host": "127.0.0.1",
+    "port": 8000,
+    "flash_attn": true,
+    "extra_args": "--ubatch-size 512 --threads 12 --cont-batching --cache-type-k q4_0 --cache-type-v q4_0"
+  }
+}

@@ -4,23 +4,57 @@ from typing import Optional, Dict, Any
 from datetime import datetime
 import aiohttp
 
+from loguru import logger
+
 from ..config.api_key_manager import APIKeyManager
 from .assessment_models import AssessmentPayload, EvaluationResult
 from .evaluation_prompts import EVALUATION_SYSTEM_PROMPT, EVALUATION_USER_PROMPT_TEMPLATE
 
+# Anonymisation gateway (optional — graceful if not configured)
+try:
+    from ..anonymisation.gateway import CloudExportGateway, ExportBlockedError
+    ANON_AVAILABLE = True
+except ImportError:
+    ANON_AVAILABLE = False
+
+
 class CloudEvaluator:
     """
     Handles communication with cloud AI providers for quality assessment.
+
+    When an anonymisation gateway is attached, all outbound data is
+    automatically anonymised before reaching the cloud API, and
+    responses are de-anonymised before being returned to the caller.
     """
     
-    def __init__(self, api_key_manager: Optional[APIKeyManager] = None, provider: str = "openai", model_name: str = "gpt-5.1-instant"):
+    def __init__(
+        self,
+        api_key_manager: Optional[APIKeyManager] = None,
+        provider: str = "openai",
+        model_name: str = "gpt-5.1-instant",
+        anonymisation_gateway: Optional['CloudExportGateway'] = None,
+    ):
         self.api_key_manager = api_key_manager or APIKeyManager()
         self.provider = provider
         self.model = model_name
+        self._gateway = anonymisation_gateway
         
+    def set_anonymisation_gateway(self, gateway: 'CloudExportGateway') -> None:
+        """Attach or replace the anonymisation gateway.
+
+        Args:
+            gateway: CloudExportGateway instance to use for all exports.
+        """
+        self._gateway = gateway
+        logger.info("CloudEvaluator: anonymisation gateway attached")
+
     async def evaluate(self, payload: AssessmentPayload) -> Optional[EvaluationResult]:
         """
         Send assessment payload to cloud provider for evaluation.
+
+        If an anonymisation gateway is attached, all PII in the payload
+        is pseudonymised before transmission and the response is
+        de-anonymised before return.
         
         Args:
             payload: The data to evaluate
@@ -37,8 +71,33 @@ class CloudEvaluator:
             print(f"Skipping evaluation: No API key for {self.provider}")
             return None
 
+        # --- Anonymise outbound data if gateway is configured ---
+        if self._gateway:
+            try:
+                anon_payload = self._gateway.export_qa(
+                    query=payload.query,
+                    answer=payload.generated_answer,
+                    chunks=payload.retrieved_chunks,
+                )
+                # Replace payload fields with anonymised versions
+                payload_query = anon_payload.anonymised_query
+                payload_answer = anon_payload.anonymised_text
+                payload_chunks = anon_payload.anonymised_chunks
+                logger.info(
+                    "CloudEvaluator: payload anonymised via gateway "
+                    f"(tokens={len(anon_payload.token_legend)})"
+                )
+            except ExportBlockedError as e:
+                logger.error(f"CloudEvaluator: export blocked — {e.reason}")
+                print(f"Export blocked by anonymisation gateway: {e.reason}")
+                return None
+        else:
+            payload_query = payload.query
+            payload_answer = payload.generated_answer
+            payload_chunks = payload.retrieved_chunks
+
         # Prepare chunks string (limit to top 10 to respect context)
-        top_chunks = payload.retrieved_chunks[:10]
+        top_chunks = payload_chunks[:10]
         chunks_str = "\n\n".join([
             f"Chunk {i+1} (Score: {c.get('score', 0):.2f}):\n{c.get('text', '')[:1000]}..." 
             for i, c in enumerate(top_chunks)
@@ -46,10 +105,10 @@ class CloudEvaluator:
 
         # Format prompt
         user_prompt = EVALUATION_USER_PROMPT_TEMPLATE.format(
-            query=payload.query,
+            query=payload_query,
             num_chunks=len(top_chunks),
             chunks=chunks_str,
-            answer=payload.generated_answer,
+            answer=payload_answer,
             model=payload.model_used,
             system_prompt=payload.system_prompt,
             config=json.dumps(payload.generation_config),
@@ -58,7 +117,17 @@ class CloudEvaluator:
 
         try:
             if self.provider == "openai":
-                return await self._evaluate_openai(api_key, user_prompt)
+                result = await self._evaluate_openai(api_key, user_prompt)
+                # --- De-anonymise response if gateway is configured ---
+                if result and self._gateway:
+                    result.raw_response = self._gateway.import_response(result.raw_response)
+                    result.suggestions = [
+                        self._gateway.import_response(s) for s in result.suggestions
+                    ]
+                    result.prompt_improvements = [
+                        self._gateway.import_response(p) for p in result.prompt_improvements
+                    ]
+                return result
             # Add other providers here as needed
             else:
                 print(f"Provider {self.provider} not implemented")

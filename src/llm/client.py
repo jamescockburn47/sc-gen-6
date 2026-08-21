@@ -48,24 +48,34 @@ class LLMClient:
         if self.config.provider == "ollama":
             return self._generate_ollama_native(messages, model, temperature, stream=False, **kwargs)
 
+        # llama-swap returns 503 while the model subprocess is loading.
+        # Retry until the model is ready (up to 90 seconds).
+        import time as _time
         payload = self._build_payload(messages, model, temperature, stream=False, **kwargs)
-        response = self.session.post(
-            self._build_url("chat/completions"),
-            headers=self._headers(),
-            json=payload,
-            timeout=self.timeout,
-        )
+        _deadline = _time.monotonic() + 90.0
+        while True:
+            response = self.session.post(
+                self._build_url("chat/completions"),
+                headers=self._headers(),
+                json=payload,
+                timeout=self.timeout,
+            )
+            if response.status_code == 503 and _time.monotonic() < _deadline:
+                print(f"[LLM] 503 model loading — retrying in 3s…")
+                _time.sleep(3)
+                continue
+            break
         self._raise_for_status(response)
         data = response.json()
         choices = data.get("choices") or []
         if not choices:
             raise RuntimeError("No choices returned from LLM response")
         
-        # Extract llama.cpp statistics if available
         usage = data.get("usage", {})
         timings = data.get("timings", {})
         
-        content = choices[0].get("message", {}).get("content", "")
+        msg = choices[0].get("message", {})
+        content = msg.get("content") or msg.get("reasoning_content", "")
         
         # Log statistics (async - 0ms overhead)
         if timings and self.config.provider == "llama_cpp":
@@ -117,14 +127,26 @@ class LLMClient:
             yield from self._stream_ollama_native(messages, model, temperature, **kwargs)
             return
 
+        # llama-swap returns 503 while the model subprocess is loading.
+        # Retry until the model is ready (up to 90 seconds).
+        import time as _time
         payload = self._build_payload(messages, model, temperature, stream=True, **kwargs)
-        with self.session.post(
-            self._build_url("chat/completions"),
-            headers=self._headers(),
-            json=payload,
-            timeout=self.timeout,
-            stream=True,
-        ) as response:
+        _deadline = _time.monotonic() + 90.0
+        while True:
+            response = self.session.post(
+                self._build_url("chat/completions"),
+                headers=self._headers(),
+                json=payload,
+                timeout=self.timeout,
+                stream=True,
+            )
+            if response.status_code == 503 and _time.monotonic() < _deadline:
+                print(f"[LLM] 503 model loading — retrying stream in 3s…")
+                response.close()
+                _time.sleep(3)
+                continue
+            break
+        with response:
             self._raise_for_status(response)
             yield from self._iter_stream(response)
 
@@ -291,7 +313,15 @@ class LLMClient:
             raise RuntimeError(f"LLM HTTP request failed: {exc}") from exc
 
     @staticmethod
-    def _iter_stream(response: requests.Response) -> Iterable[str]:
+    def _iter_stream(response: requests.Response) -> Iterable[tuple]:
+        """Iterate SSE stream, yielding tagged (kind, token) tuples.
+
+        kind == "thinking" : chain-of-thought / reasoning token
+        kind == "content"  : final answer token
+
+        llama.cpp (GLM, Nemotron) puts reasoning in delta.reasoning_content
+        and the real answer in delta.content.
+        """
         for line in response.iter_lines(decode_unicode=False):
             if not line:
                 continue
@@ -313,9 +343,14 @@ class LLMClient:
             if not choices:
                 continue
             delta = choices[0].get("delta") or {}
+
+            reasoning = delta.get("reasoning_content")
+            if reasoning:
+                yield ("thinking", reasoning)
+
             content = delta.get("content")
             if content:
-                yield content
+                yield ("content", content)
 
     def _log_performance_async(self, messages, data, usage, timings, kwargs):
         """Queue performance metrics (returns immediately - 0ms overhead)."""

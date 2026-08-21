@@ -1,0 +1,129 @@
+{
+  "timestamp": "2026-02-13T22:21:07.782443",
+  "model": "glm-4.7-flash",
+  "enricher_accuracy": {
+    "status": "complete",
+    "total_score": 12,
+    "total_max": 12,
+    "accuracy_pct": 100.0,
+    "test_cases": [
+      {
+        "name": "UK commercial litigation parties",
+        "score": 5,
+        "max": 5,
+        "persons": [
+          {
+            "name": "HPII Holdings Ltd (In Liquidation)",
+            "type": "corporate",
+            "role": "complainant"
+          },
+          {
+            "name": "Dr Cochrane",
+            "type": "natural",
+            "role": "defendant"
+          },
+          {
+            "name": "Mr Stevens",
+            "type": "natural",
+            "role": "defendant"
+          },
+          {
+            "name": "Mr Justice Foxton",
+            "type": "natural",
+            "role": "enacting_authority"
+          },
+          {
+            "name": "Clifford Chance LLP",
+            "type": "corporate",
+            "role": "non_party"
+          }
+        ],
+        "locations": [
+          {
+            "name": "Rolls Building, Fetter Lane, London EC4A 1NL",
+            "type": "address"
+          }
+        ]
+      },
+      {
+        "name": "Enron-style email with entities",
+        "score": 2,
+        "max": 2,
+        "persons": [
+          {
+            "name": "Ken",
+            "type": "natural",
+            "role": "other"
+          },
+          {
+            "name": "Andy Fastow",
+            "type": "natural",
+            "role": "non_party"
+          },
+          {
+            "name": "SEC",
+            "type": "politic",
+            "role": "non_party"
+          },
+          {
+            "name": "Arthur Andersen",
+            "type": "corporate",
+            "role": "non_party"
+          },
+          {
+            "name": "Jeff",
+            "type": "natural",
+            "role": "other"
+          }
+        ],
+        "locations": [
+          {
+            "name": "California",
+            "type": "state"
+          },
+          {
+            "name": "Houston",
+            "type": "city"
+          }
+        ]
+      },
+      {
+        "name": "Contract clause with parties and amounts",
+        "score": 5,
+        "max": 5,
+        "persons": [
+          {
+            "name": "Phoenix Capital Partners LLP",
+            "type": "corporate",
+            "role": "buyer"
+          },
+          {
+            "name": "Meridian Asset Management Ltd",
+            "type": "corporate",
+            "role": "seller"
+          },
+          {
+            "name": "TargetCo Holdings Ltd",
+            "type": "corporate",
+            "role": "non_party"
+          },
+          {
+            "name": "Freshfields Bruckhaus Deringer LLP",
+            "type": "corporate",
+            "role": "non_party"
+          }
+        ],
+        "locations": [
+          {
+            "name": "100 Bishopsgate, London EC2P 2SR",
+            "type": "address"
+          }
+        ]
+      }
+    ],
+    "usage": {
+      "total_tokens": 319,
+      "total_requests": 3
+    }
+  }
+}

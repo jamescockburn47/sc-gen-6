@@ -20,7 +20,7 @@ class Sidebar(QFrame):
         layout.setSpacing(8)
         
         # App Title
-        title = QLabel("SC Gen 6")
+        title = QLabel("Project XX")
         title.setStyleSheet("font-size: 18px; font-weight: bold; color: #f1f5f9; padding-left: 12px; margin-bottom: 10px;")
         layout.addWidget(title)
         

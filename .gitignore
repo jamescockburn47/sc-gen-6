@@ -110,3 +110,9 @@ Thumbs.db
 config/api_keys.json
 *.key
 .env
+*.db-shm
+*.db-wal
+err.txt
+out.txt
+venv_py311_backup/
+llama-cpp-backup/

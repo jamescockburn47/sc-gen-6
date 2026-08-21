@@ -1,0 +1,19 @@
+{
+  "provider": "llama_cpp",
+  "api_key": "local-llama",
+  "model_name": "nemotron3-nano-30b-bf16",
+  "nemotron_notes": "Nemotron 3 Nano 30B BF16 (UNQUANTIZED): Full precision weights for maximum quality. Uses ~63GB VRAM for weights + KV cache. Context reduced to 32K to fit in 96GB VRAM allocation.",
+  "llama_server": {
+    "executable": "C:/Users/James/Desktop/SC Gen 6/llama-cpp/llama-server.exe",
+    "model_path": "C:/Users/James/Desktop/SC Gen 6/models/nemotron3-nano-30b-bf16/BF16/Nemotron-3-Nano-30B-A3B-BF16-00001-of-00002.gguf",
+    "context": 32768,
+    "gpu_layers": 999,
+    "parallel": 1,
+    "batch": 2048,
+    "timeout": 600,
+    "host": "127.0.0.1",
+    "port": 8000,
+    "flash_attn": true,
+    "extra_args": "--ubatch-size 512 --threads 12 --cont-batching --cache-type-k q4_0 --cache-type-v q4_0"
+  }
+}

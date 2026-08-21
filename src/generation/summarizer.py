@@ -259,13 +259,19 @@ class SummarizerService:
             return None
         
         client = self._get_llm_client(model)
-        
-        # Truncate text if too long (~32K chars = ~8K tokens)
-        max_chars = 32000
-        text_to_summarize = document_text[:max_chars]
-        if len(document_text) > max_chars:
-            text_to_summarize += "\n\n[Document truncated for summarization...]"
-        
+
+        # GLM 4.7 Flash supports 128K context — use up to ~100K chars (~25K tokens)
+        # for direct summarization.  For documents beyond that, use map-reduce.
+        MAX_DIRECT_CHARS = 100_000
+
+        if len(document_text) <= MAX_DIRECT_CHARS:
+            text_to_summarize = document_text
+        else:
+            # Map-reduce: split into chunks, summarize each, then synthesize
+            text_to_summarize = self._map_reduce_text(
+                document_text, file_name, doc_type, client, MAX_DIRECT_CHARS
+            )
+
         # Build prompt
         prompt_template = SUMMARY_PROMPTS.get(summary_type, SUMMARY_PROMPTS["overview"])
         prompt = prompt_template.format(
@@ -273,16 +279,16 @@ class SummarizerService:
             doc_type=doc_type,
             text=text_to_summarize,
         )
-        
+
         try:
             # Generate summary
             response = client.generate_chat_completion(
                 messages=[
-                    {"role": "system", "content": "You are a legal document summarization assistant. Be accurate, concise, and cite specific details."},
+                    {"role": "system", "content": "You are a legal document summarization assistant. Be accurate, concise, and cite specific details from the source text. Do not invent facts."},
                     {"role": "user", "content": prompt},
                 ],
                 model=self._current_model,
-                temperature=0.3,  # Lower temperature for factual summarization
+                temperature=0.1,  # Very low temperature for factual accuracy
                 max_tokens=self.settings.summary.max_summary_length * 2,
             )
             
@@ -311,6 +317,62 @@ class SummarizerService:
                 self.progress_signals.error.emit(file_name, str(e))
             return None
     
+    def _map_reduce_text(
+        self,
+        document_text: str,
+        file_name: str,
+        doc_type: str,
+        client,
+        chunk_chars: int,
+    ) -> str:
+        """Map-reduce summarization for documents exceeding the direct context limit.
+
+        Splits the document into overlapping segments, summarizes each segment,
+        then returns the concatenated segment summaries for the final synthesis
+        prompt.
+
+        Args:
+            document_text: Full document text.
+            file_name: Source file name.
+            doc_type: Document type.
+            client: LLM client.
+            chunk_chars: Maximum chars per segment.
+
+        Returns:
+            Concatenated segment summaries suitable for the synthesis prompt.
+        """
+        overlap = 2000  # chars of overlap between segments
+        segments: list[str] = []
+        pos = 0
+        while pos < len(document_text):
+            end = min(pos + chunk_chars, len(document_text))
+            segments.append(document_text[pos:end])
+            pos += chunk_chars - overlap
+
+        segment_summaries: list[str] = []
+        for i, segment in enumerate(segments):
+            prompt = (
+                f"Summarize segment {i + 1}/{len(segments)} of the legal document "
+                f"'{file_name}' (type: {doc_type}). "
+                f"Extract key facts, parties, dates, and claims.\n\n"
+                f"---\n{segment}\n---\n\nSegment summary:"
+            )
+            try:
+                resp = client.generate_chat_completion(
+                    messages=[
+                        {"role": "system", "content": "You are a legal document summarization assistant. Be factual and concise."},
+                        {"role": "user", "content": prompt},
+                    ],
+                    model=self._current_model,
+                    temperature=0.1,
+                    max_tokens=800,
+                )
+                segment_summaries.append(f"[Segment {i + 1}] {resp.strip()}")
+            except Exception:
+                segment_summaries.append(f"[Segment {i + 1}] (summarization failed)")
+
+        return "\n\n".join(segment_summaries)
+
     def summarize_documents(
         self,
         documents: list[dict[str, Any]],
@@ -489,6 +551,107 @@ class SummarizerService:
         
         return summaries
     
+    # ------------------------------------------------------------------ #
+    #  Accuracy verification
+    # ------------------------------------------------------------------ #
+    def verify_summary(
+        self,
+        summary_text: str,
+        source_text: str,
+        file_name: str,
+        model: Optional[str] = None,
+    ) -> dict[str, Any]:
+        """Verify a summary against its source document.
+
+        Performs two checks:
+        1. **Entity cross-reference** — extracts capitalised proper nouns,
+           dates, and monetary amounts from the summary and checks they
+           appear in the source.
+        2. **LLM grading** — asks the LLM to judge factual accuracy on a
+           1-5 scale with justification.
+
+        Args:
+            summary_text: The generated summary.
+            source_text: The original document text (may be truncated).
+            file_name: Source file name for context.
+            model: LLM model to use for grading.
+
+        Returns:
+            Dict with keys: ``entity_recall``, ``missing_entities``,
+            ``llm_grade`` (1-5), ``llm_justification``, ``passed``.
+        """
+        import re
+
+        # --- 1.  Entity cross-reference (cheap, no LLM call) ---------- #
+        def _extract_entities(text: str) -> set[str]:
+            """Extract proper nouns, dates, and monetary amounts."""
+            entities: set[str] = set()
+            # Capitalised multi-word phrases (e.g. "Smith & Co")
+            for m in re.finditer(r'\b([A-Z][a-z]+(?:\s+(?:&\s+)?[A-Z][a-z]+)*)\b', text):
+                entities.add(m.group(1).strip())
+            # Dates (DD/MM/YYYY, DD Month YYYY, etc.)
+            for m in re.finditer(r'\b\d{1,2}[\s/\-]\w+[\s/\-]\d{2,4}\b', text):
+                entities.add(m.group(0).strip())
+            # Monetary amounts
+            for m in re.finditer(r'[£$€]\s?[\d,]+(?:\.\d{2})?', text):
+                entities.add(m.group(0).strip())
+            return entities
+
+        summary_entities = _extract_entities(summary_text)
+        source_lower = source_text.lower()
+        missing: list[str] = []
+        for ent in summary_entities:
+            if ent.lower() not in source_lower:
+                missing.append(ent)
+
+        entity_recall = (
+            1.0 - len(missing) / len(summary_entities)
+            if summary_entities
+            else 1.0
+        )
+
+        # --- 2.  LLM grading (optional — uses one LLM call) ---------- #
+        llm_grade = 0
+        llm_justification = ""
+        try:
+            client = self._get_llm_client(model)
+            grade_prompt = (
+                f"You are a legal accuracy auditor. Rate the following summary "
+                f"of '{file_name}' on a scale of 1-5 for factual accuracy, "
+                f"where 5 = perfectly accurate and 1 = contains fabrications.\n\n"
+                f"SUMMARY:\n{summary_text}\n\n"
+                f"SOURCE EXCERPT (first 8000 chars):\n{source_text[:8000]}\n\n"
+                f"Respond ONLY with:\nGRADE: <1-5>\nJUSTIFICATION: <one sentence>"
+            )
+            resp = client.generate_chat_completion(
+                messages=[
+                    {"role": "system", "content": "You are a factual accuracy auditor. Be strict."},
+                    {"role": "user", "content": grade_prompt},
+                ],
+                model=self._current_model,
+                temperature=0.0,
+                max_tokens=120,
+            )
+            # Parse grade
+            grade_match = re.search(r'GRADE:\s*(\d)', resp)
+            if grade_match:
+                llm_grade = int(grade_match.group(1))
+            just_match = re.search(r'JUSTIFICATION:\s*(.+)', resp, re.DOTALL)
+            if just_match:
+                llm_justification = just_match.group(1).strip()
+        except Exception as exc:
+            llm_justification = f"LLM grading failed: {exc}"
+
+        passed = entity_recall >= 0.8 and llm_grade >= 3
+
+        return {
+            "entity_recall": round(entity_recall, 3),
+            "missing_entities": missing,
+            "llm_grade": llm_grade,
+            "llm_justification": llm_justification,
+            "passed": passed,
+        }
+
     def cancel(self):
         """Cancel ongoing summarization."""
         self._cancel_event.set()

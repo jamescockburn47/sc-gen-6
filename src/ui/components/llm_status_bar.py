@@ -144,6 +144,25 @@ class LLMStatusBar(QWidget):
         self.tokens_label.setText(f"{tokens:,} tokens")
         self.tps_label.setText(f"{tokens_per_sec:.1f} t/s")
     
+    def set_status(self, message: str, color: str = "#a1a1aa"):
+        """Set a simple status message.
+        
+        Args:
+            message: Status message to display
+            color: Color for the status indicator (hex or bool for green/red)
+        """
+        self.is_active = True
+        self.setVisible(True)
+        self.model_label.setText(message)
+        self.task_label.setText("")
+        
+        # Handle color - can be hex string or bool
+        if isinstance(color, bool):
+            dot_color = "#22c55e" if color else "#ef4444"
+        else:
+            dot_color = color
+        self.status_dot.setStyleSheet(f"color: {dot_color}; font-size: 16px;")
+    
     def set_error(self, error: str):
         """Display an error.
         

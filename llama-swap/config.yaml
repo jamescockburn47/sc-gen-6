@@ -1,0 +1,44 @@
+# llama-swap configuration for SCGen7 on Linux
+# AMD Radeon 8060S (Strix Halo / gfx1151) — Vulkan backend
+# All models served through llama-swap. No Ollama needed.
+#
+# NOTE: Speculative decoding disabled — causes GPU deadlock on Vulkan/gfx1151.
+# Both models already achieve 50-60+ t/s without it.
+
+listen: ":8000"
+
+healthcheck:
+  model: "glm-4.7-flash"
+
+macros:
+  S: "/home/james/llama.cpp/build/bin/llama-server"
+  GLM: "/home/james/.cache/huggingface/gguf/zai-org_GLM-4.7-Flash-Q4_K_M.gguf"
+  NEM: "/home/james/.cache/huggingface/gguf/Nemotron-3-Nano-30B-A3B-Q8_0.gguf"
+
+models:
+  # GLM 4.7 Flash 30B MoE Q4_K_M — default model (~55-63 t/s)
+  "glm-4.7-flash":
+    cmd: "${S} --model ${GLM} --ctx-size 32768 --n-gpu-layers 99 --host 127.0.0.1 --port ${PORT} --batch-size 2048 --ubatch-size 512 --flash-attn on --cont-batching --cache-type-k q4_0 --cache-type-v q4_0 --threads 8 --timeout 300 --metrics --repeat-penalty 1.0 --min-p 0.01"
+    env:
+      - "GGML_VULKAN_DEVICE=0"
+    aliases:
+      - "glm4"
+      - "glm"
+
+  # Nemotron 3 Nano 30B Q8_0 (~53 t/s)
+  "nemotron-3-nano":
+    cmd: "${S} --model ${NEM} --ctx-size 32768 --n-gpu-layers 99 --host 127.0.0.1 --port ${PORT} --batch-size 2048 --ubatch-size 512 --flash-attn on --cont-batching --cache-type-k q4_0 --cache-type-v q4_0 --threads 8 --timeout 300 --metrics"
+    env:
+      - "GGML_VULKAN_DEVICE=0"
+    aliases:
+      - "nemotron"
+      - "gpt-3.5-turbo"
+
+  # Nemotron Embed 8B — embedding model
+  "nemotron-embed-8b":
+    cmd: "${S} --model /media/james/Windows/ModelStore/embeddings/llama-embed-nemotron-8b-Q4_K_M.gguf --ctx-size 8192 --n-gpu-layers 99 --host 127.0.0.1 --port ${PORT} --embedding --pooling mean"
+    env:
+      - "GGML_VULKAN_DEVICE=0"
+    aliases:
+      - "text-embedding-ada-002"
+      - "embedding"
